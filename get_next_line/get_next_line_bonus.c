@@ -6,11 +6,11 @@
 /*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:14:31 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/31 15:14:35 by lniehues         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:16:05 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /*
 **	### gnl_init: initializes the stats of a file to default. Only happens the

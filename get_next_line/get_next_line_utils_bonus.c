@@ -6,11 +6,11 @@
 /*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:17:00 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/31 15:17:03 by lniehues         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:16:20 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
