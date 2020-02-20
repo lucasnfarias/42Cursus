@@ -1,0 +1,50 @@
+server {
+		#default_server: this virtual host will answer requests on port 80 that don’t specifically match another virtual host’s listen statement.
+        listen 80 default_server;
+        #This second statement listens over IPv6 and behaves similarly.
+        listen [::]:80 default_server;	
+		
+        root /var/www/html;
+        index index.php index.html index.htm index.nginx-debian.html
+
+        server_name ft_server;
+
+        location / {
+                try_files $uri $uri/ =404;
+                autoindex on;
+        }
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/%PHP_FPM%.sock;
+        }
+}
+
+server {
+		#Same of the above, but for ssl protocols
+		listen 443;
+		listen [::]:443;
+
+		#SSL certificate and key for access
+		ssl on;
+		ssl_certificate /etc/ssl/certs/nginx-dev.crt;
+		ssl_certificate_key /etc/ssl/private/nginx-dev.key;
+		
+		#
+		root /var/www/html;
+		index index.php index.html index.htm index.nginx-debian.html
+
+		#The server_name directive allows multiple domains to be served from a single IP address.
+		server_name ft_server;
+
+		#location directives cover requests for specific files and folders, such as http://example.com/blog/
+		location / {
+				try_files $uri $uri/ =404;
+				autoindex on;
+		}
+		#starting with a tilde (~), NGINX performs a REGEX match. These matches are always case-sensitive, except (~*)
+		location ~ \.php$ {
+				include snippets/fastcgi-php.conf;
+				fastcgi_pass unix:/run/php/%PHP_FPM%.sock;
+		}
+		
+}
