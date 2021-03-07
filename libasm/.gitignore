@@ -1,0 +1,6 @@
+*.o
+libasm.a
+main_tests
+write.txt
+ft_write.txt
+.vscode
