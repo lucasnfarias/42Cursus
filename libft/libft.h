@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:36:21 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/29 12:56:39 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/03/16 21:06:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include <string.h>
+# include <stdlib.h>
+# include <ctype.h>
+# include <limits.h>
+# include <inttypes.h>
 
 typedef struct	s_list
 {
@@ -108,5 +117,24 @@ void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 
 void			ft_putnbr_fd(int n, int fd);
+
+/*
+*   GNL
+*/
+
+typedef struct		s_gnl_stats
+{
+	int				init;
+	int				reached;
+	unsigned char	buffer[201];
+	size_t			byte_read;
+	size_t			offset;
+	unsigned char	*stored;
+	size_t			pos;
+}					t_gnl_stats;
+
+int					get_next_line(int fd, char **line);
+
+int					get_next_line(int fd, char **line);
 
 #endif
