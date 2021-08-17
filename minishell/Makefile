@@ -14,11 +14,24 @@
 NAME = minishell
 
 # Project source files and object files
-SRC_DIR = ./src/
-SRCS = $(shell ls $(SRC_DIR) | grep -E ".+\.c")
+SRC_DIR = src
+
+DIRS = execution free main parsing
+SOURCE_DIRS = $(foreach dir, $(DIRS), $(addprefix $(SRC_DIR)/, $(dir)))
+SRCS = $(foreach dir,$(SOURCE_DIRS),$(wildcard $(dir)/*.c))
+
+# SOUCE FILES
+
+# 	- main: main.c
+# 	- execution: index.c
+# 	- parsing: index.c ft_split_mult.C
+# 	- free: index.c
+
+
+OBJ_DIR = obj
+OBJS = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRCS:.c=.o))
+
 INCLUDE_DIR = ./include/
-OBJ_DIR = ./obj/
-OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 # Libft builds and dirs
 LIBFT_DIR = ./libft/
@@ -38,21 +51,25 @@ ifeq ($(SANITIZE_L),true)
 	CC_FLAGS += -fsanitize=leak
 endif
 
-all: $(OBJ_DIR) $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CC_FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 	@echo "\n\033[0;32m=> Compiled minishell sucessfully...\n\033[0;0m"
 	@echo "\n\n🔥😈\033[0;31m THOSE WHO SHALL ENTER ITS DOMAIN MUST ABANDON ALL HOPE \033[0;0m😈🔥\n\n"
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/execution
+	@mkdir -p $(OBJ_DIR)/free
+	@mkdir -p $(OBJ_DIR)/main
+	@mkdir -p $(OBJ_DIR)/parsing
 	$(CC) $(CC_FLAGS) -I$(LIBFT_INC) -I$(INCLUDE_DIR) -c $< -o $@
+	@echo "Compiled "$<" successfully!"
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 clean:
 	$(RM) $(OBJ_DIR)
