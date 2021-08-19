@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   liberror.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:16:43 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/17 21:50:03 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/08/18 21:17:39 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** ERROR MESSAGE MACROS:
 */
 
-# define NO_INPUT "Only a series of integers is accepted as an argument."
+# define NO_INPUT "No input found! Please, insert some integers as arguments."
 
 # define NOT_DIGIT "Sorry, mate! I only accept integers."
 
@@ -38,5 +38,6 @@
 */
 
 void	exit_with_msg_error(char *error_code);
+void	validate_input(char **argv);
 
 #endif

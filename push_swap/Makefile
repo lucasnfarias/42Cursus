@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lniehues <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/17 21:09:49 by lniehues          #+#    #+#              #
-#    Updated: 2021/08/17 21:48:13 by lniehues         ###   ########.fr        #
+#    Updated: 2021/08/18 21:37:14 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ clean:
 			@make clean --no-print-directory -C $(LIBFT_DIR)
 			@$(RM) $(OBJS)
 			@$(RM) -r $(DIR_OBJS)
-			@echo "\n\033[0;32mWow... that is some cleanup!\n\033[0;0m"
+			@echo "\n\033[1;33mWow... that is some cleanup!\n\033[0;0m"
 
 fclean:		clean
 			@make fclean --no-print-directory -C $(LIBFT_DIR)
