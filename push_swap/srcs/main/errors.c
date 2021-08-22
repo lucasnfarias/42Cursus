@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:29:56 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/18 21:33:51 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/08/22 15:52:05 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ static void	is_arg_digit(char *arg)
 
 void	validate_input(char **argv)
 {
-	int	i;
-	int	j;
-	int	int_max_length;
+	int		i;
+	int		j;
+	char	*int_min_str;
+	int		int_max_length;
 
-	int_max_length = ft_strlen(ft_itoa(INT_MIN));
+	int_min_str = ft_itoa(INT_MIN);
+	int_max_length = ft_strlen(int_min_str);
+	free(int_min_str);
 	i = 1;
 	while (argv[i])
 	{
@@ -56,4 +59,14 @@ void	validate_input(char **argv)
 		}
 		i++;
 	}
+}
+
+void	*ec_calloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = ft_calloc(size, 1);
+	if (ptr == NULL)
+		exit_with_msg_error(MALLOC_ERROR);
+	return (ptr);
 }

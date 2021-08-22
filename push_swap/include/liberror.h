@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:16:43 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/18 21:17:39 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/08/22 15:52:23 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@
 
 # define DUPLICATE_INPUT "There are some impostors. Check for duplicates!"
 
+# define MALLOC_ERROR "Damn you malloc! Sorry, malloc screwed up."
+
 /*
 ** ERROR HANDLING FUNCTIONS:
 */
 
 void	exit_with_msg_error(char *error_code);
 void	validate_input(char **argv);
+void	*ec_calloc(size_t size);
 
 #endif
