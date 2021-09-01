@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 12:01:49 by lniehues          #+#    #+#              #
-#    Updated: 2021/03/16 21:06:40 by lniehues         ###   ########.fr        #
+#    Updated: 2021/09/01 20:43:43 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SOURCES	=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c \
 			ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
 			ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c \
-			ft_substr.c ft_tolower.c ft_toupper.c 
+			ft_substr.c ft_tolower.c ft_toupper.c ft_atoll.c
 
 ADD_SOURCES = get_next_line.c
 
