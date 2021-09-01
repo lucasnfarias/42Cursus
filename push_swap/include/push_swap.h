@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:14:43 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/22 19:15:41 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/08/31 21:25:21 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_int_node
 
 typedef struct s_stacks
 {
+	int			biggest_number;
+	int			length;
 	t_int_node	*a;
 	t_int_node	*b;
 }				t_stacks;
@@ -59,11 +61,25 @@ typedef struct s_stacks
 **	MAIN FUNCTIONS:
 */
 
+/*
+**	STACKS FUNCTIONS:
+*/
+
 void		display_stack(t_int_node *head, char *stack_name);
 void		push_stack(t_int_node **head, int new_number);
 void		reverse_push_stack(t_int_node **head, int new_number);
 t_int_node	*pop_stack(t_int_node **head);
 t_int_node	*reverse_pop_stack(t_int_node **head);
+void		validate_and_setup_stacks(t_stacks *stacks, char **argv, int argc);
+
+/*
+**	SORTING FUNCTIONS:
+*/
+
+void		sort_stacks(t_stacks *stacks);
+int			is_sorted(t_int_node *head);
+void		sort_three_numbers(t_stacks *stacks);
+void		sort_five_numbers(t_stacks *stacks);
 
 /**
  * OPERATIONS FUNCTIONS:
@@ -76,17 +92,17 @@ t_int_node	*reverse_pop_stack(t_int_node **head);
  *	
  *	ss : sa and sb at the same time.
  *	
- *	pa : push a - take the first element at the top of b and put it at the top of a.
- *	Do nothing if b is empty.
+ *	pa : push a - take the first element at the top of b and put it at the top
+ *	of a. Do nothing if b is empty.
  *	
- *	pb : push b - take the first element at the top of a and put it at the top of b.
- *	Do nothing if a is empty.
+ *	pb : push b - take the first element at the top of a and put it at the top
+ *	of b. Do nothing if a is empty.
  *	
- *	ra : rotate a - shift up all elements of stack a by 1. The first element becomes
- *	the last one.
+ *	ra : rotate a - shift up all elements of stack a by 1. The first element
+ *	becomes the last one.
  *	
- *	rb : rotate b - shift up all elements of stack b by 1. The first element becomes
- *	the last one.
+ *	rb : rotate b - shift up all elements of stack b by 1. The first element
+ *	becomes the last one.
  *	
  *	rr : ra and rb at the same time.
  *	
@@ -95,9 +111,10 @@ t_int_node	*reverse_pop_stack(t_int_node **head);
  *
  */
 
-void		ps_swap(t_int_node **head);
-void		ps_push(t_int_node **stack_from, t_int_node **stack_to);
-void		ps_rotate(t_int_node **head);
-void		ps_reverse_rotate(t_int_node **head);
+void		ps_swap(t_int_node **head, char *op_name);
+void		ps_push(t_int_node **stack_from, t_int_node **stack_to,
+				char *op_name);
+void		ps_rotate(t_int_node **head, char *op_name);
+void		ps_reverse_rotate(t_int_node **head, char *op_name);
 
 #endif

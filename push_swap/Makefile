@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/17 21:09:49 by lniehues          #+#    #+#              #
-#    Updated: 2021/08/22 16:41:44 by lniehues         ###   ########.fr        #
+#    Updated: 2021/08/30 18:46:22 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RM			= rm -f
 
 DIR_SRCS	= srcs
 DIR_OBJS	= objs
-SUBDIRS		= main operations
+SUBDIRS		= main operations stacks sorting
 
 SRCS_DIRS	= $(foreach dir, $(SUBDIRS), $(addprefix $(DIR_SRCS)/, $(dir)))
 OBJS_DIRS	= $(foreach dir, $(SUBDIRS), $(addprefix $(DIR_OBJS)/, $(dir)))
