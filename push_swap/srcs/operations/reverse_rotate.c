@@ -6,13 +6,13 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 11:21:14 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/22 17:50:15 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/08/26 21:32:28 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_reverse_rotate(t_int_node **head)
+void	ps_reverse_rotate(t_int_node **head, char *op_name)
 {
 	t_int_node	*last_node;
 
@@ -24,4 +24,5 @@ void	ps_reverse_rotate(t_int_node **head)
 		push_stack(head, last_node->number);
 		free(last_node);
 	}
+	ft_putstr_fd(op_name, 1);
 }
