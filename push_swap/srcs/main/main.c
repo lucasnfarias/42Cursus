@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:28:52 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/31 22:04:04 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/01 20:36:04 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,19 @@
 // 	}
 // }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stacks *stacks;
+	t_stacks	*stacks;
 
 	stacks = (t_stacks *)ft_calloc(sizeof(t_stacks), 1);
 	if (argc == 1)
 		exit_with_msg_error(NO_INPUT);
 	validate_and_setup_stacks(stacks, argv, argc);
 	// ft_putstr_fd("### Your Input:\n", 1);
-	// display_stack(stacks->a, "a");
-	// display_stack(stacks->b, "b");
+	display_stack(stacks->a, "a");
+	display_stack(stacks->b, "b");
 	sort_stacks(stacks);
-	// display_stack(stacks->a, "a");
-	// display_stack(stacks->b, "b");
+	display_stack(stacks->a, "a");
+	display_stack(stacks->b, "b");
 	exit(0);
 }
