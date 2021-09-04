@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 18:41:56 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/01 20:40:42 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/01 21:47:29 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ static void	sort_two_numbers(t_stacks *stacks)
 void	sort_stacks(t_stacks *stacks)
 {
 	if (is_sorted(stacks->a))
-	{
-		ft_putstr_fd("IS SORTED!\n", 1);
-		exit(0);
-	}
+		return ;
 	if (stacks->length == 2)
 		sort_two_numbers(stacks);
 	else if (stacks->length == 3)
 		sort_three_numbers(stacks);
 	else if (stacks->length == 5)
 		sort_five_numbers(stacks);
+	else
+		radix_sort(stacks);
 }

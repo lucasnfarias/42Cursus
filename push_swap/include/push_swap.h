@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:14:43 by lniehues          #+#    #+#             */
-/*   Updated: 2021/08/31 21:25:21 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/02 21:09:27 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ void		sort_stacks(t_stacks *stacks);
 int			is_sorted(t_int_node *head);
 void		sort_three_numbers(t_stacks *stacks);
 void		sort_five_numbers(t_stacks *stacks);
+int			check_bit_on_i(int biggest_number, int i);
+int			most_significant_bit(int biggest_number);
+void		quick_sort(int *array, int start, int end);
+void		radix_sort(t_stacks *stacks);
 
 /**
  * OPERATIONS FUNCTIONS:
