@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:14:43 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/02 21:09:27 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:50:04 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_stacks
 **	STACKS FUNCTIONS:
 */
 
-void		display_stack(t_int_node *head, char *stack_name);
 void		push_stack(t_int_node **head, int new_number);
 void		reverse_push_stack(t_int_node **head, int new_number);
 t_int_node	*pop_stack(t_int_node **head);

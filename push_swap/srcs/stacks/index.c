@@ -6,47 +6,11 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 11:41:45 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/03 21:42:13 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:50:23 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	print_phrase(char *phrase, char *color, int fd)
-{
-	if (color)
-	{
-		ft_putstr_fd(color, fd);
-		ft_putstr_fd(phrase, fd);
-		ft_putstr_fd(RESET_COLOR, fd);
-	}
-	else
-		ft_putstr_fd(phrase, fd);
-}
-
-void	display_stack(t_int_node *head, char *stack_name)
-{
-	t_int_node	*current;
-
-	current = head;
-	if (head == NULL)
-		print_phrase("Stack is Empty!\n", BOLD_YELLOW, 1);
-	else
-	{
-		print_phrase("Stack elements: \n", BOLD_GREEN, 1);
-		while (current->next != head)
-		{
-			ft_putnbr_fd(current->number, 1);
-			ft_putstr_fd("\n", 1);
-			current = current->next;
-		}
-		ft_putnbr_fd(current->number, 1);
-		ft_putstr_fd("\n", 1);
-	}
-	ft_putstr_fd("---\n", 1);
-	ft_putstr_fd(stack_name, 1);
-	ft_putstr_fd("\n\n", 1);
-}
 
 static void	setup_argv_on_int_array(int *array, char **argv, int length)
 {

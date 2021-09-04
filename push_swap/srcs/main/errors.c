@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:29:56 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/01 20:44:08 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:51:53 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	is_arg_digit(char *arg)
 	i = 0;
 	if (arg[0] == '+' || arg[0] == '-')
 		i++;
+	if (!arg[i])
+		exit_with_msg_error(NOT_DIGIT);
 	while (arg[i])
 	{
 		if (!ft_isdigit((int) arg[i]))
