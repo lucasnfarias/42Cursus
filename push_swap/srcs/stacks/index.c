@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 11:41:45 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/03 21:50:23 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/04 12:38:21 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	validate_and_setup_stacks(t_stacks *stacks, char **argv, int argc)
 			stacks->biggest_number = indexed_pos_array[i];
 		i++;
 	}
+	free(indexed_pos_array);
 }
