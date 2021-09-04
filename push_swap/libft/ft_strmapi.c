@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:15:06 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/24 17:58:59 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:05:59 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,22 @@ static void	*ft_alloc_zeros(size_t size)
 {
 	void	*mem;
 
-	if (!(mem = malloc(size)))
+	mem = malloc(size);
+	if (!mem)
 		return (NULL);
 	ft_bzero(mem, size);
 	return (mem);
 }
 
-char		*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	unsigned int	i;
 	char			*new;
 
-	if (!s || !(new = ft_alloc_zeros((size_t)ft_strlen(s) + 1)))
+	if (!s)
+		return (NULL);
+	new = ft_alloc_zeros((size_t)ft_strlen(s) + 1);
+	if (!new)
 		return (NULL);
 	i = 0;
 	while (s[i])

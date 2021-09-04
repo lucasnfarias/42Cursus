@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:11:30 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/27 14:05:43 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:03:09 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static size_t	word_len(const char *str, char sep)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (str[count] != '\0' && str[count] != sep)
@@ -23,7 +23,7 @@ static size_t	word_len(const char *str, char sep)
 	return (count);
 }
 
-static char		*pos_next_word(char const *s, char c)
+static char	*pos_next_word(char const *s, char c)
 {
 	while (*s && *s == c)
 		s++;
@@ -50,9 +50,9 @@ static size_t	ft_countwords(const char *str, char sep)
 	return (result);
 }
 
-static void		malloc_fuckedup(char **words, size_t pos)
+static void	malloc_fuckedup(char **words, size_t pos)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i <= pos)
@@ -63,7 +63,7 @@ static void		malloc_fuckedup(char **words, size_t pos)
 	free(words);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t	num_words;
 	char	**words;
@@ -72,7 +72,8 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	num_words = ft_countwords(s, c);
-	if (!(words = malloc((num_words + 1) * sizeof(char *))))
+	words = malloc((num_words + 1) * sizeof(char *));
+	if (!words)
 		return (NULL);
 	i = 0;
 	while (i < num_words)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:19:08 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/29 12:31:12 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 20:59:17 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char *ptr1;
-	unsigned char *ptr2;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-	ptr1 = (unsigned char*)dst;
-	ptr2 = (unsigned char*)src;
+	ptr1 = (unsigned char *)dst;
+	ptr2 = (unsigned char *)src;
 	if (dst == src)
 		return (dst);
 	while (n > 0)
