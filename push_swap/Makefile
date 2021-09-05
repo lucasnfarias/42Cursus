@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/17 21:09:49 by lniehues          #+#    #+#              #
-#    Updated: 2021/08/30 18:46:22 by lniehues         ###   ########.fr        #
+#    Updated: 2021/09/05 19:50:07 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,17 @@ RM			= rm -f
 DIR_SRCS	= srcs
 DIR_OBJS	= objs
 SUBDIRS		= main operations stacks sorting
+
+# SRCS:
+#	main:	errors.c main.c
+#
+#	operations:	push.c reverse_rotate.c rotate.c swap.c
+#
+#	sorting:	bits_operation.c index.c quick_sort.c
+#				radix_sort.c sort_five_numbers.c sort_three_numbers.c
+#
+#	stacks:		index.c manipulation.c
+#
 
 SRCS_DIRS	= $(foreach dir, $(SUBDIRS), $(addprefix $(DIR_SRCS)/, $(dir)))
 OBJS_DIRS	= $(foreach dir, $(SUBDIRS), $(addprefix $(DIR_OBJS)/, $(dir)))
