@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 17:19:08 by lniehues          #+#    #+#             */
-/*   Updated: 2021/09/03 20:59:17 by lniehues         ###   ########.fr       */
+/*   Created: 2021/09/01 20:41:44 by lniehues          #+#    #+#             */
+/*   Updated: 2021/09/01 20:42:55 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+long long int	ft_atoll(const char *str)
 {
-	unsigned char	*ptr1;
-	unsigned char	*ptr2;
+	unsigned int	i;
+	long long int	sinal;
+	long long int	base;
 
-	ptr1 = (unsigned char *)dst;
-	ptr2 = (unsigned char *)src;
-	if (dst == src)
-		return (dst);
-	while (n > 0)
+	i = 0;
+	sinal = 1;
+	base = 0;
+	if (!str[i])
+		return (0);
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		*(ptr1++) = *(ptr2++);
-		n--;
+		if (str[i] == '-')
+			sinal *= -1;
+		i++;
 	}
-	return (dst);
+	while (str[i] >= '0' && str[i] <= '9')
+		base = (base * 10) + (str[i++] - '0');
+	return (base * sinal);
 }
