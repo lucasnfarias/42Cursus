@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:20:00 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/24 22:29:03 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 20:56:57 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	new_lst = NULL;
 	while (lst)
 	{
-		if (!(new_item = ft_lstnew(f(lst->content))))
+		new_item = ft_lstnew(f(lst->content));
+		if (!new_item)
 		{
 			ft_lstclear(&new_lst, del);
 			return (NULL);

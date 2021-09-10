@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 18:58:49 by lniehues          #+#    #+#             */
-/*   Updated: 2020/01/22 18:36:14 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:09:20 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ char	*ft_strrchr(const char *s, int c)
 	char	letra;
 
 	letra = (char)c;
-	len = ft_strlen((char*)s);
+	len = ft_strlen((char *)s);
 	while (len > 0)
 	{
 		if (*(s + len - 1) == c)
-			return ((char*)(s + len - 1));
+			return ((char *)(s + len - 1));
 		else
 			--len;
 	}
 	if (letra == '\0')
 	{
-		len = ft_strlen((char*)s);
-		return ((char*)(s + len));
+		len = ft_strlen((char *)s);
+		return ((char *)(s + len));
 	}
 	return (NULL);
 }

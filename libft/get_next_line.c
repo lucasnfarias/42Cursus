@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:14:31 by lniehues          #+#    #+#             */
-/*   Updated: 2021/03/16 21:06:18 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/09/03 21:36:12 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 **	stored and pos.
 */
 
-static int				gnl_init(t_gnl_stats *stats, int validate,
-						int return_value)
+static int	gnl_init(t_gnl_stats *stats, int validate,
+	int return_value)
 {
 	if (!(!validate && (*stats).init == 1))
 	{
@@ -51,7 +51,8 @@ static unsigned char	*gnl_line_store(t_gnl_stats *stat, int validation)
 
 	c = (*stat).buffer[(*stat).offset];
 	(*stat).offset += 1;
-	if (!(new = malloc(sizeof(char) * ((*stat).pos + 1))))
+	new = malloc(sizeof(char) * ((*stat).pos + 1));
+	if (!new)
 		return (NULL);
 	if ((*stat).stored != NULL)
 	{
@@ -71,7 +72,7 @@ static unsigned char	*gnl_line_store(t_gnl_stats *stat, int validation)
 	return (NULL);
 }
 
-static int				gnl_handle_desloc(t_gnl_stats *stat, char **return_line)
+static int	gnl_handle_desloc(t_gnl_stats *stat, char **return_line)
 {
 	unsigned char	*line;
 	int				validation;
@@ -91,7 +92,7 @@ static int				gnl_handle_desloc(t_gnl_stats *stat, char **return_line)
 	return (0);
 }
 
-int						get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static t_gnl_stats	stats[200];
 	t_gnl_stats			*stat;
@@ -108,7 +109,7 @@ int						get_next_line(int fd, char **line)
 			(*stat).byte_read = read(fd, (*stat).buffer, 201);
 			(*stat).offset = 0;
 		}
-		if ((*stat).byte_read == (size_t)-1)
+		if ((*stat).byte_read == (size_t)(1 * -1))
 			return (-1);
 		if (gnl_handle_desloc(stat, line))
 		{
