@@ -3,84 +3,117 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: msales-a <msales-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/13 19:55:22 by lniehues          #+#    #+#              #
-#    Updated: 2021/03/13 19:55:22 by lniehues         ###   ########.fr        #
+#    Created: 2021/09/14 20:40:30 by msales-a          #+#    #+#              #
+#    Updated: 2021/10/20 08:48:38 by msales-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Project executable filename
-NAME = minishell
+NAME := minishell
 
-# Project source files and object files
-SRC_DIR = src
+# CONFIG
 
-DIRS = execution free main parsing
-SOURCE_DIRS = $(foreach dir, $(DIRS), $(addprefix $(SRC_DIR)/, $(dir)))
-SRCS = $(foreach dir,$(SOURCE_DIRS),$(wildcard $(dir)/*.c))
+DIRECTORY_SOURCE	:= src
+DIRECTORY_HEADER	:= includes
+DIRECTORY_TARGET	:= target
 
-# SOUCE FILES
+LIBRARIES_SYSTEM	:= -lreadline
+LIBRARIES_COMPILED	:= ./libs/libft/libft.a
 
-# 	- main: main.c
-# 	- execution: index.c
-# 	- parsing: index.c ft_split_mult.C
-# 	- free: index.c
+# PREPARE
 
+LIBRARIES_FLAGS_UTIL		= -L$(dir $(library)) -l$(patsubst lib%.a,%, $(notdir $(library)))
+LIBRARIES_COMPILED_FLAGS	:= $(foreach library, $(LIBRARIES_COMPILED), $(LIBRARIES_FLAGS_UTIL))
+LIBRARIES_FLAGS				:= $(LIBRARIES_COMPILED_FLAGS) $(LIBRARIES_SYSTEM)
 
-OBJ_DIR = obj
-OBJS = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRCS:.c=.o))
+# FILE_SOURCE	:= $(filter %.c, $(shell find $(DIRECTORY_SOURCE) -type f))
+FILE_SOURCE	:= src/signals.c \
+	src/builtins/cd.c \
+	src/builtins/exit.c \
+	src/builtins/unset.c \
+	src/builtins/echo.c \
+	src/builtins/export.c \
+	src/builtins/pwd.c \
+	src/builtins/env.c \
+	src/prompt.c \
+	src/tokens/token_escaper.c \
+	src/tokens/tokens_validator.c \
+	src/tokens/token_recognition.c \
+	src/tokens/token_util.c \
+	src/utils/ignore_signal.c \
+	src/utils/free.c \
+	src/utils/path_formater.c \
+	src/utils/error_handler.c \
+	src/utils/set_variable.c \
+	src/utils/pipe_util.c \
+	src/utils/is_directory.c \
+	src/utils/paths.c \
+	src/utils/str_list_to_array.c \
+	src/utils/pipe_minishell.c \
+	src/utils/array_size.c \
+	src/utils/ft_strrstr.c \
+	src/here_document/parser_core.c \
+	src/here_document/here_document_parser.c \
+	src/here_document/here_document.c \
+	src/parser/expand_variables.c \
+	src/parser/join_words.c \
+	src/parser/show.c \
+	src/env/path.c \
+	src/env/env.c \
+	src/commands/get_next_command.c \
+	src/commands/command.c \
+	src/commands/redirects.c \
+	src/commands/operators.c \
+	src/commands/program.c \
+	src/commands/process_commands.c \
+	src/hashmap/free.c \
+	src/hashmap/index.c \
+	src/hashmap/get_keys.c \
+	src/hashmap/create.c \
+	src/hashmap/operations.c \
+	src/main.c \
 
-INCLUDE_DIR = ./include/
+OBJECTS_SOURCE	:= $(addprefix $(DIRECTORY_TARGET)/, $(FILE_SOURCE:.c=.o))
 
-# Libft builds and dirs
-LIBFT_DIR = ./libft/
-LIBFT = ./libft/libft.a
-LIBFT_INC = ./libft/includes/
+COMPILER		:= clang
+COMPILER_FLAGS	:= -Wall -Wextra -Werror -g
 
-# Optimization and Compiler flags and commands
-CC = gcc
-CC_FLAGS = -Wall -Werror -Wextra
-RM = rm -rf
+HANDLER = solver
 
 ifeq ($(SANITIZE_A),true)
-	CC_FLAGS += -fsanitize=address
+        COMPILER_FLAGS += -fsanitize=address
 endif
 
 ifeq ($(SANITIZE_L),true)
-	CC_FLAGS += -fsanitize=leak
+        COMPILER_FLAGS += -fsanitize=leak
 endif
 
-all: $(LIBFT) $(NAME)
+# RECIPES
 
-$(NAME): $(OBJS)
-	$(CC) $(CC_FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
-	@echo "\n\033[0;32m=> Compiled minishell sucessfully...\n\033[0;0m"
-	@echo "\n\n🔥😈\033[0;31m THOSE WHO SHALL ENTER ITS DOMAIN MUST ABANDON ALL HOPE \033[0;0m😈🔥\n\n"
+.PHONY : all clean fclean make re
 
+all : $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/execution
-	@mkdir -p $(OBJ_DIR)/free
-	@mkdir -p $(OBJ_DIR)/main
-	@mkdir -p $(OBJ_DIR)/parsing
-	$(CC) $(CC_FLAGS) -I$(LIBFT_INC) -I$(INCLUDE_DIR) -c $< -o $@
-	@echo "Compiled "$<" successfully!"
+clean :
+	@rm -rf $(DIRECTORY_TARGET)
+	@$(foreach library, $(LIBRARIES_COMPILED), make -C $(dir $(library)) clean)
 
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
+fclean : clean
+	@rm -f $(NAME)
+	@$(foreach library, $(LIBRARIES_COMPILED), make -C $(dir $(library)) fclean)
 
-clean:
-	$(RM) $(OBJ_DIR)
-	make -C $(LIBFT_DIR) clean
+re : clean all
 
-fclean: clean
-	$(RM) $(NAME)
-	make -C $(LIBFT_DIR) fclean
+$(NAME) : $(OBJECTS_SOURCE) $(LIBRARIES_COMPILED)
+	@$(COMPILER) $(COMPILER_FLAGS) $(OBJECTS_SOURCE) $(LIBRARIES_FLAGS) -o $(NAME)
 
-# Do both of the above
-re: fclean all
+$(BONUS_NAME) : $(OBJECTS_SOURCE_BONUS) $(LIBRARIES_COMPILED)
+	@$(COMPILER) $(COMPILER_FLAGS) $(OBJECTS_SOURCE_BONUS) $(LIBRARIES_FLAGS) -o $(BONUS_NAME)
 
-# Just in case those files exist in the root dir
-.PHONY: all fclean clean re
+$(DIRECTORY_TARGET)/%.o : %.c Makefile
+	@mkdir -p $(@D)
+	@$(COMPILER) -I$(DIRECTORY_HEADER) $(COMPILER_FLAGS) -c $< -o $@
+
+$(LIBRARIES_COMPILED) :
+	@$(MAKE) -C $(dir $@)
