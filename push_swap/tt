@@ -1,0 +1,1 @@
+n=$1; seq 1 $n | awk '{print $1 - a}' a=$(expr $n / 2) | shuf | tr '\\n' ' ' | xargs ./push_swap > out; grep Error out; wc -l <out; rm out
