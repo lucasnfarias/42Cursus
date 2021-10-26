@@ -1,0 +1,11 @@
+rm -f a b
+
+for i in $(seq 1 $2 | tr '\n' ' ');
+do
+./tt $1 >>a
+done
+
+sort -n a > b
+echo "min: $(head -1 b)"
+echo "media: $(awk '{ total += $1; count++ } END { print total/count }' a)"
+echo "max: $(tail -1 b)"
