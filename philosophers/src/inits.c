@@ -1,46 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   int_utils.c                                        :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/31 19:23:55 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/07 16:50:36 by lniehues         ###   ########.fr       */
+/*   Created: 2021/11/07 19:04:37 by lniehues          #+#    #+#             */
+/*   Updated: 2021/11/07 19:06:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long	ft_atoill(char const *str)
+void	init_rules(char **argv, t_rules *rules)
 {
-	int			s;
-	long long	n;
-	long long	p;
-
-	s = 1;
-	n = 0;
-	p = n;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		s = 1;
-		if (*str == '-')
-			s = -1;
-		str++;
-	}
-	while (ft_isdigit(*str))
-	{
-		n = (n * 10) + (*(str++) - '0');
-		if (p > n)
-			return (!(s == -1) * -1);
-		p = n;
-	}
-	return (s * n);
-}
-
-int	ft_atoi(char const *str)
-{
-	return ((int)ft_atoill(str));
+	rules->num_of_philos = ft_atoi(argv[1]);
+	rules->time_to_die = ft_atoi(argv[2]);
+	rules->time_to_eat = ft_atoi(argv[3]);
+	rules->time_to_sleep = ft_atoi(argv[4]);
+	if (argv[5])
+		rules->num_of_meals_per_philo = ft_atoi(argv[5]);
+	else
+		rules->num_of_meals_per_philo = 0;
 }
