@@ -6,19 +6,14 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:18 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/07 19:06:30 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/11/17 22:17:38 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include "utils.h"
-
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -72,7 +67,37 @@ typedef struct s_rules
 	int	num_of_meals_per_philo;
 }				t_rules;
 
-int		check_args_errors(int argc, char **argv);
-void	init_rules(char **argv, t_rules *rules);
+typedef struct s_philo
+{
+	int				index;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
+	int				is_dead;
+	int				meals_eaten;
+	int				total_meals;
+	long long int	last_meal;
+	long long int	session_start;
+	pthread_mutex_t	*end_checker;
+	pthread_mutex_t	*print_lock;
+}				t_philo;
+
+typedef struct s_session
+{
+	t_rules			*rules;
+	t_philo			philos[200];
+	pthread_mutex_t	forks[200];
+	int				dead_philo_index;
+	long long int	session_start;
+	long long int	time_of_death;
+	int				is_someone_dead;
+	pthread_mutex_t	end_checker;
+	pthread_mutex_t	print_lock;
+}				t_session;
+
+int				check_args_errors(int argc, char **argv);
+void			init_rules(char **argv, t_rules *rules);
+__uint64_t		get_current_time(void);
+long long int	timestamp(long long int session_start);
+void			wait_time_in_ms(long long int microseconds_time);
 
 #endif
