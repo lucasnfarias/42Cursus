@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 18:25:03 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/07 18:58:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/11/20 14:56:54 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ static int	check_philos_quantity(int philos_qty)
 		return (handle_error_message(ZERO_PHILOS, 0));
 	if (philos_qty == 1)
 	{
-		printf("%sPoor lonely philosopher!%s\n", YELLOW, RESET_COLOR);
+		printf("\033[0;33m");
+		printf("Poor lonely philosopher!\n");
+		printf("As he was starving to death his only thought was:\n");
+		printf("'Why do I need two forks to eat spaghetti?'\n");
+		printf("But he died before he could complete his line of thought.\n");
+		printf("If only he had another fork...\n");
+		printf("\033[0m");
 		return (1);
 	}
 	return (0);

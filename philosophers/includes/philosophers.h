@@ -6,14 +6,13 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:18 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/17 22:17:38 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/11/29 21:33:58 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include "utils.h"
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -21,6 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <fcntl.h>
+# include "utils.h"
 
 /*
 ** Standard macros.
@@ -53,10 +53,11 @@
 # define EATING 2
 # define PICK_LEFT_FORK 3
 # define PICK_RIGHT_FORK 4
-# define DROP_LEFT_FORK 5
-# define DROP_RIGHT_FORK 6
+# define RELEASE_LEFT_FORK 5
+# define RELEASE_RIGHT_FORK 6
 # define FINISHED_EATING 7
 # define DEAD 8
+# define SATIATED 9
 
 typedef struct s_rules
 {
@@ -72,10 +73,12 @@ typedef struct s_philo
 	int				index;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
-	int				is_dead;
+	int				*is_dead;
+	int				*dead_philo_index;
+	long long int	*time_of_death;
 	int				meals_eaten;
-	int				total_meals;
 	long long int	last_meal;
+	t_rules			*rules;
 	long long int	session_start;
 	pthread_mutex_t	*end_checker;
 	pthread_mutex_t	*print_lock;
@@ -86,18 +89,42 @@ typedef struct s_session
 	t_rules			*rules;
 	t_philo			philos[200];
 	pthread_mutex_t	forks[200];
-	int				dead_philo_index;
 	long long int	session_start;
+	int				dead_philo_index;
 	long long int	time_of_death;
-	int				is_someone_dead;
+	int				is_dead;
 	pthread_mutex_t	end_checker;
 	pthread_mutex_t	print_lock;
 }				t_session;
 
+typedef struct s_routine_args
+{
+	t_philo		*current_philo;
+	t_session	*session;
+}				t_routine_args;
+
+/* ERRORS */
 int				check_args_errors(int argc, char **argv);
+
+/* INITIALIZER */
 void			init_rules(char **argv, t_rules *rules);
-__uint64_t		get_current_time(void);
-long long int	timestamp(long long int session_start);
-void			wait_time_in_ms(long long int microseconds_time);
+void			init_session(t_session *session, t_rules *rules);
+
+/* ROUTINES & PROCESSES */
+int				is_satiated(t_philo *philo, t_rules *rules);
+void			*philo_routine(void *_routine_args);
+
+/* PROMPT */
+void			philo_speak(long long int timestamp, int philo_index, int type,
+					int meals);
+
+/* THREADS */
+int				create_philo_threads(pthread_t *threads, t_session *session);
+void			join_philo_threads(pthread_t *threads, t_session *session);
+
+/* ACTIONS */
+int				eating(t_philo *philo);
+int				sleeping(t_philo *philo);
+int				thinking(t_philo *philo);
 
 #endif

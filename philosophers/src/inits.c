@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 19:04:37 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/17 21:50:26 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/11/29 21:40:42 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ static void	init_philos(t_session *session)
 	i = 0;
 	while (i < session->rules->num_of_philos)
 	{
-		//death
-		//dead_philo_index
-		//is_someone_dead
 		session->philos[i].index = i + 1;
+		session->philos[i].is_dead = &session->is_dead;
+		session->philos[i].dead_philo_index = &session->dead_philo_index;
+		session->philos[i].time_of_death = &session->time_of_death;
 		session->philos[i].meals_eaten = 0;
 		session->philos[i].last_meal = 0;
 		session->philos[i].left_fork = &session->forks[i];
-		session->philos[i].right_fork = &session->forks[(i + 1) 
+		session->philos[i].right_fork = &session->forks[(i + 1)
 			% session->rules->num_of_philos];
+		session->philos[i].rules = session->rules;
+		session->philos[i].session_start = session->session_start;
 		session->philos[i].end_checker = &session->end_checker;
 		session->philos[i].print_lock = &session->print_lock;
 		i++;
@@ -60,18 +62,17 @@ static void	init_forks(t_session *session)
 
 void	init_session(t_session *session, t_rules *rules)
 {
-	pthread_t	threads[200];
+	pthread_t		threads[200];
 
 	pthread_mutex_init(&session->end_checker, NULL);
 	pthread_mutex_init(&session->print_lock, NULL);
 	session->rules = rules;
 	session->session_start = get_current_time();
 	session->time_of_death = 0;
-	session->is_someone_dead = 0;
+	session->is_dead = 0;
 	session->dead_philo_index = 0;
 	init_forks(session);
 	init_philos(session);
-	//create threads
-	//join threads
-	//clean list
+	create_philo_threads(threads, session);
+	join_philo_threads(threads, session);
 }

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:02 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/07 19:20:02 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/11/29 19:20:44 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,16 @@
 	- utils for time check
 */
 
-void	*routine()
-{
-	printf("Test from threads\n");
-	sleep(2);
-	printf("End thread\n");
-	return ((void *)1);
-}
-
 int	main(int argc, char **argv)
 {
-	pthread_t	t1;
-	pthread_t	t2;
 	t_rules		rules;
+	t_session	session;
 
 	if (check_args_errors(argc, argv))
 		return (1);
 	init_rules(argv, &rules);
-	if (argc && *argv)
-	{
-		if (pthread_create(&t1, NULL, &routine, NULL) != 0)
-			printf("Deu ruim no 1!\n");
-		if (pthread_create(&t2, NULL, &routine, NULL) != 0)
-			printf("Deu ruim no 2!\n");
-		if (pthread_join(t1, NULL) != 0)
-			printf("Deu ruim no 1!\n");
-		if (pthread_join(t2, NULL) != 0)
-			printf("Deu ruim no 2!\n");
-	}
+	init_session(&session, &rules);
+	if (session.is_dead)
+		philo_speak(session.time_of_death, session.dead_philo_index, DEAD, 0);
 	return (0);
 }
