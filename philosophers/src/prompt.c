@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:28:51 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/29 21:17:20 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/12/05 13:33:55 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static char	*choose_type_color(int type)
 	return (BOLD_WHITE);
 }
 
-void	philo_speak(long long int timestamp, int philo_index, int type,
-	int meals)
+static void	event_message_picker(int type, t_philo *philo)
 {
-	printf("%s", choose_type_color(type));
-	printf("% 10lld | ", timestamp);
+	int	philo_index;
+
+	philo_index = philo->index;
 	if (type == EATING)
 		printf("%d is eating. Yummy!\n", philo_index);
 	else if (type == SLEEPING)
@@ -48,7 +48,7 @@ void	philo_speak(long long int timestamp, int philo_index, int type,
 		printf("%d is doing what philosophers do. Thinking!\n", philo_index);
 	else if (type == SATIATED)
 		printf("%d ate %d meals and with no space in his tummy!\n",
-			philo_index, meals);
+			philo_index, philo->meals_eaten);
 	else if (type == PICK_LEFT_FORK)
 		printf("%d took a fork in his left hand.\n", philo_index);
 	else if (type == PICK_RIGHT_FORK)
@@ -59,5 +59,14 @@ void	philo_speak(long long int timestamp, int philo_index, int type,
 		printf("%d released his right fork.\n", philo_index);
 	else if (type == DEAD)
 		printf("%d is dead. R.I.P\n", philo_index);
+}
+
+void	philo_speak(long long int timestamp, int type, t_philo *philo)
+{
+	if (type != DEAD && *philo->is_dead)
+		return ;
+	printf("%s", choose_type_color(type));
+	printf("% 10lld | ", timestamp);
+	event_message_picker(type, philo);
 	printf("%s", RESET_COLOR);
 }

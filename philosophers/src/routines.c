@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:13:10 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/29 21:41:45 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:22:27 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	is_satiated(t_philo *philo, t_rules *rules)
 static void	satiation_process(t_philo *philo)
 {
 	pthread_mutex_lock(philo->print_lock);
-	philo_speak(timestamp(philo->session_start), philo->index, SATIATED,
-		philo->meals_eaten);
+	philo_speak(timestamp(philo->session_start), SATIATED, philo);
 	pthread_mutex_unlock(philo->print_lock);
 }
 

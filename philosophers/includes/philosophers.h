@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:18 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/29 21:33:58 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:49:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
-# include <fcntl.h>
 # include "utils.h"
 
 /*
@@ -29,8 +28,6 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 # define LONG_MAX 9223372036854775807
-# define TRUE 1
-# define FALSE 0
 
 /*
 ** Error messages.
@@ -115,8 +112,7 @@ int				is_satiated(t_philo *philo, t_rules *rules);
 void			*philo_routine(void *_routine_args);
 
 /* PROMPT */
-void			philo_speak(long long int timestamp, int philo_index, int type,
-					int meals);
+void			philo_speak(long long int timestamp, int type, t_philo *philo);
 
 /* THREADS */
 int				create_philo_threads(pthread_t *threads, t_session *session);

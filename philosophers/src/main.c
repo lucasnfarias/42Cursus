@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:02 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/29 19:20:44 by lniehues         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:21:29 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	init_rules(argv, &rules);
 	init_session(&session, &rules);
 	if (session.is_dead)
-		philo_speak(session.time_of_death, session.dead_philo_index, DEAD, 0);
+		philo_speak(session.time_of_death, DEAD,
+			&session.philos[session.dead_philo_index - 1]);
 	return (0);
 }
