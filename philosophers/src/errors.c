@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 18:25:03 by lniehues          #+#    #+#             */
-/*   Updated: 2021/11/20 14:56:54 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:09:05 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int	check_args_errors(int argc, char **argv)
 		return (handle_error_message(TOO_FEW_ARGS, 1));
 	if (argc > 6)
 		return (handle_error_message(TOO_MANY_ARGS, 1));
-	if (check_philos_quantity(ft_atoi(argv[1])))
-		return (1);
 	while (argv[i])
 	{
 		if (check_args_is_only_digits(argv[i])
@@ -94,5 +92,7 @@ int	check_args_errors(int argc, char **argv)
 			return (1);
 		i++;
 	}
+	if (check_philos_quantity(ft_atoi(argv[1])))
+		return (1);
 	return (0);
 }

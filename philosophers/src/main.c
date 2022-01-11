@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 19:21:02 by lniehues          #+#    #+#             */
-/*   Updated: 2021/12/08 19:21:29 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:10:04 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@
 	arg 3: time_to_eat
 	arg 4: time_to_sleep
 	arg 5: number_of_times_each_philosopher_must_eat (optional)
-
-	TO-DO:
-	- init pthreads philos
-	- init mutexes (forks and print-lock)
-	- create routine (and sobs eat, think and sleep)
-	- utils for time check
 */
 
 int	main(int argc, char **argv)
