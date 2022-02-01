@@ -6,12 +6,11 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/01/29 21:34:57 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/31 20:45:24 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-using namespace std;
 
 int	ft_toupper(int c)
 {
@@ -33,20 +32,20 @@ size_t	ft_strlen(const char *s)
 void print_str_upperized(char *str) {
 	int len = ft_strlen(str);
 	for (int i = 0; i < len; i++) {
-		cout << (char)ft_toupper(str[i]);
+		std::cout << (char)ft_toupper(str[i]);
 	}
 	return;
 }
 
 int main(int argc, char **argv) {
 	if (argc == 1) {
-		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	}
 	else {
 		for (int i = 1; i < argc; i++) {
 			print_str_upperized(argv[i]);
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	return (0);
