@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/13 21:21:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:49:02 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,26 @@ int main( void ) {
 	PhoneBook	clumsy_phonebook;
 	std::string	input;
 
-	std::cout << "WELCOME TO THE GREATEST PHONE BOOK YOU HAVE EVER SEEN !" << std::endl;
+	std::cout << "\n##########################################################\n";
+	std::cout << "\n  WELCOME TO THE GREATEST PHONE BOOK YOU HAVE EVER SEEN!\n";
+	std::cout << "\n##########################################################\n";
 
 	while (1) {
-		std::cout << "Type one of the below commands:" << std::endl;
+		std::cout << "\nType one of the below commands:" << std::endl;
 		std::cout << "1) ADD" << std::endl;
 		std::cout << "2) SEARCH" << std::endl;
 		std::cout << "3) EXIT" << std::endl;
 		std::cout << "## Any other command will be discarded ##" << std::endl;
-
-
 		std::cout << std::endl << "# Input: ";
 		std::cin >> input;
+
 		if (input == "ADD") clumsy_phonebook.add_contact();
 		else if (input == "SEARCH") clumsy_phonebook.search_contacts();
 		else if (input == "EXIT") {
 			clumsy_phonebook.exit();
 			break;
 		}
-		else std::cout << "Come on bro that's not a real command :/" << std::endl;
+		else std::cout << "\n# Come on bro that's not a real command :/ #\n" << std::endl;
 	}
 
 	return (0);

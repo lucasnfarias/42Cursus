@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 20:15:36 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/13 21:20:18 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:46:26 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ void Contact::fill(
 	this->_phone_number = phone_number;
 	this->_darkest_secret = darkest_secret;
 
-	std::cout << "Contact Created!" << std::endl;
+	std::cout << std::endl;
+	std::cout << "Contact Filled!" << std::endl;
 	std::cout << "First Name: " << this->_first_name << std::endl;
 	std::cout << "Last Name: " << this->_last_name << std::endl;
 	std::cout << "Nickname: " << this->_nickname << std::endl;
 	std::cout << "Phone Number: " << this->_phone_number << std::endl;
 	std::cout << "Darkest Secret: " << this->_darkest_secret << std::endl;
+	std::cout << std::endl;
 };
 
 Contact::~Contact( void ) {
