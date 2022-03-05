@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/13 21:29:10 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/04 23:16:59 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include "Contact.class.hpp"
 
 class PhoneBook {
-
-public:
+private:
 	Contact	contacts[8];
 	int 	index = 0;
 
+public:
 	PhoneBook( void );
 	~PhoneBook( void );
 

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 20:25:54 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/16 21:10:58 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:45:29 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,38 @@ PhoneBook::PhoneBook( void ) {
 };
 
 void PhoneBook::add_contact( void ) {
-	std::string first_name;
-	std::string last_name;
+	std::string firstName;
+	std::string lastName;
 	std::string nickname;
-	std::string phone_number;
-	std::string darkest_secret;
+	std::string phoneNumber;
+	std::string darkestSecret;
 
-	std::cout << std::endl;
+	std::getline(std::cin, firstName);
+
 	std::cout << "Type first name: ";
-	std::cin >> first_name;
+	std::getline(std::cin, firstName);
 
 	std::cout << "Type last name: ";
-	std::cin >> last_name;
+	std::getline(std::cin, lastName);
 
 	std::cout << "Type nickname: ";
-	std::cin >> nickname;
+	std::getline(std::cin, nickname);
 
 	std::cout << "Type phone number: ";
-	std::cin >> phone_number;
+	std::getline(std::cin, phoneNumber);
 
 	std::cout << "Type darkest secret: ";
-	std::cin >> darkest_secret;
+	std::getline(std::cin, darkestSecret);
 	std::cout << std::endl;
 
 	Contact	new_contact;
 
 	new_contact.fill(
-		first_name,
-		last_name,
+		firstName,
+		lastName,
 		nickname,
-		phone_number,
-		darkest_secret
+		phoneNumber,
+		darkestSecret
 	);
 
 	this->contacts[this->index] = new_contact;
@@ -71,7 +72,7 @@ std::string formattedStringGenerator(std::string str) {
 void PhoneBook::search_contacts( void ) {
 	int i = 0;
 	std::cout << "SEARCHING..." << std::endl;
-	if (this->contacts[0]._first_name == "") {
+	if (this->contacts[0].getFirstName() == "") {
 		std::cout << "\n########################\n";
 		std::cout << "# NO CONTACTS FOUND :( #";
 		std::cout << "\n########################\n";
@@ -88,14 +89,14 @@ void PhoneBook::search_contacts( void ) {
 	std::cout << std::endl;
 
 	while (i < 8) {
-		if (this->contacts[i]._first_name != "") {
+		if (this->contacts[i].getFirstName() != "") {
 			std::cout << std::setw(10) << i;
 			std::cout << "|";
-			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i]._first_name);
+			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i].getFirstName());
 			std::cout << "|";
-			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i]._last_name);
+			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i].getLastName());
 			std::cout << "|";
-			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i]._nickname);
+			std::cout << std::setw(10) << formattedStringGenerator(this->contacts[i].getNickname());
 			std::cout << std::endl;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/13 21:15:26 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:29:14 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <string>
 
 class Contact {
+private:
+	std::string _firstName;
+	std::string _lastName;
+	std::string _nickname;
+	std::string _phoneNumber;
+	std::string _darkestSecret;
 
 public:
-	std::string _first_name;
-	std::string _last_name;
-	std::string _nickname;
-	std::string _phone_number;
-	std::string _darkest_secret;
-
 	Contact( void );
 	~Contact( void );
 
@@ -34,6 +34,17 @@ public:
 		std::string phone_number,
 		std::string darkest_secret
 	);
+
+	std::string getFirstName() const;
+	void setFirstName(std::string value);
+	std::string getLastName() const;
+	void setLastName(std::string value);
+	std::string getNickname() const;
+	void setNickname(std::string value);
+	std::string getPhoneNumber() const;
+	void setPhoneNumber(std::string value);
+	std::string getDarkestSecret() const;
+	void setDarkestSecret(std::string value);
 };
 
 #endif

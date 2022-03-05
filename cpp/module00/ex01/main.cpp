@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/02/16 20:49:02 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:42:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main( void ) {
 		std::cout << "## Any other command will be discarded ##" << std::endl;
 		std::cout << std::endl << "# Input: ";
 		std::cin >> input;
+		std::cout << std::endl;
 
 		if (input == "ADD") clumsy_phonebook.add_contact();
 		else if (input == "SEARCH") clumsy_phonebook.search_contacts();
