@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 20:25:54 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/05 16:45:29 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/06 18:09:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ void PhoneBook::add_contact( void ) {
 	std::getline(std::cin, darkestSecret);
 	std::cout << std::endl;
 
-	Contact	new_contact;
-
-	new_contact.fill(
+	Contact	new_contact(
 		firstName,
 		lastName,
 		nickname,

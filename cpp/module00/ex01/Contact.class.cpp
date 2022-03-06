@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 20:15:36 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/05 16:32:54 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/06 18:16:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 #include "Contact.class.hpp"
 
 Contact::Contact( void ) {
-	std::cout << "Creating Contact..." << std::endl;
+	std::cout << "Creating empty contact..." << std::endl;
 	return;
 };
 
-void Contact::fill(
+Contact::Contact(
 	std::string firstName,
 	std::string lastName,
 	std::string nickname,
 	std::string phoneNumber,
 	std::string darkestSecret
-)
+) :
+	_firstName(firstName),
+	_lastName(lastName),
+	_nickname(nickname),
+	_phoneNumber(phoneNumber),
+	_darkestSecret(darkestSecret)
 {
-	this->_firstName = firstName;
-	this->_lastName = lastName;
-	this->_nickname = nickname;
-	this->_phoneNumber = phoneNumber;
-	this->_darkestSecret = darkestSecret;
-
 	std::cout << std::endl;
-	std::cout << "# Contact Filled! #" << std::endl;
+	std::cout << "# Contact created and filled! #" << std::endl;
 	std::cout << "First Name: " << this->_firstName << std::endl;
 	std::cout << "Last Name: " << this->_lastName << std::endl;
 	std::cout << "Nickname: " << this->_nickname << std::endl;
@@ -90,6 +89,9 @@ void Contact::setDarkestSecret(std::string value) {
 
 
 Contact::~Contact( void ) {
-	std::cout << "Contact " + this->_firstName + " Gone!" << std::endl;
+	if (this->_firstName == "")
+		std::cout << "Empty Contact Gone!" << std::endl;
+	else
+		std::cout << "Contact " + this->_firstName + " Gone!" << std::endl;
 	return;
 };
