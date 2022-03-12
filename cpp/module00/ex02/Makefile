@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/06 16:29:50 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/12 12:53:51 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME := the_job_of_your_nightmare
 
 DIRECTORY_TARGET	:= target
 
-FILE_SOURCE	:= PhoneBook.class.cpp Contact.class.cpp main.cpp
+FILE_SOURCE	:= tests.cpp Account.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror
