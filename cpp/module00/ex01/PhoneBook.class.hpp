@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/04 23:16:59 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/12 13:17:30 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 class PhoneBook {
 private:
-	Contact	contacts[8];
-	int 	index = 0;
+	Contact	_contacts[8];
+	static int 	_index;
 
 public:
 	PhoneBook( void );
