@@ -3,36 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 20:14:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/01/31 20:45:24 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/13 21:15:11 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	count;
-
-	count = 0;
-	while (s[count] != '\0')
-		count++;
-	return (count);
-}
-
-void print_str_upperized(char *str) {
-	int len = ft_strlen(str);
-	for (int i = 0; i < len; i++) {
-		std::cout << (char)ft_toupper(str[i]);
+void print_str_upperized(const char *str) {
+    std::string outputStr = str;
+	for (size_t i = 0; i < outputStr.length(); i++) {
+		std::cout << (char) std::toupper(outputStr[i]);
 	}
 	return;
 }
