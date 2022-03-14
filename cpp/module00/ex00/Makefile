@@ -6,7 +6,7 @@
 #    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/01/31 20:53:25 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/14 20:47:09 by lniehues         ###   ########.fr        #
 #                                                                              #
 # *****************c********************************************************** #
 
@@ -18,7 +18,7 @@ DIRECTORY_TARGET	:= target
 
 FILE_SOURCE	:= megaphone.cpp
 
-COMPILER		:= g++
+COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror
 
 ifeq ($(SANITIZE_A),true)
