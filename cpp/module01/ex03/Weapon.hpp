@@ -6,24 +6,27 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 20:48:24 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/17 20:58:19 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:53:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+#ifndef WEAPON_HPP
+#define WEAPON_HPP
 #include <string>
 
-class Weapon {
+class Weapon
+{
 
 private:
-
-  std::string _type;
+  std::string type;
 
 public:
+  Weapon(std::string type);
+  ~Weapon(void);
 
-  Weapon( void );
-  Weapon( std::string type );
-  ~Weapon( void );
-
-  std::string getType( void ) const;
-  void        setType( std::string type );
+  std::string getType(void) const;
+  void setType(std::string type);
 };
+
+#endif

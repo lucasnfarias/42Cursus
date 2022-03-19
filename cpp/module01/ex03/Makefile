@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/17 08:22:17 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/19 16:32:20 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := referenceisnotthatcomplicated
 
 # CONFIG
 
-FILE_SOURCE	:= main.cpp
+FILE_SOURCE	:= Weapon.cpp  HumanA.cpp  HumanB.cpp main.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98
@@ -25,6 +25,10 @@ endif
 
 ifeq ($(SANITIZE_L),true)
         COMPILER_FLAGS += -fsanitize=leak
+endif
+
+ifeq ($(DEBUG), true)
+        COMPILER_FLAGS += -g
 endif
 
 # RECIPES
