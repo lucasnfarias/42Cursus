@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/19 18:34:52 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/20 20:06:43 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := fsdebut
 
 # CONFIG
 
-FILE_SOURCE	:= main.cpp
+FILE_SOURCE	:= main.cpp FileSed.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror

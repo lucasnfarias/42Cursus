@@ -6,25 +6,28 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:05:52 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/19 17:17:52 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/20 20:16:29 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILESED_HPP
 #define FILESED_HPP
-#include <iostream>
+# include <iostream>
 
 class FileSed
 {
 private:
   std::string _inputFileName;
+  std::ifstream _inputFile;
 
 public:
   FileSed(std::string inputFileName);
   ~FileSed(void);
 
-  std::ifstream &createInputStream(void) const;
-  void replaceStrToOutputFile(std::string s1, std::string s2) const;
+  std::string replacer(std::string line, std::string s1, std::string s2);
+  int replaceStrToOutputFile(std::string s1, std::string s2);
 };
+
+int  errorMessage(std::string msg);
 
 #endif
