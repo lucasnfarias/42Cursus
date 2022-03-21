@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:11:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/20 20:29:12 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:51:22 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 #include <fstream>
 #include "FileSed.hpp"
 
-int errorMessage(std::string msg)
+int errorMessage(std::string msg, bool print_args)
 {
   std::cerr << "Error: " << msg << std::endl;
-  std::cout << "arg1: filename | arg2: string1 | arg3: string2" << std::endl;
+  if (print_args)
+    std::cout << "arg1: filename | arg2: string1 | arg3: string2" << std::endl;
   return (1);
 }
 
@@ -36,6 +37,9 @@ std::string FileSed::replacer(std::string line, std::string s1, std::string s2)
   size_t s1Length = s1.length();
 
   result.assign(line);
+  if (s1.length() == 0)
+    return (result);
+
   for (size_t pos = 0; pos < result.length(); pos++)
   {
     if (result.compare(pos, s1Length, s1) == 0)
@@ -52,12 +56,12 @@ int FileSed::replaceStrToOutputFile(std::string s1, std::string s2)
   std::ofstream ofs;
   std::string line;
 
-  ofs.open(this->_inputFileName + ".replace");
-
   if (!this->_inputFile.is_open())
   {
-    return (errorMessage("Error while opening file" + this->_inputFileName));
+    return (errorMessage("could not open file" + this->_inputFileName, false));
   }
+
+  ofs.open(this->_inputFileName + ".replace");
 
   while (std::getline(this->_inputFile, line))
   {

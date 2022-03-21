@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:05:52 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/20 20:16:29 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:30:53 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ public:
   int replaceStrToOutputFile(std::string s1, std::string s2);
 };
 
-int  errorMessage(std::string msg);
+int  errorMessage(std::string msg, bool print_args);
 
 #endif
