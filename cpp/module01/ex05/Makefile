@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/21 20:06:17 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/25 20:27:49 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ endif
 
 ifeq ($(DEBUG), true)
         COMPILER_FLAGS += -g
+endif
+
+ifeq ($(STD98),true)
+        COMPILER_FLAGS += -std=c++98
 endif
 
 # RECIPES

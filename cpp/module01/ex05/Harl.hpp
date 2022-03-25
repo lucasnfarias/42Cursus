@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:45:19 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/23 18:35:54 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:26:09 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ public:
   void complain( std::string level );
 };
 
-typedef void(*fnPtr)(void);
+typedef void (Harl::*methodPtr)(void);
 
 #endif

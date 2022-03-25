@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:48:14 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/23 18:55:14 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:33:45 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void Harl::complain(std::string level)
     "warning",
     "error",
   };
+  methodPtr selectedFn;
 
-  for (int i; i < 4; i++)
+  for (int i = 0; i < 4; i++)
   {
-    void(Harl::*selectedFn)(void) = complaintFnArray[i];
+    selectedFn = complaintFnArray[i];
     if (level == complaintLevelArray[i])
       (this->*selectedFn)();
   }
