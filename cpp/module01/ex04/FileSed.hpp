@@ -6,12 +6,12 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:05:52 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/21 18:30:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:45:01 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILESED_HPP
-#define FILESED_HPP
+# define FILESED_HPP
 # include <iostream>
 
 class FileSed
