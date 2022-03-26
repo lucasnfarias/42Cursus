@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:24:11 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/16 22:07:32 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/26 19:19:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Zombie::Zombie( std::string name ) : name(name) {}
 
 Zombie::Zombie( void ) {
-  std::cout << "A nameless zombie has been become alive..." << std::endl;
+  std::cout << "A nameless zombie has become alive..." << std::endl;
 }
 
 Zombie::~Zombie( void ) {
