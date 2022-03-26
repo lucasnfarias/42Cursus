@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 20:48:24 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/19 16:53:06 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/26 19:33:51 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public:
   Weapon(std::string type);
   ~Weapon(void);
 
-  std::string getType(void) const;
+  const std::string& getType(void) const;
   void setType(std::string type);
 };
 
