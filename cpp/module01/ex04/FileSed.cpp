@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FileSed.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:11:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/21 18:51:22 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/27 21:59:47 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int errorMessage(std::string msg, bool print_args)
 
 FileSed::FileSed(std::string inputFileName) : _inputFileName(inputFileName)
 {
-  this->_inputFile.open(inputFileName);
+  this->_inputFile.open(inputFileName.c_str());
   std::cout << "Input file set to " << inputFileName << std::endl;
 };
 
@@ -58,10 +58,11 @@ int FileSed::replaceStrToOutputFile(std::string s1, std::string s2)
 
   if (!this->_inputFile.is_open())
   {
-    return (errorMessage("could not open file" + this->_inputFileName, false));
+    return (errorMessage("could not open file " + this->_inputFileName, false));
   }
+  std::string ofsName = this->_inputFileName + ".replace";
 
-  ofs.open(this->_inputFileName + ".replace");
+  ofs.open(ofsName.c_str());
 
   while (std::getline(this->_inputFile, line))
   {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/20 20:06:43 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/26 19:42:04 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME := fsdebut
 FILE_SOURCE	:= main.cpp FileSed.cpp
 
 COMPILER		:= c++
-COMPILER_FLAGS	:= -Wall -Wextra -Werror
+COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98
 
 ifeq ($(SANITIZE_A),true)
         COMPILER_FLAGS += -fsanitize=address
