@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:48:14 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/25 20:33:45 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/27 22:17:18 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-  void (Harl::*complaintFnArray[])(void) = {
+  methodPtr complaintFnArray[] = {
     &Harl::debug,
     &Harl::info,
     &Harl::warning,

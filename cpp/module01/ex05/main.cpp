@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:52:14 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/21 20:09:26 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/27 22:24:11 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <limits>
 #include "Harl.hpp"
 
 std::string commandPicker(int n)
@@ -29,7 +30,7 @@ std::string commandPicker(int n)
 int main(void)
 {
   Harl  harl;
-  int n;
+  int n = 0;
 
   while (n != 5)
   {
@@ -42,6 +43,13 @@ int main(void)
     std::cout << "# Command Number: ";
     std::cin >> n;
     std::cout << "-------------" << std::endl;
+	if(!std::cin)
+	{
+		std::cout << "Only numbers, please" << std::endl;
+		std::cin.clear(); // reset failbit
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //skip bad input
+		continue;
+	}
     if (n < 1 || n > 5)
       std::cout << "I don't know that command" << std::endl;
     else
