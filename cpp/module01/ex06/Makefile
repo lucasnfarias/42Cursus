@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/03/25 20:40:34 by lniehues         ###   ########.fr        #
+#    Updated: 2022/03/27 22:28:31 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME := harlFilter
 FILE_SOURCE	:= main.cpp Harl.cpp
 
 COMPILER		:= c++
-COMPILER_FLAGS	:= -Wall -Wextra -Werror
+COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98
 
 ifeq ($(SANITIZE_A),true)
         COMPILER_FLAGS += -fsanitize=address
@@ -29,10 +29,6 @@ endif
 
 ifeq ($(DEBUG), true)
         COMPILER_FLAGS += -g
-endif
-
-ifeq ($(STD98),true)
-        COMPILER_FLAGS += -std=c++98
 endif
 
 # RECIPES

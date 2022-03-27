@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:48:14 by lniehues          #+#    #+#             */
-/*   Updated: 2022/03/25 22:04:44 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/03/27 23:02:20 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Harl.hpp"
 
-Harl::Harl(const std::string level) : _level(level) {};
+Harl::Harl(const std::string level) {
+	this->_level = this->getLevelFromString(level);
+};
 
 Harl::~Harl(void) {};
+
+Harl::filterLevel Harl::getLevel(void) const
+{
+  return this->_level;
+};
 
 void Harl::_messageBuilder(std::string level, std::string message)
 {
@@ -59,34 +66,45 @@ void Harl::_error(void)
   );
 };
 
-void Harl::complain( void )
+Harl::filterLevel Harl::getLevelFromString(std::string level)
 {
-  void (Harl::*complaintFnArray[])(void) = {
-    &Harl::_debug,
-    &Harl::_info,
-    &Harl::_warning,
-    &Harl::_error,
-  };
   std::string complaintLevelArray[] = {
-    "DEBUG",
-    "INFO",
-    "WARNING",
     "ERROR",
+    "WARNING",
+    "INFO",
+    "DEBUG",
   };
-  int fnIndex = -1;
 
   for (int i = 0; i < 4; i++)
   {
-    if (this->_level == complaintLevelArray[i])
-      fnIndex = i;
+    if (level == complaintLevelArray[i])
+      return ((filterLevel)i);
   }
+  return (Harl::defaultLevel);
+};
 
-  if (fnIndex == -1)
-    std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-  else {
-    for (int j = fnIndex; j < 4; j++)
-    {
-      (this->*complaintFnArray[j])();
-    }
+void Harl::complain( std::string level )
+{
+  filterLevel fLevel = this->getLevelFromString(level);
+
+  if (fLevel <= this->_level)
+  {
+	  switch (fLevel)
+	  {
+		  case Harl::debugLevel:
+		  	this->_debug();
+			  break;
+		  case Harl::infoLevel:
+		  	this->_info();
+			  break;
+			case Harl::warningLevel:
+					this->_warning();
+					break;
+			case Harl::errorLevel:
+					this->_error();
+					break;
+			default:
+				std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	  }
   }
 };
