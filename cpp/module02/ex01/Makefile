@@ -6,11 +6,11 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/04/05 19:40:23 by lniehues         ###   ########.fr        #
+#    Updated: 2022/04/05 19:40:34 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := fixedPoint
+NAME := realFixedPoint
 
 # CONFIG
 
