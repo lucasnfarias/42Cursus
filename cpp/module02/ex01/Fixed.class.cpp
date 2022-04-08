@@ -12,8 +12,20 @@
 
 #include "Fixed.class.hpp"
 #include <iostream>
+#include <cmath>
 
-Fixed::Fixed( void ) : _fixedPointNumber(0)
+int ft_pow(int val, int pow)
+{
+  int res = 1;
+
+  for (int i = 0; i < pow; i++)
+  {
+    res *= val;
+  }
+  return (res);
+}
+
+Fixed::Fixed( void ) : _fixedPointValue(0)
 {
   std::cout << "Default constructor called" << std::endl;
 };
@@ -24,8 +36,15 @@ Fixed::Fixed( Fixed const & src )
   *this = src;
 };
 
-Fixed::Fixed( int const i ) {};
-Fixed::Fixed( float const f ) {};
+Fixed::Fixed( int const i ) {
+  std::cout << "Int constructor called" << std::endl;
+  this->_fixedPointValue = i << this->_numOfFractionalBits;
+};
+
+Fixed::Fixed( float const f ) {
+  std::cout << "Float constructor called" << std::endl;
+  this->_fixedPointValue = roundf(f * ft_pow(2, this->_numOfFractionalBits));
+};
 
 Fixed::~Fixed( void )
 {
@@ -36,7 +55,7 @@ Fixed::~Fixed( void )
 Fixed & Fixed::operator=(Fixed const & rhs )
 {
   std::cout << "Copy assignment operator called" << std::endl;
-  this->_fixedPointNumber = rhs.getRawBits();
+  this->_fixedPointValue = rhs._fixedPointValue;
   return *this;
 };
 
@@ -44,19 +63,24 @@ Fixed & Fixed::operator=(Fixed const & rhs )
 int Fixed:: getRawBits( void ) const
 {
   std::cout << "getRawBits member function called" << std::endl;
-  return this->_fixedPointNumber;
+  return this->_fixedPointValue;
 };
 
 void Fixed::setRawBits( int const raw ) {
-  this->_fixedPointNumber = raw;
+  this->_fixedPointValue = raw;
 };
 
-float Fixed::toFloat( void ) const {};
-int Fixed::toInt( void ) const {};
+float Fixed::toFloat( void ) const {
+  return ((float) this->_fixedPointValue / ft_pow(2, this->_numOfFractionalBits));
+};
 
-std::ostream & Fixed::operator<<( std::ostream & o, Fixed const & f )
+int Fixed::toInt( void ) const {
+  return (this->_fixedPointValue >> this->_numOfFractionalBits);
+};
+
+std::ostream & operator<<( std::ostream & o, Fixed const & f )
 {
-  o << f.getRawBits(); // maybe change to toFloat
+  o << f.toFloat();
 
   return o;
 };

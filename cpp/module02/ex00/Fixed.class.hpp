@@ -26,7 +26,7 @@ public:
   void setRawBits( int const raw );
 
 private:
-  int _fixedPointNumber;
+  int _fixedPointValue;
   static const int _numOfFractionalBits;
 };
 

@@ -33,10 +33,11 @@ public:
   int toInt( void ) const;
 
 private:
-  int _fixedPointNumber;
+  int _fixedPointValue;
   static const int _numOfFractionalBits;
 };
 
 std::ostream & operator<<( std::ostream & o, Fixed const & f );
+int ft_pow(int val, int pow);
 
 #endif
