@@ -54,4 +54,11 @@ void Fixed::setRawBits( int const raw ) {
 float Fixed::toFloat( void ) const {};
 int Fixed::toInt( void ) const {};
 
+std::ostream & Fixed::operator<<( std::ostream & o, Fixed const & f )
+{
+  o << f.getRawBits(); // maybe change to toFloat
+
+  return o;
+};
+
 const int Fixed::_numOfFractionalBits = 8;
