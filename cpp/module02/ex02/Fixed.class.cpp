@@ -26,37 +26,44 @@ int ft_pow(int val, int pow)
 }
 
 const int Fixed::_numOfFractionalBits = 8;
+const bool Fixed::_verbose = false;
 
 Fixed::Fixed( void ) : _fixedPointValue(0)
 {
-  std::cout << "Default constructor called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Default constructor called" << std::endl;
 };
 
 Fixed::Fixed( Fixed const & src )
 {
-  std::cout << "Copy constructor called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Copy constructor called" << std::endl;
   *this = src;
 };
 
 Fixed::Fixed( int const i ) {
-  std::cout << "Int constructor called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Int constructor called" << std::endl;
   this->_fixedPointValue = i << this->_numOfFractionalBits;
 };
 
 Fixed::Fixed( float const f ) {
-  std::cout << "Float constructor called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Float constructor called" << std::endl;
   this->_fixedPointValue = roundf(f * ft_pow(2, this->_numOfFractionalBits));
 };
 
 Fixed::~Fixed( void )
 {
-  std::cout << "Destructor called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Destructor called" << std::endl;
 };
 
 
 Fixed & Fixed::operator=(Fixed const & rhs )
 {
-  std::cout << "Copy assignment operator called" << std::endl;
+  if (this->_verbose)
+    std::cout << "Copy assignment operator called" << std::endl;
   this->_fixedPointValue = rhs._fixedPointValue;
   return *this;
 };
@@ -64,7 +71,8 @@ Fixed & Fixed::operator=(Fixed const & rhs )
 
 int Fixed:: getRawBits( void ) const
 {
-  std::cout << "getRawBits member function called" << std::endl;
+  if (this->_verbose)
+    std::cout << "getRawBits member function called" << std::endl;
   return this->_fixedPointValue;
 };
 

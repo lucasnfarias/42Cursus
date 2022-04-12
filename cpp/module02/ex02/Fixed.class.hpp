@@ -57,6 +57,7 @@ public:
 private:
   int _fixedPointValue;
   static const int _numOfFractionalBits;
+  static const bool _verbose;
 };
 
 std::ostream & operator<<( std::ostream & o, Fixed const & f );
