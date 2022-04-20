@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:05:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/14 18:59:12 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:22:53 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 int main( void ) {
   ClapTrap namelessCT;
-  ClapTrap ct("Arnaldo");
+  ClapTrap arnaldo("Arnaldo");
 
   namelessCT.attack("Arnaldo");
-  ct.attack("Someone");
-  ct.takeDamage(2);
-  ct.beRepaired(3);
-  ct.beRepaired(2);
-  ct.takeDamage(10);
-  ct.attack("Someone");
+  arnaldo.attack("Someone");
+  arnaldo.takeDamage(2);
+  arnaldo.beRepaired(3);
+  arnaldo.beRepaired(2);
+  arnaldo.takeDamage(10);
+  arnaldo.attack("Someone");
   namelessCT.takeDamage(5);
 
-  ct.getStatus();
+  arnaldo.getStatus();
   namelessCT.getStatus();
 
   return 0;

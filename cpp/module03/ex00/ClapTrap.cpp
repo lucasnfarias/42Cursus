@@ -60,95 +60,98 @@ ClapTrap & ClapTrap::operator=(ClapTrap const & rhs )
   std::cout << "Copy assignment operator called" << std::endl;
   if (this != &rhs)
   {
-    this->_name = rhs.getName();
-    this->_hitPoints = rhs.getHitPoints();
-    this->_energyPoints = rhs.getEnergyPoints();
-    this->_attackDamage = rhs.getAttackDamage();
-    this->_hitPointsLimit = rhs.getHitPointsLimit();
-    this->_energyPointsLimit = rhs.getEnergyPointsLimit();
+    _name = rhs.getName();
+    _hitPoints = rhs.getHitPoints();
+    _energyPoints = rhs.getEnergyPoints();
+    _attackDamage = rhs.getAttackDamage();
+    _hitPointsLimit = rhs.getHitPointsLimit();
+    _energyPointsLimit = rhs.getEnergyPointsLimit();
   }
   return *this;
 };
 
 std::string ClapTrap::getName( void ) const
 {
-  return this->_name;
+  return _name;
 };
 
 int ClapTrap::getHitPoints( void ) const
 {
-  return this->_hitPoints;
+  return _hitPoints;
 };
 
 int ClapTrap::getEnergyPoints( void ) const
 {
-  return this->_energyPoints;
+  return _energyPoints;
 };
 
 int ClapTrap::getAttackDamage( void ) const
 {
-  return this->_attackDamage;
+  return _attackDamage;
 };
 
 int ClapTrap::getHitPointsLimit( void ) const
 {
-  return this->_hitPointsLimit;
+  return _hitPointsLimit;
 };
 
 int ClapTrap::getEnergyPointsLimit( void ) const
 {
-  return this->_energyPointsLimit;
+  return _energyPointsLimit;
 };
 
 void ClapTrap::attack(const std::string& target)
 {
-  if (this->_hitPoints <= 0)
-    std::cout << "Hmm... it seems " << this->_name << " is kind of dead :/ (no hit points)" << std::endl;
-  else if (this->_energyPoints <= 0)
-    std::cout << "Well..." << this->_name << "ran out of energy points :(" << std::endl;
+  if (_hitPoints <= 0)
+    std::cout << "Hmm... it seems " << _name << " is kind of dead :/ (no hit points)" << std::endl;
+  else if (_energyPoints <= 0)
+    std::cout << "Well..." << _name << "ran out of energy points :(" << std::endl;
   else
   {
-    this->_energyPoints--;
-    std::cout << "ClapTrap " << this->_name
+    _energyPoints--;
+    std::cout << "ClapTrap " << _name
     << " attacks " << target
-    << " causing " << this->_attackDamage << " points of damage!" << std::endl;
+    << " causing " << _attackDamage << " points of damage!" << std::endl;
   }
 };
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
   // maybe don't hit if hit point equal 0
-  this->_hitPoints = this->_hitPoints - amount;
-  if (this->_hitPoints < 0)
-    this->_hitPoints = 0;
-  std::cout << "Ouch! "<< amount << " points of damage on " << this->_name << std::endl;
+  _hitPoints = _hitPoints - amount;
+  if (_hitPoints < 0)
+    _hitPoints = 0;
+  std::cout << "Ouch! "<< amount << " points of damage on " << _name << std::endl;
 };
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-  if (this->_hitPoints + (int)amount > this->_hitPointsLimit)
+  if (_hitPoints + (int)amount > _hitPointsLimit)
   {
-    std::cout << this->_name << " can't repair above your maximum health of " << this->_hitPointsLimit << " points!" << std::endl;
-    std::cout << "Current Hit Points: " << this->_hitPoints << " points" << std::endl;
-    std::cout << "Possible amount of repair: " << this->_hitPointsLimit - this->_hitPoints << " points" << std::endl;
+    std::cout << _name << " can't repair above your maximum health of " << _hitPointsLimit << " points!" << std::endl;
+    std::cout << "Current Hit Points: " << _hitPoints << " points" << std::endl;
+    std::cout << "Possible amount of repair: " << _hitPointsLimit - _hitPoints << " points" << std::endl;
   }
-  else if (this->_energyPoints <= 0)
-    std::cout << "Well... " << this->_name << " ran out of energy points :(" << std::endl;
+  else if (_energyPoints <= 0)
+    std::cout << "Well... " << _name << " ran out of energy points :(" << std::endl;
   else
   {
-    this->_energyPoints--;
-    std::cout << "Ahhh " << this->_name << " repaired " << amount << " points!" << std::endl;
+    _energyPoints--;
+    _hitPoints += amount;
+    std::cout << "Ahhh " << _name << " repaired " << amount << " points!" << std::endl;
   }
 };
 
 void ClapTrap::getStatus( void ) const
 {
+  std::cout << std::endl;
   std::cout << "##################" << std::endl;
-  std::cout << "Name: " << this->_name << std::endl;
-  std::cout << "Hit Points: " << this->_hitPoints << std::endl;
-  std::cout << "Energy Points: " << this->_energyPoints << std::endl;
-  std::cout << "Attack Damage: " << this->_attackDamage << std::endl;
+  std::cout << "Name: " << _name << std::endl;
+  std::cout << "Hit Points: " << _hitPoints << std::endl;
+  std::cout << "Energy Points: " << _energyPoints << std::endl;
+  std::cout << "Attack Damage: " << _attackDamage << std::endl;
   std::cout << "##################" << std::endl;
+  std::cout << std::endl;
 };
 
 
