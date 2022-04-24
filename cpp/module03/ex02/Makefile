@@ -6,15 +6,15 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/04/24 16:02:36 by lniehues         ###   ########.fr        #
+#    Updated: 2022/04/24 16:25:53 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := scavtrap
+NAME := fragtrap
 
 # CONFIG
 
-FILE_SOURCE	:= main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp
+FILE_SOURCE	:= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98

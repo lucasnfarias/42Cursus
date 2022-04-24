@@ -6,21 +6,21 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:05:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/24 16:01:56 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/24 16:25:36 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 
 int main( void ) {
   ClapTrap namelessCT;
   ClapTrap arnaldo("Arnaldo");
   ScavTrap xandi("Xandi");
-  FlagTrap namelessFT;
-  FlagTrap creyson("Creyson");
+  FragTrap namelessFT;
+  FragTrap creyson("Creyson");
 
   namelessCT.attack("Arnaldo");
   arnaldo.attack("Someone");
