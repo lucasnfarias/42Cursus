@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:04:02 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/24 13:50:38 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/24 18:33:09 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ ScavTrap::~ScavTrap( void )
 
 ScavTrap & ScavTrap::operator=(ScavTrap const & rhs )
 {
-  std::cout << "Copy assignment operator called" << std::endl;
+  std::cout << "ScavTrap Copy assignment operator called" << std::endl;
   if (this != &rhs)
   {
     _name = rhs.getName();

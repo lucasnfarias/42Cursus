@@ -6,21 +6,25 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:04:02 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/24 18:33:21 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/24 18:32:57 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 #include <iostream>
 
+int ScavTrap::hitPointsInit = 100;
+int ScavTrap::energyPointsInit = 50;
+int ScavTrap::attackDamageInit = 20;
+
 ScavTrap::ScavTrap( void )
 {
   _name = "NamelessScavTrap";
-  _hitPoints = 100;
-  _energyPoints = 50;
-  _attackDamage = 20;
-  _hitPointsLimit = 100;
-  _energyPointsLimit = 50;
+  _hitPoints = ScavTrap::hitPointsInit;
+  _energyPoints = ScavTrap::energyPointsInit;
+  _attackDamage = ScavTrap::attackDamageInit;
+  _hitPointsLimit = ScavTrap::hitPointsInit;
+  _energyPointsLimit = ScavTrap::energyPointsInit;
   std::cout << "ScavTrap Default constructor called" << std::endl;
 };
 
@@ -28,11 +32,11 @@ ScavTrap::ScavTrap( std::string name )
   :
   ClapTrap(name)
 {
-  _hitPoints = 100;
-  _energyPoints = 50;
-  _attackDamage = 20;
-  _hitPointsLimit = 100;
-  _energyPointsLimit = 50;
+  _hitPoints = ScavTrap::hitPointsInit;
+  _energyPoints = ScavTrap::energyPointsInit;
+  _attackDamage = ScavTrap::attackDamageInit;
+  _hitPointsLimit = ScavTrap::hitPointsInit;
+  _energyPointsLimit = ScavTrap::energyPointsInit;
   std::cout << "ScavTrap Name constructor called" << std::endl;
 };
 
