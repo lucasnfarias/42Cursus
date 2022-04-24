@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:05:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/24 13:57:05 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/24 15:54:36 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int main( void ) {
 
   arnaldo = creyson;
   arnaldo.getStatus();
+
+  std::cout << "Check std::cout -> " << namelessCT << std::endl;
+  std::cout << "Check std::cout -> " << arnaldo << std::endl;
 
   return 0;
 }
