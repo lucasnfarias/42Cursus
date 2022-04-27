@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:09:43 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/25 16:40:01 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:03:05 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Animal
 
 		Animal &      operator=( Animal const & rhs );
 
+    virtual void  getIdea() const;
     virtual void  makeSound() const;
     std::string   getType() const;
 

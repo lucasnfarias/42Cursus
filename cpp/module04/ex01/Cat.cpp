@@ -6,11 +6,12 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:08:18 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/26 17:04:18 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:04:43 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
+#include <stdlib.h>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -18,16 +19,17 @@
 
 Cat::Cat()
 {
-  std::cout << "CAT Default constructor called" << std::endl;
   _type = "Cat";
+  _brain = new Brain();
+  std::cout << "CAT Default constructor called" << std::endl;
 }
 
 Cat::Cat( const Cat & src )
  :
   Animal(src)
 {
-  std::cout << "CAT Copy constructor called" << std::endl;
   *this = src;
+  std::cout << "CAT Copy constructor called" << std::endl;
 }
 
 
@@ -49,8 +51,8 @@ Cat &				Cat::operator=( Cat const & rhs )
 {
 	if ( this != &rhs )
 	{
-		this->_type = rhs.getType();
-    _brain = &(rhs.getBrain());
+		_type = rhs.getType();
+    _brain = new Brain(rhs.getBrain());
 	}
 	return *this;
 }
@@ -71,6 +73,11 @@ void  Cat::makeSound() const
 Brain & Cat::getBrain() const
 {
   return *_brain;
+}
+
+void Cat::getIdea() const
+{
+  std::cout << "Thinking... " << _brain->_ideas[rand() % 100] << std::endl;
 }
 
 /* ************************************************************************** */

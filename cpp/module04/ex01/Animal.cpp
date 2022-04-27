@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:09:47 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/25 16:54:07 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:03:10 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void  Animal::makeSound() const
 std::string Animal::getType() const
 {
   return _type;
+}
+
+void Animal::getIdea() const
+{
+  std::cout << "Some animals do not have brains..." << std::endl;
 }
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:06:18 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/26 17:03:37 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:04:46 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Cat : public Animal
 		Cat &		operator=( Cat const & rhs );
 
     virtual void makeSound() const;
+    virtual void getIdea() const;
     Brain & getBrain() const;
 
 	private:

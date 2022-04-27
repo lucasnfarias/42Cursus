@@ -17,6 +17,7 @@ class Brain
 		Brain &		operator=( Brain const & rhs );
 
 	private:
+    static std::string  _rawIdeas[100];
 };
 
 std::ostream &			operator<<( std::ostream & o, Brain const & i );

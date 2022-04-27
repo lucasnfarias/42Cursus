@@ -6,11 +6,11 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/04/26 17:20:15 by lniehues         ###   ########.fr        #
+#    Updated: 2022/04/27 12:16:55 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := animal00
+NAME := animal01
 
 # CONFIG
 
