@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:05:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/27 12:29:14 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:49:04 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ std::cout << "\n\n### TEST HEAP ANIMALS ###\n\n" << std::endl;
 
 AAnimal* animals[10];
 
-/* u cannot instantiate such as:
-  AAnimal animal = AAnimal();
-  AAnimal* animal = new AAnimal();
-  AAnimal test;
+/*
+  u cannot instantiate such as:
+    AAnimal animal = AAnimal();
+    AAnimal* animal = new AAnimal();
+    AAnimal test;
 */
 
 for (int i = 0; i < 5; i++)
