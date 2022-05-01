@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 17:56:08 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/30 18:39:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/01 20:03:31 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main( void )
   std::cout << capote;
   std::cout << john;
 
-  Bureaucrat gregor("gregor", 150);
+  Bureaucrat gregor("Gregor", 150);
   Bureaucrat thomas("Thomas", 1);
 
   gregor.decrementGrade();

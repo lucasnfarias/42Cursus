@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:05:57 by lniehues          #+#    #+#             */
-/*   Updated: 2022/04/30 18:41:50 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/01 20:02:09 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Bureaucrat::Bureaucrat() : _name("Capote"), _grade(75)
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade)
 {
+  _gradeChecker();
   std::cout << "Bureaucrat NameGrade constructor called" << std::endl;
 }
 
@@ -72,11 +73,12 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 
 void Bureaucrat::incrementGrade()
 {
-  try {
+  try
+  {
     _grade--;
     _gradeChecker();
   }
-  catch (Bureaucrat::GradeTooHighException& e)
+  catch (std::exception& e)
   {
     _grade++;
     std::cerr << "Not able to increment..." << std::endl;
@@ -86,11 +88,12 @@ void Bureaucrat::incrementGrade()
 
 void Bureaucrat::decrementGrade()
 {
-  try {
+  try
+  {
     _grade++;
     _gradeChecker();
   }
-  catch (Bureaucrat::GradeTooLowException& e)
+  catch (std::exception& e)
   {
     _grade--;
     std::cerr << "Not able to decrement..." << std::endl;
