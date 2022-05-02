@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:05:57 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/01 20:02:09 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:13:45 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void Bureaucrat::incrementGrade()
   catch (std::exception& e)
   {
     _grade++;
-    std::cerr << "Not able to increment..." << std::endl;
+    std::cerr << "Not able to increment " << _name << std::endl;
     std::cerr << e.what() << std::endl;
   }
 }
@@ -96,7 +96,7 @@ void Bureaucrat::decrementGrade()
   catch (std::exception& e)
   {
     _grade--;
-    std::cerr << "Not able to decrement..." << std::endl;
+    std::cerr << "Not able to decrement " << _name << std::endl;
     std::cerr << e.what() << std::endl;
   }
 }
