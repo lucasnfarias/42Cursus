@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 17:56:08 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/02 21:53:21 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/04 19:09:04 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main( void )
   Bureaucrat capote;
   Bureaucrat john("John", 13);
   Form defaultForm;
-  Form darf("IRPF", 73, 73);
+  Form irpf("IRPF", 73, 73);
 
   capote.incrementGrade();
   john.decrementGrade();
@@ -27,15 +27,14 @@ int main( void )
   std::cout << john;
 
   capote.signForm(defaultForm);
-  capote.signForm(darf);
+  capote.signForm(irpf);
 
   std::cout << defaultForm;
-  std::cout << darf;
+  std::cout << irpf;
 
-  john.signForm(darf);
+  john.signForm(irpf);
 
-  std::cout << darf;
-
+  std::cout << irpf;
 
   return (0);
 }
