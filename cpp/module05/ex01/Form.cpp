@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 20:21:33 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/02 21:50:29 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/04 20:47:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ const int Form::_lowestGrade = 150;
 
 Form::Form()
   :
-  _name("Insane burocratic default form"),
+  _name("Insane burocratic default"),
   _isSigned(false),
   _signGrade(75),
   _executionGrade(75)
@@ -79,14 +79,19 @@ Form &				Form::operator=( Form const & rhs )
 std::ostream &			operator<<( std::ostream & o, Form const & i )
 {
 	o
+  << "---" << std::endl
   << i.getName()
-  << ", form sign grade "
+  << " Form"
+  << std::endl
+  << "# Sign grade: "
   << i.getSignGrade()
-  << ", execution grade "
+  << std::endl
+  << "# Execution grade: "
   << i.getExecutionGrade()
-  << " and is"
-  << (i.getIsSigned() ? " " : " NOT ")
-  << "signed."
+  << std::endl
+  << "# Signed: "
+  << (i.getIsSigned() ? "YES" : "NO")
+  << std::endl << "---" << std::endl
   << std::endl;
 	return o;
 }
