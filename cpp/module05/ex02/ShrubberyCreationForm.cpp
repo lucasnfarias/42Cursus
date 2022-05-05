@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/05 19:07:01 by lniehues          #+#    #+#             */
+/*   Updated: 2022/05/05 19:07:01 by lniehues         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
@@ -83,7 +95,7 @@ void		ShrubberyCreationForm::_createFile() const
 	{
 		while(getline(inputFile, line))
 			outputFile << line << std::endl;
-		std::cout << filename << " has been created and it's filled with a awesome ASCII tree!" << std::endl;
+		std::cout << filename << " has been created and it's filled with an awesome ASCII tree!" << std::endl;
 	}
 	else
 		std::cerr << "Error creating file" << std::endl;

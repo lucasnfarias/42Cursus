@@ -6,11 +6,11 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/05/04 21:32:14 by lniehues         ###   ########.fr        #
+#    Updated: 2022/05/05 18:51:43 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := bureaucratandform
+NAME := whysomanyforms
 
 # CONFIG
 

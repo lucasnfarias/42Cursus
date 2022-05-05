@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 17:56:08 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/04 21:31:08 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:15:40 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
 
 int main( void )
 {
@@ -27,6 +28,39 @@ int main( void )
   std::cout << creyson;
   std::cout << john;
   std::cout << horacio;
+  std::cout << "---------------" << std::endl;
+
+  // Error example - trying to execute before signing
+  creyson.executeForm(scf);
+
+  std::cout << "---------------" << std::endl;
+  creyson.signForm(scf);
+  creyson.signForm(rqf);
+  creyson.signForm(ppf);
+  std::cout << "---------------" << std::endl;
+  creyson.executeForm(scf);
+  creyson.executeForm(rqf);
+  creyson.executeForm(ppf);
+  std::cout << "---------------" << std::endl;
+  // john.signForm(scf); - no need to sign because Creyson signed
+  john.signForm(rqf);
+  john.signForm(ppf);
+  std::cout << "---------------" << std::endl;
+  john.executeForm(scf);
+  john.executeForm(rqf);
+  john.executeForm(ppf);
+  std::cout << "---------------" << std::endl;
+  // horacio.signForm(ppf); - no need to sign because Creyson signed
+  // horacio.signForm(ppf); - no need to sign because John signed
+  horacio.signForm(ppf);
+  std::cout << "---------------" << std::endl;
+  horacio.executeForm(scf);
+  horacio.executeForm(rqf);
+  horacio.executeForm(ppf);
+  std::cout << "---------------" << std::endl;
+  std::cout << scf;
+  std::cout << rqf;
+  std::cout << ppf;
 
   return (0);
 }
