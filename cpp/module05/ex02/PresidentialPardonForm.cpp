@@ -4,64 +4,71 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-PresidentialPardonForm::PresidentialPardonForm()
+PresidentialPardonForm::PresidentialPardonForm(std::string target)
+  :
+  AForm("PresidentialPardonForm", 25, 5)
 {
-  std::cout << "PresidentialPardonForm Default constructor called" << std::endl;
+  setTarget(target);
+  std::cout << *this << std::endl;
 }
 
+
 PresidentialPardonForm::PresidentialPardonForm( const PresidentialPardonForm & src )
-{
-}
+  :
+  AForm(src)
+{}
 
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-}
+PresidentialPardonForm::~PresidentialPardonForm() {}
 
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-PresidentialPardonForm &				PresidentialPardonForm::operator=( PresidentialPardonForm const & rhs )
-{
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
-	return *this;
-}
-
 std::ostream &			operator<<( std::ostream & o, PresidentialPardonForm const & i )
 {
-	o
+  o
+  << "---" << std::endl
   << i.getName()
-  << ", form sign grade "
+  << " Form"
+  << std::endl
+  << "# Sign grade: "
   << i.getSignGrade()
-  << ", execution grade "
+  << std::endl
+  << "# Execution grade: "
   << i.getExecutionGrade()
-  << " and is"
-  << (i.getIsSigned() ? " " : " NOT ")
-  << "signed."
+  << std::endl
+  << "# Signed: "
+  << (i.getIsSigned() ? "YES" : "NO")
+  << std::endl
+  << "# Target: "
+  << i.getTarget()
+  << std::endl << "---" << std::endl
   << std::endl;
 	return o;
 }
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor) const
-{}
+bool PresidentialPardonForm::execute(Bureaucrat const & executor) const
+{
+  if (AForm::execute(executor))
+  {
+    std::cout << getTarget() <<" has been pardoned by Zaphod Beeblebrox." << std::endl;
+    return true;
+  }
+  return false;
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
-
 
 /* ************************************************************************** */

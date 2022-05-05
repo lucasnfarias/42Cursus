@@ -6,12 +6,12 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 18:05:57 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/02 21:42:46 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/04 20:32:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <stdexcept>
 
 const int Bureaucrat::_highestGrade = 1;
@@ -87,7 +87,7 @@ void Bureaucrat::incrementGrade()
   }
 }
 
-void  Bureaucrat::signForm(Form & form)
+void  Bureaucrat::signForm(AForm & form)
 {
   try
   {
@@ -101,6 +101,27 @@ void  Bureaucrat::signForm(Form & form)
   {
     std::cerr	<< _name
       << " cannot sign "
+      << form.getName()
+      << " because "
+      << e.what()
+      << std::endl;
+  }
+}
+
+void  Bureaucrat::executeForm(AForm const & form)
+{
+  try
+  {
+      form.execute(*this);
+      std::cout	<< _name
+      << " executed "
+      << form.getName()
+      << std::endl;
+  }
+  catch (std::exception & e)
+  {
+    std::cerr	<< _name
+      << " cannot execute "
       << form.getName()
       << " because "
       << e.what()

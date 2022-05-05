@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/05/02 21:42:19 by lniehues         ###   ########.fr        #
+#    Updated: 2022/05/04 21:32:14 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@ NAME := bureaucratandform
 
 # CONFIG
 
-FILE_SOURCE	:= main.cpp Bureaucrat.cpp Form.cpp
+FILE_SOURCE	:= main.cpp Bureaucrat.cpp AForm.cpp \
+							ShrubberyCreationForm.cpp \
+							RobotomyRequestForm.cpp \
+							PresidentialPardonForm.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98

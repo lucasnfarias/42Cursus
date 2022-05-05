@@ -1,62 +1,94 @@
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm & src )
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+  :
+  AForm("ShrubberyCreationForm", 145, 137)
 {
+  setTarget(target);
+  std::cout << *this << std::endl;
 }
+
+
+ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm & src )
+  :
+  AForm(src)
+{}
 
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-ShrubberyCreationForm &				ShrubberyCreationForm::operator=( ShrubberyCreationForm const & rhs )
-{
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
-	return *this;
-}
-
 std::ostream &			operator<<( std::ostream & o, ShrubberyCreationForm const & i )
 {
-	o
+  o
+  << "---" << std::endl
   << i.getName()
-  << ", form sign grade "
+  << " Form"
+  << std::endl
+  << "# Sign grade: "
   << i.getSignGrade()
-  << ", execution grade "
+  << std::endl
+  << "# Execution grade: "
   << i.getExecutionGrade()
-  << " and is"
-  << (i.getIsSigned() ? " " : " NOT ")
-  << "signed."
+  << std::endl
+  << "# Signed: "
+  << (i.getIsSigned() ? "YES" : "NO")
+  << std::endl
+  << "# Target: "
+  << i.getTarget()
+  << std::endl << "---" << std::endl
   << std::endl;
 	return o;
 }
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
+bool ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+{
+  if (AForm::execute(executor))
+  {
+    _createFile();
+    return true;
+  }
+  return false;
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
-{}
+void		ShrubberyCreationForm::_createFile() const
+{
+	std::string line;
+	std::string filename = getTarget() + "_shrubbery";
+	std::ofstream outputFile(filename.c_str());
+	std::ifstream inputFile("awesome_tree.txt");
+
+	if(inputFile && outputFile)
+	{
+		while(getline(inputFile, line))
+			outputFile << line << std::endl;
+		std::cout << filename << " has been created and it's filled with a awesome ASCII tree!" << std::endl;
+	}
+	else
+		std::cerr << "Error creating file" << std::endl;
+	outputFile.close();
+	inputFile.close();
+}
 
 /* ************************************************************************** */

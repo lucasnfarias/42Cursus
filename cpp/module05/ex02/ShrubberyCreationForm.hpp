@@ -10,16 +10,18 @@ class ShrubberyCreationForm : public AForm
 
 	public:
 
+    ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm( ShrubberyCreationForm const & src );
 		~ShrubberyCreationForm();
 
 		ShrubberyCreationForm &		operator=( ShrubberyCreationForm const & rhs );
 
-    virtual void execute(Bureaucrat const & executor) const;
+    virtual bool execute(Bureaucrat const & executor) const;
 
 	private:
 
 		ShrubberyCreationForm();
+    void  _createFile() const;
 };
 
 std::ostream &			operator<<( std::ostream & o, ShrubberyCreationForm const & i );

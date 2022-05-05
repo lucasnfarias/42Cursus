@@ -71,7 +71,8 @@ AForm &				AForm::operator=( AForm const & rhs )
 {
 	if ( this != &rhs )
 	{
-    this->_isSigned = rhs.getIsSigned();
+    _isSigned = rhs.getIsSigned();
+    _target = rhs.getTarget();
 	}
 	return *this;
 }
@@ -79,14 +80,19 @@ AForm &				AForm::operator=( AForm const & rhs )
 std::ostream &			operator<<( std::ostream & o, AForm const & i )
 {
 	o
+  << "---" << std::endl
   << i.getName()
-  << ", form sign grade "
+  << " Form"
+  << std::endl
+  << "# Sign grade: "
   << i.getSignGrade()
-  << ", execution grade "
+  << std::endl
+  << "# Execution grade: "
   << i.getExecutionGrade()
-  << " and is"
-  << (i.getIsSigned() ? " " : " NOT ")
-  << "signed."
+  << std::endl
+  << "# Signed: "
+  << (i.getIsSigned() ? "YES" : "NO")
+  << std::endl << "---" << std::endl
   << std::endl;
 	return o;
 }
@@ -95,6 +101,16 @@ std::ostream &			operator<<( std::ostream & o, AForm const & i )
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
+
+bool  AForm::execute(Bureaucrat const & executor) const
+{
+  if (!_isSigned)
+    throw AForm::NoSignatureException();
+  else if (executor.getGrade() > _executionGrade)
+    throw AForm::GradeTooLowException();
+  return true;
+}
+
 
 void  AForm::beSigned(Bureaucrat const & bureaucrat)
 {
@@ -134,6 +150,17 @@ int AForm::getSignGrade() const
 int AForm::getExecutionGrade() const
 {
   return _executionGrade;
+}
+
+std::string AForm::getTarget() const
+{
+  return _target;
+}
+
+void AForm::setTarget(std::string & target)
+{
+  if (target.length())
+    _target = target;
 }
 
 
