@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:04:41 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/07 15:49:40 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:48:49 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,18 @@ int main(int argc, char** argv)
   }
   else
   {
-    TypeConverter converter;
+    try
+    {
+      TypeConverter converter(argv[1]);
 
-    converter.convertAll(argv[1]);
+      // converter.validate();
+      // converter.convert();
+      std::cout << converter << std::endl;
+    }
+    catch (std::exception & err)
+    {
+      std::cout << err.what() << std:: endl;
+    }
   }
 
   return 0;

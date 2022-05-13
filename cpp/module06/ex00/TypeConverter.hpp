@@ -3,25 +3,45 @@
 
 # include <iostream>
 # include <string>
+# include <stdexcept>
 
 class TypeConverter
 {
 
 	public:
 
-		TypeConverter();
+		TypeConverter( std::string input );
 		TypeConverter( TypeConverter const & src );
 		~TypeConverter();
 
 		TypeConverter &		operator=( TypeConverter const & rhs );
 
-    void  convertAll(char* value) const;
-    char  toChar(char* value) const;
-    int  toInt(char* value) const;
-    float  toFloat(char* value) const;
-    double  toDouble(char* value) const;
-	private:
+    std::string  getInput() const;
 
+    void  convert() const;
+    void  validate() const;
+    char  toChar() const;
+    int  toInt() const;
+    float  toFloat() const;
+    double  toDouble() const;
+
+  private:
+
+    TypeConverter();
+    std::string _input;
+
+    void  _validateChar() const;
+    void  _validateInt() const;
+    void  _validateFloat() const;
+    void  _validateDouble() const;
+
+    class NotValidInput : public std::exception {
+      public:
+        virtual const char* what() const throw()
+        {
+          return "Error: not_valid_input\n - usage: enter an argument char, int, float or double.";
+        }
+    };
 };
 
 
