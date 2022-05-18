@@ -5,6 +5,15 @@
 # include <string>
 # include <stdexcept>
 
+# define RESET    "\033[0m"
+# define RED      "\033[31m"
+# define YELLOW   "\033[33m"
+# define PURPLE     "\033[34m"
+
+enum LogLevel {
+  Error = 0, Warning, Info
+};
+
 class TypeConverter
 {
 
@@ -30,16 +39,18 @@ class TypeConverter
     TypeConverter();
     std::string _input;
 
-    void  _validateChar() const;
-    void  _validateInt() const;
-    void  _validateFloat() const;
-    void  _validateDouble() const;
+    bool  _validateChar() const;
+    bool  _validateInt() const;
+    bool  _validateFloat() const;
+    bool  _validateDouble() const;
+
+    void  _createLog(LogLevel level, std::string message) const;
 
     class NotValidInput : public std::exception {
       public:
         virtual const char* what() const throw()
         {
-          return "Error: not_valid_input\n - usage: enter an argument char, int, float or double.";
+          return "not_valid_input\n- usage: enter an argument char, int, float or double.";
         }
     };
 };
