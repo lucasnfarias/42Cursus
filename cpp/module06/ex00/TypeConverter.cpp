@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:09:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/18 20:41:16 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:21:40 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ std::ostream &			operator<<( std::ostream & o, TypeConverter const & i )
 
 void  TypeConverter::validate() const
 {
+  _createLog(Info, "Starting input type validation...");
   if (
     !_validateInt() &&
     !_validateFloat() &&
@@ -86,7 +87,6 @@ bool  TypeConverter::_validateChar() const
     _createLog(Info, "A cheeky displayable CHAR appears.");
     return true;
   }
-  _createLog(Warning, "Not a char.");
   return false;
 }
 
@@ -99,11 +99,8 @@ bool  TypeConverter::_validateInt() const
     i++;
   while (i < input.length())
   {
-    if (!isdigit(input[0]))
-    {
-      _createLog(Warning, "Not a int.");
+    if (!isdigit(input[i]))
       return false;
-    }
     i++;
   }
   _createLog(Info, "A cheeky INT appears.");
@@ -112,24 +109,73 @@ bool  TypeConverter::_validateInt() const
 
 bool  TypeConverter::_validateFloat() const
 {
+  // check if valid 0f, .f, .3f,
+  // check if necessary to have dot
   std::string input = getInput();
   size_t i = 0;
-	// size_t count = 0;
+	size_t dotCount = 0;
 
   if (input == "-inff" || input == "+inff" || input == "nanf")
   {
     _createLog(Info, "A cheeky pseudo literal FLOAT appears.");
     return true;
   }
+  if (input[input.length() - 1] != 'f')
+    return false;
   if (input[i] == '+' || input[i] == '-')
     i++;
-  _createLog(Warning, "Not a float.");
+  while (i < input.length())
+  {
+    if (input[i] == '.' && isdigit(input[i + 1]))
+    {
+      i++;
+      dotCount++;
+    }
+    else if (isdigit(input[i]) || (input[i] == 'f' && input[i + 1] == '\0'))
+      i++;
+    else
+      return false;
+  }
+  if (dotCount == 1)
+  {
+    _createLog(Info, "A cheeky pseudo literal FLOAT appears.");
+    return true;
+  }
   return false;
 }
 
 bool  TypeConverter::_validateDouble() const
 {
-  _createLog(Warning, "Not a double.");
+  // check if valid 0, ., .3,
+  // check if necessary to have dot
+  std::string input = getInput();
+  size_t i = 0;
+	size_t dotCount = 0;
+
+  if (input == "-inf" || input == "+inf" || input == "nan")
+  {
+    _createLog(Info, "A cheeky pseudo literal DOUBLE appears.");
+    return true;
+  }
+  if (input[i] == '+' || input[i] == '-')
+    i++;
+  while (i < input.length())
+  {
+    if (input[i] == '.' && isdigit(input[i + 1]))
+    {
+      i++;
+      dotCount++;
+    }
+    else if (isdigit(input[i]))
+      i++;
+    else
+      return false;
+  }
+  if (dotCount == 1)
+  {
+    _createLog(Info, "A cheeky pseudo literal DOUBLE appears.");
+    return true;
+  }
   return false;
 }
 
