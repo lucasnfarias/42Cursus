@@ -6,25 +6,25 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:09:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/19 21:21:40 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:16:38 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "TypeConverter.hpp"
+#include <iomanip>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-TypeConverter::TypeConverter( std::string input ) : _input(input)
+TypeConverter::TypeConverter(std::string input) : _input(input), _type(NONE)
 {
 }
 
-TypeConverter::TypeConverter( const TypeConverter & src )
+TypeConverter::TypeConverter(const TypeConverter &src)
 {
   *this = src;
 }
-
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -34,46 +34,46 @@ TypeConverter::~TypeConverter()
 {
 }
 
-
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-TypeConverter &				TypeConverter::operator=( TypeConverter const & rhs )
+TypeConverter &TypeConverter::operator=(TypeConverter const &rhs)
 {
   (void)rhs;
   if (this != &rhs)
+  {
     this->_input = rhs.getInput();
-	return *this;
+    this->_input = rhs.getType();
+  }
+  return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, TypeConverter const & i )
+std::ostream &operator<<(std::ostream &o, TypeConverter const &i)
 {
-	o
-  << "Bro... i'm just a regular type converter. This is my input: "
-  << i.getInput()
-  << ". See ya!";
-	return o;
+  o
+      << "Bro... i'm just a regular type converter. This is my input: "
+      << i.getInput()
+      << ". See ya!";
+  return o;
 }
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void  TypeConverter::validate() const
+void TypeConverter::validate()
 {
   _createLog(Info, "Starting input type validation...");
   if (
-    !_validateInt() &&
-    !_validateFloat() &&
-    !_validateDouble() &&
-    !_validateChar()
-  )
+      !_validateInt() &&
+      !_validateFloat() &&
+      !_validateDouble() &&
+      !_validateChar())
     throw NotValidInput();
 }
 
-bool  TypeConverter::_validateChar() const
+bool TypeConverter::_validateChar()
 {
   std::string input = getInput();
 
@@ -85,12 +85,13 @@ bool  TypeConverter::_validateChar() const
       return false;
     }
     _createLog(Info, "A cheeky displayable CHAR appears.");
+    _type = CHAR;
     return true;
   }
   return false;
 }
 
-bool  TypeConverter::_validateInt() const
+bool TypeConverter::_validateInt()
 {
   std::string input = getInput();
   size_t i = 0;
@@ -104,20 +105,22 @@ bool  TypeConverter::_validateInt() const
     i++;
   }
   _createLog(Info, "A cheeky INT appears.");
+  _type = INT;
   return true;
 }
 
-bool  TypeConverter::_validateFloat() const
+bool TypeConverter::_validateFloat()
 {
   // check if valid 0f, .f, .3f,
   // check if necessary to have dot
   std::string input = getInput();
   size_t i = 0;
-	size_t dotCount = 0;
+  size_t dotCount = 0;
 
   if (input == "-inff" || input == "+inff" || input == "nanf")
   {
     _createLog(Info, "A cheeky pseudo literal FLOAT appears.");
+    _type = PSEUDO_LITERAL;
     return true;
   }
   if (input[input.length() - 1] != 'f')
@@ -139,22 +142,24 @@ bool  TypeConverter::_validateFloat() const
   if (dotCount == 1)
   {
     _createLog(Info, "A cheeky pseudo literal FLOAT appears.");
+    _type = FLOAT;
     return true;
   }
   return false;
 }
 
-bool  TypeConverter::_validateDouble() const
+bool TypeConverter::_validateDouble()
 {
   // check if valid 0, ., .3,
   // check if necessary to have dot
   std::string input = getInput();
   size_t i = 0;
-	size_t dotCount = 0;
+  size_t dotCount = 0;
 
   if (input == "-inf" || input == "+inf" || input == "nan")
   {
     _createLog(Info, "A cheeky pseudo literal DOUBLE appears.");
+    _type = PSEUDO_LITERAL;
     return true;
   }
   if (input[i] == '+' || input[i] == '-')
@@ -174,23 +179,37 @@ bool  TypeConverter::_validateDouble() const
   if (dotCount == 1)
   {
     _createLog(Info, "A cheeky pseudo literal DOUBLE appears.");
+    _type = DOUBLE;
     return true;
   }
   return false;
 }
 
-
-void  TypeConverter::convert() const
+void TypeConverter::convert() const
 {
-  // char    c;
-  int     i = toInt();
+  std::cout << std::fixed << std::setprecision(1);
+  if (_type == PSEUDO_LITERAL)
+    fromPseudoLiteral();
   // float   f;
   // double  d;
-
-  std::cout << "int: " << i << std::endl;
 }
 
-char  TypeConverter::toChar() const
+void TypeConverter::fromPseudoLiteral() const
+{
+  std::string input = getInput();
+  _printValue("char");
+  _printValue("int");
+  if (input == "-inff" || input == "+inff" || input == "nanf")
+  {
+    _printValue("float", input);
+    _printValue("double", input.length() == 4 ? input.substr(0, 3) : input.substr(0, 4)); // cut f out
+    return;
+  }
+  _printValue("float", input + "f");
+  _printValue("double", input);
+}
+
+void TypeConverter::fromChar() const
 {
   // char convertedValue = dynamic_cast<char>(value);
   // std::cout << "char: ";
@@ -199,17 +218,15 @@ char  TypeConverter::toChar() const
   // else
   //   std::cout << convertedValue;
   // std::cout << std::endl;
-  return 'a';
 }
 
-int  TypeConverter::toInt() const
+void TypeConverter::fromInt() const
 {
   // - if it is a char it will be 0 - need to check e.g value = 'a'
   // - check overflows
-  return static_cast<int>(_input[0]);
 }
 
-float  TypeConverter::toFloat() const
+void TypeConverter::fromFloat() const
 {
   // float convertedValue = dynamic_cast<float>(value);
   // std::cout << "float: ";
@@ -218,10 +235,9 @@ float  TypeConverter::toFloat() const
   // else
   //   std::cout << convertedValue;
   // std::cout << std::endl;
-  return static_cast<float>(_input[0]);
 }
 
-double  TypeConverter::toDouble() const
+void TypeConverter::fromDouble() const
 {
   // double convertedValue = dynamic_cast<double>(value);
   // std::cout << "double: ";
@@ -230,10 +246,9 @@ double  TypeConverter::toDouble() const
   // else
   //   std::cout << convertedValue;
   // std::cout << std::endl;
-  return static_cast<double>(_input[0]);
 }
 
-void  TypeConverter::_createLog(LogLevel level, std::string message) const
+void TypeConverter::_createLog(LogLevel level, std::string message) const
 {
   std::string logPrefix;
 
@@ -256,22 +271,29 @@ void  TypeConverter::_createLog(LogLevel level, std::string message) const
   }
 
   std::cout
-  << logPrefix
-  << message
-  << RESET
-  << std::endl;
+      << logPrefix
+      << message
+      << RESET
+      << std::endl;
 }
 
+void TypeConverter::_printValue(std::string type, std::string value) const
+{
+  std::cout << type << ": " << value << std::endl;
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-std::string  TypeConverter::getInput() const
+std::string TypeConverter::getInput() const
 {
   return _input;
 }
 
-
+inputType TypeConverter::getType() const
+{
+  return _type;
+}
 
 /* ************************************************************************** */

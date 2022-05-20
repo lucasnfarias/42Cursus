@@ -14,6 +14,10 @@ enum LogLevel {
   Error = 0, Warning, Info
 };
 
+enum  inputType {
+  NONE = 0, CHAR, INT, FLOAT, DOUBLE, PSEUDO_LITERAL
+};
+
 class TypeConverter
 {
 
@@ -26,25 +30,30 @@ class TypeConverter
 		TypeConverter &		operator=( TypeConverter const & rhs );
 
     std::string  getInput() const;
+    inputType  getType() const;
 
     void  convert() const;
-    void  validate() const;
-    char  toChar() const;
-    int  toInt() const;
-    float  toFloat() const;
-    double  toDouble() const;
+    void  validate();
+
+    void  fromChar() const;
+    void  fromPseudoLiteral() const;
+    void  fromInt() const;
+    void  fromFloat() const;
+    void  fromDouble() const;
 
   private:
 
     TypeConverter();
     std::string _input;
+    inputType _type;
 
-    bool  _validateChar() const;
-    bool  _validateInt() const;
-    bool  _validateFloat() const;
-    bool  _validateDouble() const;
+    bool  _validateChar();
+    bool  _validateInt();
+    bool  _validateFloat();
+    bool  _validateDouble();
 
     void  _createLog(LogLevel level, std::string message) const;
+    void  _printValue(std::string type, std::string value = "impossible") const;
 
     class NotValidInput : public std::exception {
       public:

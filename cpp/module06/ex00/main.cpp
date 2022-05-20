@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:04:41 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/18 19:44:04 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:10:16 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
       TypeConverter converter(argv[1]);
 
       converter.validate();
-      // converter.convert();
+      converter.convert();
       std::cout << converter << std::endl;
     }
     catch (std::exception & err)
