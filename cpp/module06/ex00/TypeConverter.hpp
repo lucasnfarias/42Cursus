@@ -35,12 +35,6 @@ class TypeConverter
     void  convert() const;
     void  validate();
 
-    void  fromChar() const;
-    void  fromPseudoLiteral() const;
-    void  fromInt() const;
-    void  fromFloat() const;
-    void  fromDouble() const;
-
   private:
 
     TypeConverter();
@@ -52,8 +46,18 @@ class TypeConverter
     bool  _validateFloat();
     bool  _validateDouble();
 
+    void  _fromChar() const;
+    void  _fromPseudoLiteral() const;
+    void  _fromInt() const;
+    void  _fromFloat() const;
+    void  _fromDouble() const;
+
     void  _createLog(LogLevel level, std::string message) const;
     void  _printValue(std::string type, std::string value = "impossible") const;
+    void  _printValue(std::string type, char value) const;
+    void  _printValue(std::string type, int value) const;
+    void  _printValue(std::string type, float value) const;
+    void  _printValue(std::string type, double value) const;
 
     class NotValidInput : public std::exception {
       public:

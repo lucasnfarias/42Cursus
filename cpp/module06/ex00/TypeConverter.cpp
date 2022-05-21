@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:09:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/20 13:16:38 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:02:53 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ bool TypeConverter::_validateInt()
 
   if (input[i] == '+' || input[i] == '-')
     i++;
+  if (i == 1 && input.length() == 1)
+    return false;
   while (i < input.length())
   {
     if (!isdigit(input[i]))
@@ -189,12 +191,14 @@ void TypeConverter::convert() const
 {
   std::cout << std::fixed << std::setprecision(1);
   if (_type == PSEUDO_LITERAL)
-    fromPseudoLiteral();
+    _fromPseudoLiteral();
+  else if (_type == CHAR)
+    _fromChar();
   // float   f;
   // double  d;
 }
 
-void TypeConverter::fromPseudoLiteral() const
+void TypeConverter::_fromPseudoLiteral() const
 {
   std::string input = getInput();
   _printValue("char");
@@ -209,24 +213,22 @@ void TypeConverter::fromPseudoLiteral() const
   _printValue("double", input);
 }
 
-void TypeConverter::fromChar() const
+void TypeConverter::_fromChar() const
 {
-  // char convertedValue = dynamic_cast<char>(value);
-  // std::cout << "char: ";
-  // if (!convertedValue)
-  //   std::cout << "impossible";
-  // else
-  //   std::cout << convertedValue;
-  // std::cout << std::endl;
+  char  c = _input[0];
+  _printValue("char", c);
+  _printValue("int", static_cast<int>(c));
+  _printValue("float", static_cast<float>(c));
+  _printValue("double", static_cast<double>(c));
 }
 
-void TypeConverter::fromInt() const
+void TypeConverter::_fromInt() const
 {
   // - if it is a char it will be 0 - need to check e.g value = 'a'
   // - check overflows
 }
 
-void TypeConverter::fromFloat() const
+void TypeConverter::_fromFloat() const
 {
   // float convertedValue = dynamic_cast<float>(value);
   // std::cout << "float: ";
@@ -237,7 +239,7 @@ void TypeConverter::fromFloat() const
   // std::cout << std::endl;
 }
 
-void TypeConverter::fromDouble() const
+void TypeConverter::_fromDouble() const
 {
   // double convertedValue = dynamic_cast<double>(value);
   // std::cout << "double: ";
@@ -281,6 +283,28 @@ void TypeConverter::_printValue(std::string type, std::string value) const
 {
   std::cout << type << ": " << value << std::endl;
 }
+
+void  TypeConverter::_printValue(std::string type, char value) const
+{
+  std::cout << type << ": '" << value << "'" << std::endl;
+}
+
+
+void  TypeConverter::_printValue(std::string type, int value) const
+{
+  std::cout << type << ": " << value << std::endl;
+}
+
+void  TypeConverter::_printValue(std::string type, float value) const
+{
+  std::cout << type << ": " << value << "f" << std::endl;
+}
+
+void  TypeConverter::_printValue(std::string type, double value) const
+{
+  std::cout << type << ": " << value << std::endl;
+}
+
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
