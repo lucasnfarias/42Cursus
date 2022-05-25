@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:09:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/24 21:36:31 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:37:20 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void TypeConverter::_fromChar() const
 void TypeConverter::_fromInt() const
 {
   if (_hasOverflow())
-    _printImpossible();
+    return (_printImpossible());
 
   int i = atoi(_input.c_str());
   _fromNumberToChar(static_cast<char>(i));
@@ -279,7 +279,7 @@ void TypeConverter::_fromInt() const
 void TypeConverter::_fromFloat() const
 {
   if (_hasOverflow())
-    _printImpossible();
+    return (_printImpossible());
 
   float f = atof(_input.c_str());
   _fromNumberToChar(static_cast<char>(f));
@@ -291,7 +291,7 @@ void TypeConverter::_fromFloat() const
 void TypeConverter::_fromDouble() const
 {
   if (_hasOverflow())
-    _printImpossible();
+    return (_printImpossible());
 
   double d = strtod(_input.c_str(), NULL);
   _fromNumberToChar(static_cast<char>(d));
@@ -319,7 +319,7 @@ void  TypeConverter::_fromNumberToInt(int i) const
 {
   double checkValue = strtod(_input.c_str(), NULL);
 
-  if (checkValue < -DBL_MAX || checkValue > INT_MAX)
+  if (checkValue < INT_MIN || checkValue > INT_MAX)
     _printValue("int");
   else
     _printValue("int", i);
