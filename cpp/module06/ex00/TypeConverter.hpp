@@ -10,6 +10,8 @@
 # define YELLOW   "\033[33m"
 # define PURPLE     "\033[34m"
 
+# define PRECISION 1
+
 enum LogLevel {
   Error = 0, Warning, Info
 };
@@ -45,19 +47,25 @@ class TypeConverter
     bool  _validateInt();
     bool  _validateFloat();
     bool  _validateDouble();
+    bool  _hasOverflow() const;
 
     void  _fromChar() const;
     void  _fromPseudoLiteral() const;
     void  _fromInt() const;
     void  _fromFloat() const;
     void  _fromDouble() const;
+    void  _fromNumberToChar(char c) const;
+    void  _fromNumberToInt(int i) const;
+    void  _fromNumberToFloat(float f) const;
+    void  _fromNumberToDouble(double d) const;
 
     void  _createLog(LogLevel level, std::string message) const;
-    void  _printValue(std::string type, std::string value = "impossible") const;
     void  _printValue(std::string type, char value) const;
     void  _printValue(std::string type, int value) const;
     void  _printValue(std::string type, float value) const;
     void  _printValue(std::string type, double value) const;
+    void  _printValue(std::string type, std::string value = "impossible") const;
+    void  _printImpossible() const;
 
     class NotValidInput : public std::exception {
       public:

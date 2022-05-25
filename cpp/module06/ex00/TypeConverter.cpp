@@ -6,12 +6,16 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:09:16 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/21 14:02:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:36:31 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "TypeConverter.hpp"
 #include <iomanip>
+#include <limits.h>
+#include <stdlib.h>
+#include <float.h>
+#include <errno.h>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -61,6 +65,8 @@ std::ostream &operator<<(std::ostream &o, TypeConverter const &i)
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
+
+/* ------- VALIDATION METHODS ------- */
 
 void TypeConverter::validate()
 {
@@ -187,15 +193,51 @@ bool TypeConverter::_validateDouble()
   return false;
 }
 
+bool  TypeConverter::_hasOverflow() const
+{
+  errno = 0;
+  double checkValue = strtod(_input.c_str(), NULL);
+
+  if (errno == ERANGE)
+    return true;
+  switch (_type)
+  {
+  case INT:
+    if (checkValue < -DBL_MAX || checkValue > INT_MAX)
+      return true;
+    break;
+  case FLOAT:
+    if (checkValue < -FLT_MAX || checkValue > FLT_MAX)
+      return true;
+    break;
+  case DOUBLE:
+    if (checkValue < -DBL_MAX || checkValue > DBL_MAX)
+      return true;
+    break;
+  default:
+    return false;
+    break;
+  }
+  return false;
+}
+
+/* ------- CONVERSION METHODS ------- */
+
 void TypeConverter::convert() const
 {
-  std::cout << std::fixed << std::setprecision(1);
+  std::cout << std::fixed << std::setprecision(PRECISION);
   if (_type == PSEUDO_LITERAL)
     _fromPseudoLiteral();
   else if (_type == CHAR)
     _fromChar();
-  // float   f;
-  // double  d;
+  else if (_type == INT)
+    _fromInt();
+  else if (_type == FLOAT)
+    _fromFloat();
+  else if (_type == DOUBLE)
+    _fromDouble();
+  else
+    throw TypeConverter::NotValidInput();
 }
 
 void TypeConverter::_fromPseudoLiteral() const
@@ -224,31 +266,87 @@ void TypeConverter::_fromChar() const
 
 void TypeConverter::_fromInt() const
 {
-  // - if it is a char it will be 0 - need to check e.g value = 'a'
-  // - check overflows
+  if (_hasOverflow())
+    _printImpossible();
+
+  int i = atoi(_input.c_str());
+  _fromNumberToChar(static_cast<char>(i));
+  _fromNumberToInt(i);
+  _fromNumberToFloat(static_cast<float>(i));
+  _fromNumberToDouble(static_cast<double>(i));
 }
 
 void TypeConverter::_fromFloat() const
 {
-  // float convertedValue = dynamic_cast<float>(value);
-  // std::cout << "float: ";
-  // if (!convertedValue)
-  //   std::cout << "impossible";
-  // else
-  //   std::cout << convertedValue;
-  // std::cout << std::endl;
+  if (_hasOverflow())
+    _printImpossible();
+
+  float f = atof(_input.c_str());
+  _fromNumberToChar(static_cast<char>(f));
+  _fromNumberToInt(static_cast<int>(f));
+  _fromNumberToFloat(f);
+  _fromNumberToDouble(static_cast<double>(f));
 }
 
 void TypeConverter::_fromDouble() const
 {
-  // double convertedValue = dynamic_cast<double>(value);
-  // std::cout << "double: ";
-  // if (!convertedValue)
-  //   std::cout << "impossible";
-  // else
-  //   std::cout << convertedValue;
-  // std::cout << std::endl;
+  if (_hasOverflow())
+    _printImpossible();
+
+  double d = strtod(_input.c_str(), NULL);
+  _fromNumberToChar(static_cast<char>(d));
+  _fromNumberToInt(static_cast<int>(d));
+  _fromNumberToFloat(static_cast<float>(d));
+  _fromNumberToDouble(d);
 }
+
+void  TypeConverter::_fromNumberToChar(char c) const
+{
+  double checkValue = strtod(_input.c_str(), NULL);
+
+  if (checkValue < 0 || checkValue > 127)
+    _printValue("char");
+  else
+  {
+    if (isprint(c)) // maybe this -> c >= '!' && c <= '~'
+      _printValue("char", c);
+    else
+      _printValue("char", "Non displayable");
+  }
+}
+
+void  TypeConverter::_fromNumberToInt(int i) const
+{
+  double checkValue = strtod(_input.c_str(), NULL);
+
+  if (checkValue < -DBL_MAX || checkValue > INT_MAX)
+    _printValue("int");
+  else
+    _printValue("int", i);
+}
+
+void  TypeConverter::_fromNumberToFloat(float f) const
+{
+  double checkValue = strtod(_input.c_str(), NULL);
+
+  if (checkValue < -FLT_MAX || checkValue > FLT_MAX)
+    _printValue("float");
+  else
+    _printValue("float", f);
+}
+
+void  TypeConverter::_fromNumberToDouble(double d) const
+{
+  double checkValue = strtod(_input.c_str(), NULL);
+
+  if (checkValue < -DBL_MAX || checkValue > DBL_MAX)
+    _printValue("double");
+  else
+    _printValue("double", d);
+}
+
+
+/* ------- PRINT METHODS ------- */
 
 void TypeConverter::_createLog(LogLevel level, std::string message) const
 {
@@ -303,6 +401,14 @@ void  TypeConverter::_printValue(std::string type, float value) const
 void  TypeConverter::_printValue(std::string type, double value) const
 {
   std::cout << type << ": " << value << std::endl;
+}
+
+void  TypeConverter::_printImpossible() const
+{
+  _printValue("char");
+  _printValue("int");
+  _printValue("float");
+  _printValue("double");
 }
 
 
