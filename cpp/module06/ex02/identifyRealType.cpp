@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identifyRealType.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:28:07 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/25 21:52:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/27 00:08:54 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ void identify(Base *p)
 
 void identify(Base &p)
 {
+  Base &temp = p;
   std::cout << "# Identify Real Type By REFERENCE\n"
             << std::endl;
 
   std::cout << "Real Type: ";
   try
   {
-    dynamic_cast<A &>(p);
+    temp = dynamic_cast<A &>(p);
 
     std::cout << "A" << std::endl;
   }
@@ -76,7 +77,7 @@ void identify(Base &p)
   std::cout << "Real Type: ";
   try
   {
-    dynamic_cast<B &>(p);
+    temp = dynamic_cast<B &>(p);
     std::cout << "B" << std::endl;
   }
   catch (std::exception &e)
@@ -86,7 +87,7 @@ void identify(Base &p)
   std::cout << "Real Type: ";
   try
   {
-    dynamic_cast<C &>(p);
+    temp = dynamic_cast<C &>(p);
     std::cout << "C" << std::endl;
   }
   catch (std::exception &e)
