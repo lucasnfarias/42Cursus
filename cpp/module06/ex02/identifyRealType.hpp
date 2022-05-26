@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IdentifyRealType.hpp                               :+:      :+:    :+:   */
+/*   identifyRealType.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 21:25:13 by lniehues          #+#    #+#             */
-/*   Updated: 2022/05/25 21:29:19 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:38:14 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define IDENTIFYREALTYPE_HPP
 
 class Base {
-  virtual ~Base();
+
+public:
+  virtual ~Base() {};
 };
 
 class A : public Base {};
