@@ -6,15 +6,15 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 01:23:05 by coder             #+#    #+#              #
-#    Updated: 2022/05/07 15:24:26 by lniehues         ###   ########.fr        #
+#    Updated: 2022/05/25 21:32:16 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := convert
+NAME := identifyRealType
 
 # CONFIG
 
-FILE_SOURCE	:= main.cpp TypeConverter.cpp
+FILE_SOURCE	:= main.cpp IdentifyRealType.cpp
 
 COMPILER		:= c++
 COMPILER_FLAGS	:= -Wall -Wextra -Werror -std=c++98
