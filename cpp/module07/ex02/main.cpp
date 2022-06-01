@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 19:07:09 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/01 20:36:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/06/01 20:50:10 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,9 +233,49 @@ static void stringTest()
   enterToContinue();
 }
 
+static void classTest()
+{
+  std::cout << "##################" << std::endl;
+  std::cout << "# 4. CLASS TEST #" << std::endl;
+  std::cout << "##################" << std::endl;
+  Array<Example> classArray(3);
+
+  std::cout << "\n@ 1.a. assign values to array's elements:\n" << std::endl;
+
+  printArray(classArray);
+  for (unsigned int i = 0; i < classArray.size(); i++)
+  {
+    try
+    {
+      classArray[i] = Example("Legolas");
+      std::cout << "classArray[" << i << "] = " << classArray[i] << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
+  }
+  enterToContinue();
+
+  std::cout << "\n@ 1.b. change specific array index - e.g. classArray[2] = Example('Hermione');\n" << std::endl;
+
+  classArray[2] = Example("Hermione");
+  printArray(classArray);
+
+  enterToContinue();
+
+  std::cout << "\n@ 1.c. copy constructor - e.g. Array<Example> copyArray(classArray);\n" << std::endl;
+
+  Array<Example> copyArray(classArray);
+  printArray(copyArray, "copyArray");
+
+  enterToContinue();
+}
+
 int main()
 {
   intTest();
   charTest();
   stringTest();
+  classTest();
 }

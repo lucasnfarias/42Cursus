@@ -36,8 +36,8 @@ public:
     catch (const std::exception &e)
     {
       std::cout
-      << "Copied first " << _n << " elements. No more space in this array :("
-      << std::endl;
+          << "Copied first " << _n << " elements. No more space in this array :("
+          << std::endl;
       std::cerr << e.what() << std::endl;
     }
     return *this;
@@ -70,12 +70,12 @@ private:
 template <typename T>
 std::ostream &operator<<(std::ostream &o, Array<T> const &i)
 {
-  o << "array size: " <<i.size();
+  o << "array size: " << i.size();
 
   return o;
 }
 
-template<typename T>
+template <typename T>
 void printArray(Array<T> &array, std::string arrayName = "intArray")
 {
   if (array.size() == 0)
@@ -87,7 +87,7 @@ void printArray(Array<T> &array, std::string arrayName = "intArray")
     {
       std::cout << arrayName << "[" << i << "] = " << array[i] << std::endl;
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
       std::cerr << e.what() << std::endl;
     }
@@ -95,7 +95,7 @@ void printArray(Array<T> &array, std::string arrayName = "intArray")
   std::cout << std::endl;
 }
 
-template<typename T>
+template <typename T>
 void printArray(Array<T> const &array, std::string arrayName = "intArray")
 {
   if (array.size() == 0)
@@ -107,7 +107,7 @@ void printArray(Array<T> const &array, std::string arrayName = "intArray")
     {
       std::cout << arrayName << "[" << i << "] = " << array[i] << std::endl;
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
       std::cerr << e.what() << std::endl;
     }
@@ -119,6 +119,26 @@ void enterToContinue()
 {
   std::cout << "\nPress enter to continue...\n";
   std::cin.ignore();
+}
+
+class Example
+{
+public:
+  Example() : _name("Marvin"){};
+  Example(std::string name) : _name(name){};
+  ~Example(){};
+
+  std::string getName() const { return _name; };
+
+private:
+  std::string _name;
+};
+
+std::ostream &operator<<(std::ostream &o, Example const &i)
+{
+  o << "My name is " << i.getName();
+
+  return o;
 }
 
 #endif /* *********************************************************** ARRAY_H */
