@@ -10,13 +10,13 @@ class Array
 {
 
 public:
-  Array<T>() : _n(0), _pointer(0){};
-  Array<T>(unsigned int n) : _n(n), _pointer(new T[n]()){};
-  Array<T>(Array const &src) : _n(src.size()), _pointer(new T[_n]())
+  Array() : _n(0), _pointer(0){};
+  Array(unsigned int n) : _n(n), _pointer(new T[n]()){};
+  Array(Array const &src) : _n(src.size()), _pointer(new T[_n]())
   {
     *this = src;
   };
-  ~Array<T>()
+  ~Array()
   {
     if (_pointer)
       delete[] _pointer;
@@ -43,7 +43,7 @@ public:
     return *this;
   };
 
-  T &operator[](unsigned int const &index)
+  T &operator[](unsigned int const &index) const
   {
     if (index >= _n)
       throw IndexOutOfBoundsException();
@@ -73,6 +73,52 @@ std::ostream &operator<<(std::ostream &o, Array<T> const &i)
   o << "array size: " <<i.size();
 
   return o;
+}
+
+template<typename T>
+void printArray(Array<T> &array, std::string arrayName = "intArray")
+{
+  if (array.size() == 0)
+    std::cout << arrayName << " is an empty array." << std::endl;
+
+  for (unsigned int i = 0; i < array.size(); i++)
+  {
+    try
+    {
+      std::cout << arrayName << "[" << i << "] = " << array[i] << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
+  }
+  std::cout << std::endl;
+}
+
+template<typename T>
+void printArray(Array<T> const &array, std::string arrayName = "intArray")
+{
+  if (array.size() == 0)
+    std::cout << arrayName << " is an empty array." << std::endl;
+
+  for (unsigned int i = 0; i < array.size(); i++)
+  {
+    try
+    {
+      std::cout << arrayName << "[" << i << "] = " << array[i] << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
+  }
+  std::cout << std::endl;
+}
+
+void enterToContinue()
+{
+  std::cout << "\nPress enter to continue...\n";
+  std::cin.ignore();
 }
 
 #endif /* *********************************************************** ARRAY_H */
