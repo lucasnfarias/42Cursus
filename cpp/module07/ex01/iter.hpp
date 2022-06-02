@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:46:54 by coder             #+#    #+#             */
-/*   Updated: 2022/05/31 02:20:05 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/02 15:30:52 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	add42ToString(std::string	&item)
 void	plusTwoToGrade(Example &item)
 {
 	item.setGrade(item.getGrade() + 2);
+}
+
+void enterToContinue()
+{
+  std::cout << "\nPress enter to continue...\n";
+  std::cin.ignore();
 }
 
 #endif
