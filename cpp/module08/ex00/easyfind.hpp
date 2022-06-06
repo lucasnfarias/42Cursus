@@ -6,30 +6,33 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:40:36 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/05 17:11:58 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/06/06 19:51:14 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#define EASYFIND_HPP
 
-# include <iostream>
-# include <vector>
-# include <algorithm>
+#include <iostream>
+#include <algorithm>
+#include <stdexcept>
 
-// template<typename T>
-// size_t  easyfind(const T &container, int &element)
-// {
-//   try
-//   {
-//     std::vector<int> vect = dynamic_cast<std::vector &>(container);
+class ElementNotFoundException : public std::exception
+{
+public:
+  virtual const char *what() const throw()
+  {
+    return ("Error: element not found.");
+  }
+};
 
-//     find(vect.begin(), vect.end(), element);
-//   }
-//   catch(const std::exception& e)
-//   {
-//     std::cerr << e.what() << std::endl;
-//   }
-// }
+template <typename T>
+typename T::iterator easyfind(T &container, int element)
+{
+  typename T::iterator elementFound = std::find(container.begin(), container.end(), element);
+  if (elementFound == container.end())
+    throw ElementNotFoundException();
+  return elementFound;
+};
 
 #endif
