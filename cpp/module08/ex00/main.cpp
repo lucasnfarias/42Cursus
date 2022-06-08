@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:48:04 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/06 20:02:38 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:19:49 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,60 +16,71 @@
 #include <deque>
 #include <list>
 
+static void enterToContinue()
+{
+  std::cout << "\nPress enter to continue...\n";
+  std::cin.ignore();
+}
+
 static void vectorTest()
 {
-  std::vector<int> deq;
+  std::vector<int> vect;
 
-  deq.push_back(1);
-  deq.push_back(5);
-  deq.push_back(42);
-  deq.push_back(-1);
-  deq.push_back(2333232);
+  vect.push_back(1);
+  vect.push_back(5);
+  vect.push_back(42);
+  vect.push_back(-1);
+  vect.push_back(2333232);
 
-  std::cout << "###############" << std::endl;
+  std::cout << "##################" << std::endl;
   std::cout << "# 1. VECTOR TEST #" << std::endl;
-  std::cout << "###############\n"
+  std::cout << "##################\n"
             << std::endl;
 
-  for (size_t i = 0; i < deq.size(); i++)
+  for (size_t i = 0; i < vect.size(); i++)
   {
     std::cout
-        << "deq["
+        << "vect["
         << i
         << "] = "
-        << deq[i] << std::endl;
+        << vect[i] << std::endl;
   }
 
-  std::cout << "\n@ 1.a easyfind value 5" << std::endl;
+  std::cout << "\n@ 1.a easyfind value 5\n" << std::endl;
+  std::vector<int>::iterator elementFound = easyfind(vect, 5);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on vector at index "
+      << std::distance(vect.begin(), elementFound)
+      << std::endl;
+
+  std::cout << "\n@ 1.b easyfind value 321 (not found error)\n" << std::endl;
   try
   {
-    std::vector<int>::iterator elementFound = easyfind(deq, 5);
-    std::cout
-        << "deq["
-        << std::distance(deq.begin(), elementFound)
-        << "] = "
-        << *elementFound
-        << std::endl;
+    easyfind(vect, 321);
   }
   catch (const std::exception &e)
   {
-    std::cerr << e.what() << '\n';
+    std::cerr << "-> " << e.what() << '\n';
   }
+
+  enterToContinue();
 }
 
 static void dequeTest()
 {
   std::deque<int> deq;
 
-  deq.push_back(1);
-  deq.push_back(5);
-  deq.push_back(42);
-  deq.push_back(-1);
-  deq.push_back(2333232);
+  deq.push_back(20000);
+  deq.push_back(123);
+  deq.push_back(-84);
+  deq.push_back(-12);
+  deq.push_back(2);
 
-  std::cout << "###############" << std::endl;
+  std::cout << "#################" << std::endl;
   std::cout << "# 2. DEQUE TEST #" << std::endl;
-  std::cout << "###############\n"
+  std::cout << "#################\n"
             << std::endl;
 
   for (size_t i = 0; i < deq.size(); i++)
@@ -80,21 +91,42 @@ static void dequeTest()
         << "] = "
         << deq[i] << std::endl;
   }
+
+  std::cout << "\n@ 2.a easyfind value 2\n" << std::endl;
+  std::deque<int>::iterator elementFound = easyfind(deq, 2);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on deque at index "
+      << std::distance(deq.begin(), elementFound)
+      << std::endl;
+
+  std::cout << "\n@ 2.b easyfind value 321 (not found error)\n" << std::endl;
+  try
+  {
+    easyfind(deq, 321);
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << "-> " << e.what() << '\n';
+  }
+
+  enterToContinue();
 }
 
 static void listTest()
 {
   std::list<int> littleList;
 
-  littleList.push_back(1);
-  littleList.push_back(5);
-  littleList.push_back(42);
-  littleList.push_back(-1);
-  littleList.push_back(2333232);
+  littleList.push_back(21);
+  littleList.push_back(32);
+  littleList.push_back(111111111);
+  littleList.push_back(-2122221223);
+  littleList.push_back(0);
 
-  std::cout << "###############" << std::endl;
+  std::cout << "################" << std::endl;
   std::cout << "# 3. LIST TEST #" << std::endl;
-  std::cout << "###############\n"
+  std::cout << "################\n"
             << std::endl;
 
   for (
@@ -106,17 +138,38 @@ static void listTest()
         << "littleList = "
         << *listBeginning << std::endl;
   }
+
+  std::cout << "\n@ 3.a easyfind value -2122221223\n" << std::endl;
+  std::list<int>::iterator elementFound = easyfind(littleList, -2122221223);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on list at index "
+      << std::distance(littleList.begin(), elementFound)
+      << std::endl;
+
+  std::cout << "\n@ 3.b easyfind value 321 (not found error)\n" << std::endl;
+  try
+  {
+    easyfind(littleList, 321);
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << "-> " << e.what() << '\n';
+  }
+
+  enterToContinue();
 }
 
 static void setTest()
 {
   std::set<int> setinho;
 
-  setinho.insert(1);
-  setinho.insert(5);
-  setinho.insert(42);
-  setinho.insert(-1);
-  setinho.insert(2333232);
+  setinho.insert(11);
+  setinho.insert(51);
+  setinho.insert(422);
+  setinho.insert(-13);
+  setinho.insert(24);
 
   std::cout << "###############" << std::endl;
   std::cout << "# 4. SET TEST #" << std::endl;
@@ -131,6 +184,25 @@ static void setTest()
     std::cout
         << "setinho = "
         << *setBeginning << std::endl;
+  }
+
+  std::cout << "\n@ 4.a easyfind value -13\n" << std::endl;
+  std::set<int>::iterator elementFound = easyfind(setinho, -13);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on set at index "
+      << std::distance(setinho.begin(), elementFound)
+      << std::endl;
+
+  std::cout << "\n@ 4.b easyfind value 321 (not found error)\n" << std::endl;
+  try
+  {
+    easyfind(setinho, 321);
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << "-> " << e.what() << '\n';
   }
 }
 
