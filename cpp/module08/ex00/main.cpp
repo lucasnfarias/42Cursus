@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 16:48:04 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/07 21:19:49 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/06/09 21:10:40 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,17 @@ static void vectorTest()
     std::cerr << "-> " << e.what() << '\n';
   }
 
+{
+  std::cout << "\n@ 1.c easyfind value -1\n" << std::endl;
+  std::vector<int>::iterator elementFound = easyfind(vect, -1);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on vector at index "
+      << std::distance(vect.begin(), elementFound)
+      << std::endl;
+}
+
   enterToContinue();
 }
 
@@ -110,6 +121,17 @@ static void dequeTest()
   {
     std::cerr << "-> " << e.what() << '\n';
   }
+
+{
+  std::cout << "\n@ 2.c easyfind value 20000\n" << std::endl;
+  std::deque<int>::iterator elementFound = easyfind(deq, 20000);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on deque at index "
+      << std::distance(deq.begin(), elementFound)
+      << std::endl;
+}
 
   enterToContinue();
 }
@@ -158,6 +180,16 @@ static void listTest()
     std::cerr << "-> " << e.what() << '\n';
   }
 
+{
+  std::cout << "\n@ 3.c easyfind value 0\n" << std::endl;
+  std::list<int>::iterator elementFound = easyfind(littleList, 0);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on list at index "
+      << std::distance(littleList.begin(), elementFound)
+      << std::endl;
+}
   enterToContinue();
 }
 
@@ -204,6 +236,17 @@ static void setTest()
   {
     std::cerr << "-> " << e.what() << '\n';
   }
+
+{
+  std::cout << "\n@ 4.c easyfind value 51\n" << std::endl;
+  std::set<int>::iterator elementFound = easyfind(setinho, 51);
+  std::cout
+      << "-> Found value "
+      << *elementFound
+      << " on set at index "
+      << std::distance(setinho.begin(), elementFound)
+      << std::endl;
+}
 }
 
 int main()
