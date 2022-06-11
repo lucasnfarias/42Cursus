@@ -4,11 +4,11 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Span::Span()
+Span::Span() : _n(0), _size(0), _index(0)
 {
 }
 
-Span::Span(unsigned int n) : _n(new int[n])
+Span::Span(unsigned int n) : _n(new int[n]), _size(n), _index(0)
 {
 }
 
@@ -56,25 +56,34 @@ std::ostream &			operator<<( std::ostream & o, Span const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void addNumber(int n)
+void Span::addNumber(int n)
 {
-  (void)n;
-  // throw exception if span is full
+  if (_index >= _size)
+    throw NoMoreSpaceException();
+  _n[_index] = n;
+  _index++;
   // implement also another addNumber w/ range of iterators
 }
 
-int shortestSpan()
+int Span::shortestSpan() const
 {
   // throw exception if span has only one or zero numbers
   return 0;
 }
 
-int longestSpan()
+int Span::longestSpan() const
 {
-  // throw exception if span has only one or zero numbers
-  return 0;
+  if (_index <= 1)
+    throw NotEnoughElementsException();
+  int* min = std::min_element(_n, _n+_index);
+  int* max = std::max_element(_n, _n+_index);
+  return (*max - *min);
 }
 
+unsigned int Span::getSize() const
+{
+  return _size;
+}
 
 
 /*
