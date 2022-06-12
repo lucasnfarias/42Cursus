@@ -5,6 +5,7 @@
 # include <string>
 # include <algorithm>
 # include <stdexcept>
+# include <limits.h>
 
 class Span
 {
@@ -17,7 +18,10 @@ public:
 
   Span &operator=(Span const &rhs);
 
+  int &operator[](unsigned int i);
+
   void addNumber(int n);
+  void addNumber(int* begin, int* end);
   int shortestSpan() const;
   int longestSpan() const;
   unsigned int getSize() const;
@@ -37,6 +41,15 @@ public:
     virtual const char *what() const throw()
     {
       return ("Error: there is not enough elements to calculate the span.");
+    }
+  };
+
+  class IndexOutOfRangeException : public std::exception
+  {
+  public:
+    virtual const char *what() const throw()
+    {
+      return ("Error: index out of range.");
     }
   };
 
