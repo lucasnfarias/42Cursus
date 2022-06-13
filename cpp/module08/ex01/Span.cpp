@@ -4,17 +4,17 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Span::Span() : _n(0), _size(0), _index(0)
+Span::Span() : _size(0), _capacity(0)
 {
 }
 
-Span::Span(unsigned int n) : _n(new int[n]), _size(n), _index(0)
+Span::Span(unsigned int n) : _size(0), _capacity(n), _n(new std::vector<int>[n])
 {
 }
 
-Span::Span(const Span &src)
+Span::Span(const Span &src) : _size(src.getSize()), _capacity(src.getCapacity()), _n(new std::vector<int>[_capacity])
 {
-  (void)src;
+  *this = src;
 }
 
 /*
@@ -33,85 +33,100 @@ Span::~Span()
 
 Span &Span::operator=(Span const &rhs)
 {
-  (void)rhs;
-  // if ( this != &rhs )
-  //{
-  // this->_value = rhs.getValue();
-  //}
+  for (unsigned int i = 0; i < getSize(); i++)
+    _n->push_back(rhs._n->at(i));
   return *this;
 }
 
 std::ostream &operator<<(std::ostream &o, Span const &i)
 {
-  (void)i;
-  o << "I'm just a Span of numbers.";
+  o
+      << "I'm just a Span of numbers with size "
+      << i.getSize()
+      << " and total capacity of "
+      << i.getCapacity();
+
   return o;
 }
 
-int &Span::operator[](unsigned int i)
+int &Span::operator[](unsigned int i) const
 {
   if (i >= _size)
     throw IndexOutOfRangeException();
-  return _n[i];
+  return _n->at(i);
 }
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Span::addNumber(int n)
+void Span::checkSpace() const
 {
-  if (_index >= _size)
+  if (_size >= _capacity)
     throw NoMoreSpaceException();
-  _n[_index] = n;
-  _index++;
 }
 
-void Span::addNumber(int *_begin, int *_end)
+void Span::addNumber(int n)
 {
-  // maybe will need template to use range of iterators
-  if (_index >= _size)
-    throw NoMoreSpaceException();
-  for (int *begin = _begin; begin <= _end; begin++)
+  checkSpace();
+  _n->push_back(n);
+  _size++;
+}
+
+void Span::addNumber(std::vector<int>::iterator firstNumber, std::vector<int>::iterator lastNumber)
+{
+  try
   {
-    if (_index >= _size)
-      throw NoMoreSpaceException();
-    _n[_index] = *begin;
-    _index++;
+    for (std::vector<int>::iterator it = firstNumber; it != lastNumber; it++)
+    {
+      checkSpace();
+      _n->push_back(*it);
+      _size++;
+    }
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << e.what() << '\n';
   }
 }
 
 int Span::shortestSpan() const
 {
-  if (_index <= 1)
+  if (_size <= 1)
     throw NotEnoughElementsException();
 
   int diff = INT_MAX;
-  std::sort(_n, _n + _index);
+  std::vector<int> numbersSorted(_n->begin(), _n->end());
+  std::sort(numbersSorted.begin(), numbersSorted.end());
 
-  for (unsigned int i = 0; i < _index - 1; i++)
-    if (_n[i + 1] - _n[i] < diff)
-      diff = _n[i + 1] - _n[i];
+  for (std::vector<int>::iterator it = numbersSorted.begin(); it < numbersSorted.end() - 1; it++)
+    if (*(it + 1) - *it < diff)
+      diff = *(it + 1) - *it;
 
   return diff;
 }
 
 int Span::longestSpan() const
 {
-  if (_index <= 1)
+  if (_size <= 1)
     throw NotEnoughElementsException();
-  int *min = std::min_element(_n, _n + _index);
-  int *max = std::max_element(_n, _n + _index);
+  std::vector<int>::iterator min = std::min_element(_n->begin(), _n->end());
+  std::vector<int>::iterator max = std::max_element(_n->begin(), _n->end());
   return (*max - *min);
 }
+
+/*
+** --------------------------------- ACCESSOR ---------------------------------
+*/
 
 unsigned int Span::getSize() const
 {
   return _size;
 }
 
-/*
-** --------------------------------- ACCESSOR ---------------------------------
-*/
+unsigned int Span::getCapacity() const
+{
+  return _capacity;
+}
 
 /* ************************************************************************** */

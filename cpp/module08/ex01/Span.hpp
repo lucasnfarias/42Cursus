@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include <vector>
 # include <algorithm>
 # include <stdexcept>
 # include <limits.h>
@@ -18,13 +19,14 @@ public:
 
   Span &operator=(Span const &rhs);
 
-  int &operator[](unsigned int i);
+  int &operator[](unsigned int i) const;
 
   void addNumber(int n);
-  void addNumber(int* begin, int* end);
+  void addNumber(std::vector<int>::iterator firstNumber, std::vector<int>::iterator lastNumber);
   int shortestSpan() const;
   int longestSpan() const;
   unsigned int getSize() const;
+  unsigned int getCapacity() const;
 
   class NoMoreSpaceException : public std::exception
   {
@@ -54,9 +56,10 @@ public:
   };
 
 private:
-  int *_n;
   unsigned int _size;
-  unsigned int _index;
+  unsigned int _capacity;
+  std::vector<int> *_n;
+  void  checkSpace() const;
 };
 
 std::ostream &operator<<(std::ostream &o, Span const &i);
