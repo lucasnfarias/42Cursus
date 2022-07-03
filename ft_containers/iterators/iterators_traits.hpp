@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 18:05:45 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/03 18:23:16 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/07/03 18:25:48 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class iterator_traits<T*>
     typedef ptrdiff_t difference_type;
     typedef T *pointer;
     typedef T &reference;
-    typedef ft::random_access_iterator_tag iterator_category;
+    typedef std::random_access_iterator_tag iterator_category;
 };
 
 template <class T>
@@ -50,7 +50,7 @@ class iterator_traits<const T*>
     typedef ptrdiff_t difference_type;
     typedef const T *pointer;
     typedef const T &reference;
-    typedef ft::random_access_iterator_tag iterator_category;
+    typedef std::random_access_iterator_tag iterator_category;
 };
 
 }
