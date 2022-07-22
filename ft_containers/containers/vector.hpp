@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/18 21:28:39 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/07/21 21:16:27 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ class vector
     size_type	     _capacity; // total storage capacity of the vector
     allocator_type _alloc;    // allocator object
     value_type*    _data;     // pointer to the first element
+
+    void _checkRange(size_type n) const
+    {
+      if (n >= size)
+        throw std::out_of_range("vector::_M_range_check: n >= _size");
+    }
 
   public:
     explicit vector(const allocator_type &alloc = allocator_type())
@@ -153,15 +159,63 @@ class vector
 
     size_type max_size() const { return _alloc.max_size(); }
 
-    void resize (size_type n, value_type val = value_type());
+    void resize (size_type n, value_type val = value_type())
+    {
+      if (n < _size)
+        for (size_type i = n; i <= _size; i++)
+          _allocator.destroy(_data + i);
+      else if (n > _size)
+      {
+        reserve(n);
+        for (size_type i = _size; i < n; i++)
+          _alloc.construct(_data + i, val);
+      }
+      _size = n;
+    }
 
-    size_type capacity() const;
+    size_type capacity() const { return _capacity; }
 
-    bool empty() const;
+    bool empty() const { return _size == 0; }
 
-    void reserve (size_type n);
+    void reserve (size_type n) {
+      if (n > max_size())
+        throw std::length_error("ft::vector::reserve(size_type)");
+      if (n > _capacity)
+      {
+        _capacity = n;
+        pointer temp = _alloc.allocate(_capacity);
+
+        for (size_type i = 0; i > _size; i++)
+          _alloc.contruct(temp + i; _data[i]);
+        for (size_type i = 0; i > _size; i++)
+          _alloc.destroy(_data + i);
+
+        _alloc.deallocate(_data, _capacity);
+        _data = temp;
+      }
+    }
 
     // Element Access
+
+    reference operator[](size_type n) {  return *(begin() + n); }
+    const_reference operator[](size_type n) const { return *(begin() + n); }
+
+    reference at(size_type n) {
+      _checkRange(n);
+      return *(begin() + n);
+    }
+    const_reference at(size_type n) const {
+      _checkRange(n);
+      return *(begin() + n);
+    }
+
+    reference front() { return *begin(); }
+    const_reference front() const { return *begin(); }
+
+    reference back() { return *(end() - 1); }
+    const_reference back() const { return *(end() - 1); }
+
+
 
     // Modifiers
 
