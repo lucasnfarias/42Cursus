@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/21 21:16:27 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:42:01 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <iostream>
 # include <string>
 # include <exception>
-# include "type_traits.hpp"
-# include "random_access_iterator.hpp"
-# include "reverse_iterator.hpp"
-# include "algorithm.hpp"
+# include "../utils/type_traits.hpp"
+# include "../iterators/random_access_iterator.hpp"
+# include "../iterators/reverse_iterator.hpp"
+# include "../utils/algorithm.hpp"
 
 namespace ft {
 
@@ -41,14 +41,15 @@ class vector
     typedef std::size_t                                     size_type;
 
   private:
-    size_type	     _size;     // number of elements actually inside the vector
-    size_type	     _capacity; // total storage capacity of the vector
-    allocator_type _alloc;    // allocator object
-    value_type*    _data;     // pointer to the first element
+    size_type	             _size;     // number of elements actually inside the vector
+    size_type	             _capacity; // total storage capacity of the vector
+    allocator_type         _alloc;    // allocator object
+    value_type*            _data;     // pointer to the first element
+    static const size_type _growthFactor = 2; // value which capacity will be multiplied
 
     void _checkRange(size_type n) const
     {
-      if (n >= size)
+      if (n >= size())
         throw std::out_of_range("vector::_M_range_check: n >= _size");
     }
 
@@ -163,7 +164,7 @@ class vector
     {
       if (n < _size)
         for (size_type i = n; i <= _size; i++)
-          _allocator.destroy(_data + i);
+          _alloc.destroy(_data + i);
       else if (n > _size)
       {
         reserve(n);
@@ -185,9 +186,9 @@ class vector
         _capacity = n;
         pointer temp = _alloc.allocate(_capacity);
 
-        for (size_type i = 0; i > _size; i++)
-          _alloc.contruct(temp + i; _data[i]);
-        for (size_type i = 0; i > _size; i++)
+        for (size_type i = 0; i < _size; i++)
+          _alloc.construct(temp + i, _data[i]);
+        for (size_type i = 0; i < _size; i++)
           _alloc.destroy(_data + i);
 
         _alloc.deallocate(_data, _capacity);
@@ -215,9 +216,97 @@ class vector
     reference back() { return *(end() - 1); }
     const_reference back() const { return *(end() - 1); }
 
-
-
     // Modifiers
+
+    template <class InputIterator>
+    void assign(
+      InputIterator first,
+      InputIterator last,
+      typename ft::enable_if<!ft::is_integral<InputIterator>::value, bool>::type = false
+    )
+    {
+      size_type newSize = last - first;
+
+      if (newSize > max_size())
+        throw std::length_error("ft::vector:assign(InputIterator, InputIterator)");
+      if (newSize > capacity)
+        reserve(newSize);
+
+      for (size_type i = 0; i < newSize; i++)
+      {
+        _alloc.construct(_data + i, *(first + i));
+      }
+      for (size_type i = newSize; i < _size; i++)
+      {
+        _alloc.destroy(_data + i);
+      }
+
+      _size = newSize;
+    }
+
+    void assign(size_type n, const value_type& val)
+    {
+      if (n > max_size())
+        throw std::length_error("ft::vector:assign(size_type, const value_type&)");
+      if (n > capacity)
+        reserve(n);
+
+      for (size_type i = 0; i < n; i++)
+        _alloc.construct(&_data[i], val);
+      for (size_type i = n; i < _size; i++)
+        _alloc.destroy(&_data[i]);
+
+      _size = n;
+    }
+
+    void push_back(const value_type& val)
+    {
+      if (_size == capacity())
+        reserve(capacity() ? capacity() * _growthFactor : 1);
+
+      _alloc.construct(&_data[_size], val);
+      _size++;
+    }
+
+    void pop_back()
+    {
+      if (_size > 0) {
+        _alloc.destroy(_data + _size - 1);
+        _size--;
+      }
+    }
+
+    iterator insert(iterator position, const value_type& val)
+    {
+      size_type indexInserted = position - begin();
+
+      if (_size == capacity())
+        reserve(capacity() * _growthFactor);
+
+      for (size_type i = _size; i > indexInserted; i--)
+        _alloc.construct(&_data[i], _data[i - 1]);
+      _alloc.construct(&_data[indexInserted], val);
+      _size++;
+
+      return (begin() + indexInserted);
+    }
+
+    void insert(iterator position, size_type n, const value_type& val)
+    {
+      size_type indexInserted = position - begin();
+
+      if (_size + n > capacity())
+        reserve(capacity() * _growthFactor);
+
+      for (size_type i = _size + n - 1; i > indexInserted; i--)
+        _alloc.construct(&_data[i], _data[i - 1]);
+      for (size_type i = 0; i < n; i++)
+        _alloc.construct(&_data[indexInserted + i], val);
+      _size += n;
+    }
+
+    template <class InputIterator>
+    void insert (iterator position, InputIterator first, InputIterator last);
 
     // Allocator
 
