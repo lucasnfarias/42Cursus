@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/26 21:42:01 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:41:27 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,14 +302,74 @@ class vector
         _alloc.construct(&_data[i], _data[i - 1]);
       for (size_type i = 0; i < n; i++)
         _alloc.construct(&_data[indexInserted + i], val);
+
       _size += n;
     }
 
     template <class InputIterator>
-    void insert (iterator position, InputIterator first, InputIterator last);
+    void insert (
+      iterator position,
+      InputIterator first,
+      InputIterator last,
+      typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 42
+    )
+    {
+      size_type indexInserted = position - begin();
+      size_type n = last - first;
+
+      if (_size + n > capacity())
+        reserve(capacity() * _growthFactor);
+
+      for (size_type i = _size + n - 1; i > indexInserted; i--)
+        _alloc.construct(&_data[i], _data[i - 1]);
+      for (size_type i = 0; i < n; i++)
+        _alloc.construct(&_data[indexInserted + i], *(first + i));
+
+      _size += n;
+    }
+
+    iterator erase (iterator position)
+    {
+      iterator tempIter = position;
+
+      _alloc.destroy(&(*position));
+
+      while (tempIter != (_data.end() - 1))
+        _alloc.construct(&(*tempIter), *(++tempIter));
+
+      _size--;
+      return position;
+    }
+
+    iterator erase (iterator first, iterator last)
+    {
+      for (iterator it = first; it != last; it++)
+        _alloc.destroy(&(*it));
+      for (iterator it = last; it != end(); it++)
+        _alloc.construct(&(*(it - (last - first))), *it);
+
+      _size -= last - first;
+      return first;
+    }
+
+    void swap (vector& x)
+    {
+      ft::swap(_data, x._data);
+      ft::swap(_size, x._size);
+      ft::swap(_capacity, x._capacity);
+    }
+
+    void clear()
+    {
+      for (iterator it = begin(); it != end(); ++it)
+        _alloc.destroy(&(*it));
+
+      _size = 0;
+    }
 
     // Allocator
 
+    allocator_type get_allocator() const { return _alloc; }
 };
 
     // Non-memeber functions overload

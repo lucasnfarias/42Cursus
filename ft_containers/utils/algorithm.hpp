@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:09:21 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/29 19:26:14 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:35:08 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
     ++first1; ++first2;
   }
   return first2 != last2;
+}
+
+template <class T>
+void swap(T &a, T &b)
+{
+  T c(a);
+  a = b;
+  b = c;
 }
 
 }
