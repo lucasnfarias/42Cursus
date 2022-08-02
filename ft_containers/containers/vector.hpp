@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/28 20:41:27 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:44:47 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,6 +373,50 @@ class vector
 };
 
     // Non-memeber functions overload
+
+  template <class T, class Alloc>
+  bool operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    if (lhs.size() != rhs.size())
+      return false;
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+  }
+
+  template <class T, class Alloc>
+  bool operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    return !(lhs == rhs);
+  }
+
+  template <class T, class Alloc>
+  bool operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  }
+
+  template <class T, class Alloc>
+  bool operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    return rhs < lhs;
+  }
+
+  template <class T, class Alloc>
+  bool operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    return !(rhs < lhs);
+  }
+
+  template <class T, class Alloc>
+  bool operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+  {
+    return !(lhs < rhs);
+  }
+
+  template <class T, class Alloc>
+  void swap(vector<T,Alloc>& x, vector<T,Alloc>& y)
+  {
+    x.swap(y);
+  }
 
 }
 
