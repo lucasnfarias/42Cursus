@@ -1,53 +1,33 @@
-STD_BINARY		= 	std_containers
-FT_BINARY		= 	ft_containers
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/08 19:26:55 by lniehues          #+#    #+#              #
+#    Updated: 2022/08/09 22:07:28 by lniehues         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SOURCE			= 	main.cpp
-OBJECT			=	$(SOURCE:.cpp=.o)
-OUTPUT_FILES    =   outputfiles/ft_output.txt outputfiles/std_output.txt
+RM		:=	rm -rf
 
-COMPILER			= 	c++
+TESTS_DIR	:=	./tests/
 
-STD_FLAGS		= 	-Wall -Wextra -Werror -std=c++98 -D STD_OPTION=1
-FT_FLAGS		= 	-Wall -Wextra -Werror -std=c++98 -D STD_OPTION=0
+VECTOR_TEST_DIR	:=	$(TESTS_DIR)vector
 
-ifeq ($(SANITIZE_A),true)
-        STD_FLAGS += -fsanitize=address
-        FT_FLAGS += -fsanitize=address
-endif
+all:	vector_test
 
-ifeq ($(SANITIZE_L),true)
-        STD_FLAGS += -fsanitize=leak
-        FT_FLAGS += -fsanitize=leak
-endif
-
-RESET			= 	\033[0m
-GREEN 			= 	\033[38;5;46m
-WHITE 			= 	\033[38;5;15m
-GRAY 			= 	\033[38;5;8m
-RED 			= 	\033[38;5;160m
-
-all: $(STD_BINARY) $(FT_BINARY)
-
-$(STD_BINARY): $(OBJECT)
-	@echo "$(GREEN)----------------------------------------------------"
-	@$(COMPILER) $(STD_FLAGS) $(SOURCE) -o $(STD_BINARY)
-	@echo "STD Executable				./$(STD_BINARY) $(RESET)"
-
-$(FT_BINARY): $(OBJECT)
-	@echo "$(GREEN)----------------------------------------------------"
-	@$(COMPILER) $(FT_FLAGS) $(SOURCE) -o $(FT_BINARY)
-	@echo "FT Executable				./$(FT_BINARY) $(RESET)"
+vector_test:
+		make -C $(VECTOR_TEST_DIR)
+		make -C $(VECTOR_TEST_DIR) std_tests.out
 
 clean:
-	@echo "$(RED)----------------------------------------------------"
-	@/bin/rm -f $(OBJECT)
-	@echo "$(GRAY)REMOVED O-FILES $(RESET)"
+		make clean -C $(VECTOR_TEST_DIR)
 
-fclean: clean
-	@echo "$(RED)----------------------------------------------------"
-	@/bin/rm -f $(STD_BINARY) $(FT_BINARY) $(OUTPUT_FILES)
-	@echo "$(GRAY)REMOVED EXECUTABLE FILE & OUTPUT FILES $(RESET)"
+fclean:
+		make fclean -C $(VECTOR_TEST_DIR)
 
-re: fclean all
+re:		fclean all
 
-.PHONY: all clean fclean re
+PHONY:	all clean fclean re vector_test map_test
