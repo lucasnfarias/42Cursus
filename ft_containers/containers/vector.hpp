@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/01 20:44:47 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/05 20:29:20 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ class vector
     size_type	             _size;     // number of elements actually inside the vector
     size_type	             _capacity; // total storage capacity of the vector
     allocator_type         _alloc;    // allocator object
-    value_type*            _data;     // pointer to the first element
+    pointer                _data;     // pointer to the first element
     static const size_type _growthFactor = 2; // value which capacity will be multiplied
 
     void _checkRange(size_type n) const
@@ -73,9 +73,7 @@ class vector
       _data = _alloc.allocate(_capacity);
 
       for (size_type i = 0; i < _size; i++)
-      {
         _alloc.construct(_data + i, val);
-      }
     }
 
     template <class InputIterator>
@@ -88,27 +86,22 @@ class vector
       : _size(last - first), _capacity(last - first), _alloc(alloc), _data(_alloc.allocate(_capacity))
     {
       for (size_type i = 0; i < _size; i++)
-      {
         _alloc.construct(_data + i, *(first + i));
-      }
     }
 
     vector(const vector &src)
       : _size(src._size), _capacity(src._capacity), _alloc(Alloc(src._alloc)), _data(_alloc.allocate(_capacity))
     {
-
       for (size_type i = 0; i < _size; i++)
-      {
         _alloc.construct(_data + i, src._data[i]);
-      }
     }
 
     ~vector()
     {
       if (_data != NULL) {
-        for (size_type i = 0; i < _size; i++) {
+        for (size_type i = 0; i < _size; i++)
           _alloc.destroy(_data + i);
-        }
+
         _alloc.deallocate(_data, _capacity);
       }
     }
@@ -133,9 +126,8 @@ class vector
           _data = _alloc.allocate(_capacity);
         }
 
-        for (size_type i = 0; i < _size; i++) {
+        for (size_type i = 0; i < _size; i++)
           _alloc.construct(_data + i, rhs._data[i]);
-        }
       }
       return *this;
     }
@@ -145,8 +137,8 @@ class vector
     iterator begin() { return iterator(_data); };
     const_iterator begin() const { return const_iterator(_data); }
 
-    iterator end() { return iterator(_data + _size); }
-    const_iterator end() const { return const_iterator(_data + _size); }
+    iterator end() { return begin() + size(); }
+    const_iterator end() const { return begin() + size(); }
 
     reverse_iterator rbegin() { return reverse_iterator(--end()); }
     const_reverse_iterator rbegin() const { return const_reverse_iterator(--end()); }
@@ -163,7 +155,7 @@ class vector
     void resize (size_type n, value_type val = value_type())
     {
       if (n < _size)
-        for (size_type i = n; i <= _size; i++)
+        for (size_type i = n; i < _size; i++)
           _alloc.destroy(_data + i);
       else if (n > _size)
       {
@@ -181,6 +173,7 @@ class vector
     void reserve (size_type n) {
       if (n > max_size())
         throw std::length_error("ft::vector::reserve(size_type)");
+
       if (n > _capacity)
       {
         _capacity = n;
@@ -281,7 +274,7 @@ class vector
       size_type indexInserted = position - begin();
 
       if (_size == capacity())
-        reserve(capacity() * _growthFactor);
+        reserve(capacity() ? capacity() * _growthFactor : 1);
 
       for (size_type i = _size; i > indexInserted; i--)
         _alloc.construct(&_data[i], _data[i - 1]);
@@ -296,10 +289,10 @@ class vector
       size_type indexInserted = position - begin();
 
       if (_size + n > capacity())
-        reserve(capacity() * _growthFactor);
+        reserve(n > _size * _growthFactor ? n : _size * _growthFactor);
 
-      for (size_type i = _size + n - 1; i > indexInserted; i--)
-        _alloc.construct(&_data[i], _data[i - 1]);
+      for (size_type i = _size; i > indexInserted; i--)
+        _alloc.construct(&_data[i + n - 1], _data[i - 1]);
       for (size_type i = 0; i < n; i++)
         _alloc.construct(&_data[indexInserted + i], val);
 
@@ -318,7 +311,7 @@ class vector
       size_type n = last - first;
 
       if (_size + n > capacity())
-        reserve(capacity() * _growthFactor);
+        reserve(n > _size * _growthFactor ? n : _size * _growthFactor);
 
       for (size_type i = _size + n - 1; i > indexInserted; i--)
         _alloc.construct(&_data[i], _data[i - 1]);
@@ -330,12 +323,9 @@ class vector
 
     iterator erase (iterator position)
     {
-      iterator tempIter = position;
-
-      _alloc.destroy(&(*position));
-
-      while (tempIter != (_data.end() - 1))
-        _alloc.construct(&(*tempIter), *(++tempIter));
+      for (size_type i = position - begin(); i < _size - 1; i++)
+        _alloc.construct(_data + i, _data[i + 1]);
+      _alloc.destroy(_data + _size - 1);
 
       _size--;
       return position;
