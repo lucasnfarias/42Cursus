@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 19:37:04 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/23 20:20:33 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/05 19:40:16 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ template <class T> struct is_integral<const volatile T> : is_integral<T> {};
 // specializations (this are the types that are integral)
 template <> struct is_integral<bool> : true_type {};
 template <> struct is_integral<char> : true_type {};
-template <> struct is_integral<char16_t> : true_type {};
-template <> struct is_integral<char32_t> : true_type {};
+// template <> struct is_integral<char16_t> : true_type {};
+// template <> struct is_integral<char32_t> : true_type {};
 template <> struct is_integral<wchar_t> : true_type {};
 template <> struct is_integral<signed char> : true_type {};
 template <> struct is_integral<short int> : true_type {};
