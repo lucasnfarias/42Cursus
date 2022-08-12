@@ -41,5 +41,6 @@ void printVector(ft::vector<T> vect, bool printInline = false)
 // TESTS
 
 void  tests_clear();
+void  tests_empty();
 
 #endif

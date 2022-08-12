@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/10 21:05:27 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:31:58 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void  tests_clear()
 {
-  prettyPrint(SUBTITLE, "Test Clear function");
+  prettyPrint(SUBTITLE, "Test CLEAR function");
 
   ft::vector<std::string> strings;
 
