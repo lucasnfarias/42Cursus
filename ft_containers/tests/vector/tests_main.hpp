@@ -1,6 +1,16 @@
 #ifndef TESTS_MAIN_HPP
 # define TESTS_MAIN_HPP
 
+// PROBABLY MOVE COLORS AND PRINT HELPERS TO TESTS ROOT AND UPDATE MAKEFILE TO USE IT
+
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define PURPLE "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define RESET "\033[0m"
+
 # include <iostream>
 # include <stdlib.h>
 # include <algorithm>
@@ -18,7 +28,36 @@
 
 enum TextType { TITLE = 0, SUBTITLE = 1, CODE_INSTRUCTIONS = 2, RESULT = 3 };
 
-void  prettyPrint(TextType textType, std::string str);
+template <typename T>
+void prettyPrint(TextType textType, T value)
+{
+  switch (textType)
+  {
+    case TITLE:
+      std::cout
+        << PURPLE
+        << "\n---------------------\n" << std::endl
+        << value << std::endl
+        << "\n---------------------\n" << RESET;
+      break;
+    case SUBTITLE:
+      std::cout
+        << YELLOW
+        << "\n#                   #\n" << std::endl
+        << value << std::endl
+        << "\n#                   #\n" << RESET;
+      break;
+    case CODE_INSTRUCTIONS:
+      std::cout << CYAN << "\ncode instruction: " << value << RESET << std::endl;
+      break;
+    case RESULT:
+      std::cout << GREEN << "result: " << value << RESET << std::endl;
+      break;
+    default:
+      break;
+  }
+  std::cout << std::endl;
+}
 
 template <typename T>
 void printVector(ft::vector<T> vect, bool printInline = false)

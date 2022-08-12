@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/11 21:31:58 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:58:18 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void  tests_clear()
 
   ft::vector<std::string> strings;
 
-  prettyPrint(CODE_INSTRUCTIONS, "vector<std::string> strings");
-  prettyPrint(CODE_INSTRUCTIONS, "strings.push_back(std::string) 7 times");
+  prettyPrint(CODE_INSTRUCTIONS, "vector<std::string> strings;");
+  prettyPrint(CODE_INSTRUCTIONS, "strings.push_back(std::string); 7 times");
 
   strings.push_back("Don't");
   strings.push_back("Panic");
@@ -31,7 +31,7 @@ void  tests_clear()
 
   printVector(strings, true);
 
-  prettyPrint(CODE_INSTRUCTIONS, "strings.clear()");
+  prettyPrint(CODE_INSTRUCTIONS, "strings.clear();");
 
   strings.clear();
 
