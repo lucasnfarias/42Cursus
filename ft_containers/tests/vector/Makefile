@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2022/08/12 20:51:50 by lniehues         ###   ########.fr        #
+#    Updated: 2022/08/13 13:43:10 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ STD_VERSION := -D STD_VERSION
 
 RM		:=	rm -rf
 
-SRCS := tests_main.cpp clear.cpp empty.cpp erase.cpp
+SRCS := tests_main.cpp clear.cpp empty.cpp erase.cpp resize.cpp
 
 STD_OBJ_DIR		:= std_objs
 FT_OBJ_DIR	:= ft_objs

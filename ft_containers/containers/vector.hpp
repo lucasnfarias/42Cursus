@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/05 20:29:20 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/08/13 14:20:09 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include "../utils/algorithm.hpp"
 
 namespace ft {
+
+/*
+
+  See std lib source code here:
+  https://gcc.gnu.org/onlinedocs/gcc-4.6.3/libstdc++/api/a01115_source.html
+  https://gcc.gnu.org/onlinedocs/gcc-4.6.3/libstdc++/api/a01069_source.html
+
+  Consider all else implementation on #ifdef __GXX_EXPERIMENTAL_CXX0X__ :)
+
+*/
 
 template < class T, class Alloc = std::allocator<T> >
 class vector
