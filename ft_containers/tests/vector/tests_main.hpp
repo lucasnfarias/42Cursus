@@ -17,8 +17,8 @@
 
 #ifdef STD_VERSION
 	#define VERSION "STD_VERSION"
-	#define ft std
 	#include <vector>
+  namespace ft = std;
 #else
 	#define VERSION "FT_VERSION"
 	#include "../../containers/vector.hpp"
@@ -81,5 +81,6 @@ void printVector(ft::vector<T> vect, bool printInline = false)
 
 void  tests_clear();
 void  tests_empty();
+void  tests_erase();
 
 #endif
