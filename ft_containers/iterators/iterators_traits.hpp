@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 18:05:45 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/03 18:25:48 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/04 12:17:13 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 namespace ft {
 
 typedef std::ptrdiff_t ptrdiff_t;
+
+struct input_iterator_tag {};
+
+struct output_iterator_tag {};
+
+struct forward_iterator_tag : public input_iterator_tag {};
+
+struct bidirectional_iterator_tag : public forward_iterator_tag {};
 
 template <class Iterator>
 class iterator_traits
@@ -51,6 +59,22 @@ class iterator_traits<const T*>
     typedef const T *pointer;
     typedef const T &reference;
     typedef std::random_access_iterator_tag iterator_category;
+};
+
+template <
+  class Category,
+  class T,
+  class Distance = ptrdiff_t,
+  class Pointer = T *,
+  class Reference = T &
+>
+class iterator {
+public:
+  typedef T value_type;
+  typedef Distance difference_type;
+  typedef Pointer pointer;
+  typedef Reference reference;
+  typedef Category iterator_category;
 };
 
 }
