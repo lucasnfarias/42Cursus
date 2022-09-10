@@ -19,7 +19,7 @@
 
 namespace ft {
 
-enum color { RED = 0, BLACK = 1 };
+enum Color { RED = 0, BLACK = 1 };
 
 template <class T, class Alloc = std::allocator<T>>
 class Node
@@ -32,7 +32,7 @@ public:
   typedef const T   &const_reference;
   typedef Node<T>   *node_ptr;
   typedef Alloc     allocator_type;
-  typedef color     color_type;
+  typedef Color     color_type;
 
   color_type      color;
   node_ptr        leftChild;

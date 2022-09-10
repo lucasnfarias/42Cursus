@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:38:19 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/04 13:06:45 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:16:06 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 
   typedef typename ft::Node<T>::node_ptr node_ptr;
 
-  node_ptr  node;
+  node_ptr  _node;
 
 private:
   node_ptr _leaf;
@@ -144,7 +144,7 @@ public:
 
   typedef typename ft::Node<T>::node_ptr node_ptr;
 
-  node_ptr  node;
+  node_ptr  _node;
 
 private:
   node_ptr _leaf;

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:30:09 by lniehues          #+#    #+#             */
-/*   Updated: 2022/06/25 16:10:48 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/10 17:08:10 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,34 @@ pair<T1, T2> make_pair(T1 x, T2 y)
 {
   return (pair<T1, T2>(x, y));
 }
+
+// stl_function.h - used on red black tree and map
+
+/**
+ * @brief Base class for standard unary function objects.
+ * @tparam Arg The argument type.
+ * @tparam Result The result type.
+ */
+template <typename Arg, typename Result>
+struct unary_function
+{
+  typedef Arg argument_type;
+  typedef Result result_type;
+};
+
+template <class Pair>
+struct _Select1st : public unary_function<Pair, typename Pair::first_type>
+{
+  typename Pair::first_type &operator()(Pair &x) const
+  {
+    return x.first;
+  }
+
+  const typename Pair::first_type &operator()(const Pair &x) const
+  {
+    return x.first;
+  }
+};
 
 }
 
