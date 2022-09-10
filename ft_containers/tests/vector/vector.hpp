@@ -6,17 +6,13 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:01:21 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/05 20:10:04 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:02:44 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <deque>
-#include <map>
-#include <stack>
 #include <vector>
-// #include "../ft_containers/map.hpp"
 #include "../containers/vector.hpp"
 
 #include <stdlib.h>
@@ -55,7 +51,6 @@ void intVectorTest()
   stdVectorIntTest.push_back(1);
   stdVectorIntTest.push_back(21);
   stdVectorIntTest.push_back(-12);
-  // NEED TO FIX PUSH_BACK
 
   printResultHeader(FT, VECTOR);
   for (unsigned i=0; i< ftVectorIntTest.size(); ++i)
