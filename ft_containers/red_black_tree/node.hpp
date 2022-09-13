@@ -21,7 +21,7 @@ namespace ft {
 
 enum Color { RED = 0, BLACK = 1 };
 
-template <class T, class Alloc = std::allocator<T>>
+template <class T, class Alloc = std::allocator<T> >
 class Node
 {
 public:
@@ -30,26 +30,27 @@ public:
   typedef T         &reference;
   typedef const T   *const_pointer;
   typedef const T   &const_reference;
-  typedef Node<T>   *node_ptr;
+  typedef Node<T>   *node_pointer;
   typedef Alloc     allocator_type;
   typedef Color     color_type;
 
-  color_type      color;
-  node_ptr        leftChild;
-  node_ptr        rightChild;
-  node_ptr        parent;
   pointer         content;
+  node_pointer        parent;
+  node_pointer        leftChild;
+  node_pointer        rightChild;
+  color_type      color;
   allocator_type  alloc;
   // check if it will need an aux node after/during creating the rb tree logic :)
 
   explicit Node(
     color_type color = BLACK,
-    node_ptr parent = NULL,
-    node_ptr leftChild = NULL,
-    node_ptr rightChild = NULL,
+    node_pointer parent = NULL,
+    node_pointer leftChild = NULL,
+    node_pointer rightChild = NULL,
     allocator_type alloc = allocator_type()
   )
-  : content(NULL),
+  :
+    content(NULL),
     parent(parent),
     leftChild(leftChild),
     rightChild(rightChild),
@@ -60,15 +61,15 @@ public:
   Node(
     value_type value,
     color_type color,
-    node_ptr nil,
+    node_pointer nil,
     allocator_type alloc = allocator_type()
   )
   :
-    alloc(alloc),
     parent(nil),
     leftChild(nil),
     rightChild(nil),
-    color(color)
+    color(color),
+    alloc(alloc)
   {
     content = alloc.allocate(1);
     alloc.construct(content, value);

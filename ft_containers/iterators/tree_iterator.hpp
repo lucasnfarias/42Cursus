@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:38:19 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/10 18:16:06 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:57:53 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ public:
   typedef ft::bidirectional_iterator_tag iterator_category;
   typedef ptrdiff_t difference_type;
 
-  typedef typename ft::Node<T>::node_ptr node_ptr;
+  typedef typename ft::Node<T>::node_pointer node_pointer;
 
-  node_ptr  _node;
+  node_pointer  _node;
 
 private:
-  node_ptr _leaf;
+  node_pointer _leaf;
 
 public:
   TreeIterator() : _node() {}
 
-  TreeIterator(node_ptr node, node_ptr leaf) : _node(node), _leaf(leaf) {}
+  TreeIterator(node_pointer node, node_pointer leaf) : _node(node), _leaf(leaf) {}
 
   TreeIterator(const TreeIterator<T> &it) : _node(it._node), _leaf(it._leaf) {}
 
@@ -54,30 +54,31 @@ public:
     return *this;
   }
 
+
   reference operator*() const { return *_node->content; }
 
   pointer operator->() const { return &(operator*()); }
 
-  node_ptr _minimum(node_ptr node)
+  node_pointer _minimum(node_pointer node)
   {
     while (node->leftChild != _leaf)
       node = node->leftChild;
     return node;
   }
 
-  node_ptr _maximum(node_ptr node)
+  node_pointer _maximum(node_pointer node)
   {
     while (node->rightChild != _leaf)
       node = node->rightChild;
     return node;
   }
 
-  node_ptr _successor(node_ptr x)
+  node_pointer _successor(node_pointer x)
   {
     if (x->rightChild != _leaf)
       return _minimum(x->rightChild);
 
-    node_ptr y = x->parent;
+    node_pointer y = x->parent;
     while (y != _leaf && x == y->rightChild) {
       x = y;
       y = y->parent;
@@ -86,11 +87,14 @@ public:
     return y;
   }
 
-  node_ptr _predecessor(node_ptr x) {
+  node_pointer _predecessor(node_pointer x) {
+    if (x == _leaf)
+      return x->parent;
+
     if (x->leftChild != _leaf)
       return _maximum(x->leftChild);
 
-    node_ptr y = x->parent;
+    node_pointer y = x->parent;
     while (y != _leaf && x == y->leftChild) {
       x = y;
       y = y->parent;
@@ -142,17 +146,17 @@ public:
   typedef ft::bidirectional_iterator_tag iterator_category;
   typedef ptrdiff_t difference_type;
 
-  typedef typename ft::Node<T>::node_ptr node_ptr;
+  typedef typename ft::Node<T>::node_pointer node_pointer;
 
-  node_ptr  _node;
+  node_pointer  _node;
 
 private:
-  node_ptr _leaf;
+  node_pointer _leaf;
 
 public:
   ConstTreeIterator() : _node() {}
 
-  ConstTreeIterator(node_ptr node, node_ptr leaf) : _node(node), _leaf(leaf) {}
+  ConstTreeIterator(node_pointer node, node_pointer leaf) : _node(node), _leaf(leaf) {}
 
   ConstTreeIterator(const ConstTreeIterator<T> &it) : _node(it._node), _leaf(it._leaf) {}
 
@@ -169,26 +173,26 @@ public:
 
   pointer operator->() const { return &(operator*()); }
 
-  node_ptr _minimum(node_ptr node)
+  node_pointer _minimum(node_pointer node)
   {
     while (node->leftChild != _leaf)
       node = node->leftChild;
     return node;
   }
 
-  node_ptr _maximum(node_ptr node)
+  node_pointer _maximum(node_pointer node)
   {
     while (node->rightChild != _leaf)
       node = node->rightChild;
     return node;
   }
 
-  node_ptr _successor(node_ptr x)
+  node_pointer _successor(node_pointer x)
   {
     if (x->rightChild != _leaf)
       return _minimum(x->rightChild);
 
-    node_ptr y = x->parent;
+    node_pointer y = x->parent;
     while (y != _leaf && x == y->rightChild) {
       x = y;
       y = y->parent;
@@ -197,11 +201,11 @@ public:
     return y;
   }
 
-  node_ptr _predecessor(node_ptr x) {
+  node_pointer _predecessor(node_pointer x) {
     if (x->leftChild != _leaf)
       return _maximum(x->leftChild);
 
-    node_ptr y = x->parent;
+    node_pointer y = x->parent;
     while (y != _leaf && x == y->leftChild) {
       x = y;
       y = y->parent;
