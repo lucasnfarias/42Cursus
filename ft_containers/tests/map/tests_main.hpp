@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/13 16:52:23 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:24:02 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,12 @@ void prettyPrint(TextType textType, T value)
 }
 
 template <typename Key, typename T>
-void printMap(ft::map<Key, T> &my_map, bool printAttributes = false)
+void printMap(ft::map<Key, T> &my_map, bool printSize = false)
 {
   std::cout << "map data: " << (my_map.size() ? "" : "- empty -") << std::endl;
 
-  if (printAttributes) {
+  if (printSize) {
     std::cout << "- size: " << my_map.size() << std::endl;
-    std::cout << "- capacity: " << my_map.capacity() << std::endl;
     std::cout << std::endl;
   }
 
@@ -88,6 +87,6 @@ void printMap(ft::map<Key, T> &my_map, bool printAttributes = false)
 
 // TESTS
 
-void  tests_clear();
+void  tests_empty();
 
 #endif

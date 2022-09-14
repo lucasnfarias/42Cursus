@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/14 16:22:58 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:38:03 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,29 @@ void  tests_empty()
 {
   prettyPrint(SUBTITLE, "Test EMPTY function");
 
-  prettyPrint(CODE_INSTRUCTIONS, "vector<float> floats;");
-  ft::vector<float> floats;
+  prettyPrint(CODE_INSTRUCTIONS, "map<float> floats;");
+  ft::map<float, float> floats;
 
   prettyPrint(CODE_INSTRUCTIONS, "floats.empty();");
   prettyPrint(RESULT, floats.empty());
 
-  prettyPrint(CODE_INSTRUCTIONS, "floats.push_back(42.7);");
-  floats.push_back(42.7);
-  printVector(floats, true);
+  prettyPrint(CODE_INSTRUCTIONS, "floats.insert(ft::make_pair(21.2f, 42.7f));");
+  floats.insert(ft::make_pair(21.2f, 42.7f));
+  printMap(floats, true);
 
   prettyPrint(CODE_INSTRUCTIONS, "floats.empty();");
   prettyPrint(RESULT, floats.empty());
 
-  prettyPrint(CODE_INSTRUCTIONS, "floats.pop_back();");
-  floats.pop_back();
+  prettyPrint(CODE_INSTRUCTIONS, "floats.erase(21.2);");
+  floats.erase(21.2);
 
   prettyPrint(CODE_INSTRUCTIONS, "floats.empty();");
   prettyPrint(RESULT, floats.empty());
 
-  prettyPrint(CODE_INSTRUCTIONS, "vector<char> chars(3, 'L');");
-  ft::vector<char> chars(3, 'L');
-  printVector(chars, true);
+  prettyPrint(CODE_INSTRUCTIONS, "map<char> chars(3, 'L');");
+  ft::map<char, char> chars;
+  chars['a'] = 'c';
+  printMap(chars, true);
 
   prettyPrint(CODE_INSTRUCTIONS, "chars.empty();");
   prettyPrint(RESULT, chars.empty());

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/13 16:55:40 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:28:28 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ public:
   template <class InputIterator>
   void insertUnique(InputIterator first, InputIterator last)
   {
-    while (first != last)
-      _insert(*first++, _root, _nil);
+    for (;first != last; first++)
+      _insert(*first, _root, _nil);
   }
 
   void erase(iterator position)
@@ -420,7 +420,7 @@ private:
   {
     if (u->parent == _nil)
       _root = v;
-    else if (u == u->parent->left)
+    else if (u == u->parent->leftChild)
       u->parent->leftChild = v;
     else
       u->parent->rightChild = v;
