@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/14 16:38:03 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:54:51 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void  tests_empty()
 {
   prettyPrint(SUBTITLE, "Test EMPTY function");
 
-  prettyPrint(CODE_INSTRUCTIONS, "map<float> floats;");
+  prettyPrint(CODE_INSTRUCTIONS, "map<float,float> floats;");
   ft::map<float, float> floats;
 
   prettyPrint(CODE_INSTRUCTIONS, "floats.empty();");
@@ -35,7 +35,7 @@ void  tests_empty()
   prettyPrint(CODE_INSTRUCTIONS, "floats.empty();");
   prettyPrint(RESULT, floats.empty());
 
-  prettyPrint(CODE_INSTRUCTIONS, "map<char> chars(3, 'L');");
+  prettyPrint(CODE_INSTRUCTIONS, "map<char,char> chars(3, 'L');");
   ft::map<char, char> chars;
   chars['a'] = 'c';
   printMap(chars, true);
