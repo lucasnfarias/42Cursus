@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/21 12:44:25 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:04:43 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void printMap(ft::map<Key, T> &my_map, bool printSize = false)
 void  tests_empty();
 void  tests_size();
 void  tests_max_size();
+void  tests_element_access_operator();
 
 #endif
