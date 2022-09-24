@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 22:32:07 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:31:47 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,44 @@ void  tests_iterators()
 {
   prettyPrint(SUBTITLE, "Test ITERATORS function");
 
-  prettyPrint(CODE_INSTRUCTIONS, "ft::map<std::string,int> cosmos;");
-  ft::map<std::string, int> cosmos;
+  prettyPrint(CODE_INSTRUCTIONS, "ft::map<char,int> myMap;");
+  ft::map<char, int> myMap;
 
-  prettyPrint(CODE_INSTRUCTIONS, "cosmos['Andromeda'] = 42;");
-  cosmos["Andromeda"] = 42;
-  prettyPrint(CODE_INSTRUCTIONS, "cosmos['Mercurio'] = 21;");
-  cosmos["Mercurio"] = 21;
-  prettyPrint(CODE_INSTRUCTIONS, "cosmos['Sol'] = 8;");
-  cosmos["Sol"] = 8;
-  prettyPrint(CODE_INSTRUCTIONS, "cosmos['Prometeu'] = 42;");
-  cosmos["Prometeu"] = 42;
-  prettyPrint(CODE_INSTRUCTIONS, "cosmos['Tita'] = -2;");
-  cosmos["Tita"] = -2;
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['g'] = 42;");
+  myMap['g'] = 42;
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['a'] = 21;");
+  myMap['a'] = 21;
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['z'] = 8;");
+  myMap['z'] = 8;
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['b'] = 42;");
+  myMap['b'] = 42;
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['t'] = -2;");
+  myMap['t'] = -2;
 
-  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<std::string, int>::iterator it = cosmos.begin(); it != cosmos.end(); it++)");
-  for (ft::map<std::string, int>::iterator it = cosmos.begin(); it != cosmos.end(); it++)
+  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<char, int>::iterator it = myMap.begin(); it != myMap.end(); it++)");
+  for (ft::map<char, int>::iterator it = myMap.begin(); it != myMap.end(); it++)
     std::cout << it->first << ", " << it->second << std::endl;
 
-  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<std::string, int>::reverse_iterator it = cosmos.rbegin(); it != cosmos.rend(); it++)");
-  for (ft::map<std::string, int>::reverse_iterator it = cosmos.rbegin(); it != cosmos.rend(); it++)
+  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<char, int>::reverse_iterator it = myMap.rbegin(); it != myMap.rend(); it++)");
+  for (ft::map<char, int>::reverse_iterator it = myMap.rbegin(); it != myMap.rend(); it++)
     std::cout << it->first << ", " << it->second << std::endl;
 
-  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<std::string, int>::const_iterator constIt = cosmos.begin(); constIt != cosmos.end(); constIt++)");
-  for (ft::map<std::string, int>::const_iterator constIt = cosmos.begin(); constIt != cosmos.end(); constIt++)
+  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<char, int>::const_iterator constIt = myMap.begin(); constIt != myMap.end(); constIt++)");
+  for (ft::map<char, int>::const_iterator constIt = myMap.begin(); constIt != myMap.end(); constIt++)
     std::cout << constIt->first << ", " << constIt->second << std::endl;
 
-  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<std::string, int>::const_reverse_iterator constIt = cosmos.rbegin(); constIt != cosmos.rend(); constIt++)");
-  for (ft::map<std::string, int>::const_reverse_iterator constIt = cosmos.rbegin(); constIt != cosmos.rend(); constIt++)
+  prettyPrint(CODE_INSTRUCTIONS, "for (ft::map<char, int>::const_reverse_iterator constIt = myMap.rbegin(); constIt != myMap.rend(); constIt++)");
+  for (ft::map<char, int>::const_reverse_iterator constIt = myMap.rbegin(); constIt != myMap.rend(); constIt++)
     std::cout << constIt->first << ", " << constIt->second << std::endl;
 
-  ft::map<std::string, int>::iterator it;
-  ft::map<std::string, int>::const_iterator constIt;
-  ft::map<std::string, int>::reverse_iterator reverseIt;
-  ft::map<std::string, int>::const_reverse_iterator constReverseIt;
-  it = cosmos.end();
-	constIt = cosmos.end();
-	reverseIt = cosmos.rbegin();
-	constReverseIt = cosmos.rbegin();
+  ft::map<char, int>::iterator it;
+  ft::map<char, int>::const_iterator constIt;
+  ft::map<char, int>::reverse_iterator reverseIt;
+  ft::map<char, int>::const_reverse_iterator constReverseIt;
+  it = myMap.end();
+	constIt = myMap.end();
+	reverseIt = myMap.rbegin();
+	constReverseIt = myMap.rbegin();
 
   prettyPrint(CODE_INSTRUCTIONS, "iterator == const_iterator");
   std::cout << (it == constIt) << std::endl;
