@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rhs.hpp                                           :+:      :+:    :+:   */
+/*   node.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:35:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/18 21:11:20 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:16:18 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ public:
   node_pointer        rightChild;
   color_type      color;
   allocator_type  alloc;
-  // check if it will need an aux node after/during creating the rb tree logic :)
 
   explicit Node(
     color_type color = BLACK,

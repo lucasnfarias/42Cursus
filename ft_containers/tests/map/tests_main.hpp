@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/21 13:04:43 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:14:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void prettyPrint(TextType textType, T value)
 }
 
 template <typename Key, typename T>
-void printMap(ft::map<Key, T> &my_map, bool printSize = false)
+void printMap(ft::map<Key, T> &myMap, bool printSize = false)
 {
-  std::cout << "map data: " << (my_map.size() ? "" : "- empty -") << std::endl;
+  std::cout << "map data: " << (myMap.size() ? "" : "- empty -") << std::endl;
 
   if (printSize) {
-    std::cout << "- size: " << my_map.size() << std::endl;
+    std::cout << "- size: " << myMap.size() << std::endl;
     std::cout << std::endl;
   }
 
-  for (typename ft::map<Key, T>::iterator it = my_map.begin(); it != my_map.end(); it++)
+  for (typename ft::map<Key, T>::iterator it = myMap.begin(); it != myMap.end(); it++)
     std::cout << "map[" << it->first << "] = " << it->second << std::endl;
   std::cout << std::endl;
 }
@@ -91,5 +91,6 @@ void  tests_empty();
 void  tests_size();
 void  tests_max_size();
 void  tests_element_access_operator();
+void  tests_iterators();
 
 #endif

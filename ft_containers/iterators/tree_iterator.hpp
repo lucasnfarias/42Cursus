@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:38:19 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/12 21:57:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:31:35 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ public:
 
   node_pointer  _node;
 
-private:
   node_pointer _leaf;
 
 public:
-  TreeIterator() : _node() {}
+  TreeIterator() : _node(), _leaf() {}
 
   TreeIterator(node_pointer node, node_pointer leaf) : _node(node), _leaf(leaf) {}
 
   TreeIterator(const TreeIterator<T> &it) : _node(it._node), _leaf(it._leaf) {}
+
+  ~TreeIterator() {}
 
   TreeIterator<T> &operator=(const TreeIterator<T> &it)
   {
@@ -150,15 +151,18 @@ public:
 
   node_pointer  _node;
 
-private:
   node_pointer _leaf;
 
 public:
-  ConstTreeIterator() : _node() {}
+  ConstTreeIterator() : _node(), _leaf() {}
 
   ConstTreeIterator(node_pointer node, node_pointer leaf) : _node(node), _leaf(leaf) {}
 
   ConstTreeIterator(const ConstTreeIterator<T> &it) : _node(it._node), _leaf(it._leaf) {}
+
+  ConstTreeIterator(const TreeIterator<T> &it) : _node(it._node), _leaf(it._leaf) {}
+
+  ~ConstTreeIterator() {}
 
   ConstTreeIterator<T> &operator=(const ConstTreeIterator<T> &it)
   {
@@ -202,6 +206,9 @@ public:
   }
 
   node_pointer _predecessor(node_pointer x) {
+    if (x == _leaf)
+      return x->parent;
+
     if (x->leftChild != _leaf)
       return _maximum(x->leftChild);
 
@@ -251,7 +258,7 @@ inline bool operator==(
   const ConstTreeIterator<T> &it2
 )
 {
-  return *it1 == *it2;
+  return it1._node == it2._node;
 }
 
 template <class T>

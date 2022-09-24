@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/14 16:28:28 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:47:59 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ public:
     _nil = _node_alloc.allocate(1);
     _nil->parent = _nil->leftChild = _nil->rightChild = _nil;
     _node_alloc.construct(_nil, node_type());
+    _root = _copyTree(other._root, other._nil);
+    _nil->parent = _maximum(_root);
   }
 
   virtual ~RBTree()

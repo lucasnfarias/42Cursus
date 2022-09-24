@@ -2,7 +2,7 @@
   "name": "C++ Launch",
   "type": "cppdbg",
   "request": "launch",
-  "program": "home/lniehues/projects/42Cursus/ft_containers/ft_containers",
+  "program": "home/lniehues/projects/42Cursus/ft_containers/tests/map/ft_tests.out",
   "stopAtEntry": false,
   "customLaunchSetupCommands": [
     {
@@ -21,7 +21,7 @@
       "name": "C/C++: g++ build and debug active file",
       "type": "cppdbg",
       "request": "launch",
-      "program": "/home/lniehues/projects/42Cursus/ft_containers/ft_containers",
+      "program": "/home/lniehues/projects/42Cursus/ft_containers/tests/map/ft_tests.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
