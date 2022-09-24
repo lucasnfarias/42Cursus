@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 21:47:59 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:28:19 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ public:
     if (!_positionPrecedesValue(position, val))
       return _insert(val, _root, _nil).first;
     else
-      return _insert(val, position->_node, _nil).first;
+      return _insert(val, position._node, _nil).first;
   }
 
   template <class InputIterator>

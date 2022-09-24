@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 14:34:28 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:11:02 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void  tests_max_size();
 void  tests_element_access_operator();
 void  tests_iterators();
 void  tests_constructors_and_operators();
+void  tests_insert();
 
 #endif

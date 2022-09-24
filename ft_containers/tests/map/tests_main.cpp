@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:39:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 14:34:38 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:11:10 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main()
   tests_element_access_operator();
   tests_iterators();
   tests_constructors_and_operators();
+  tests_insert();
 
   end = clock();
   elapsed_time = end - start;
