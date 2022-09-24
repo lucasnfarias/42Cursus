@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:29:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 18:37:13 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:40:27 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void tests_swap()
 {
+  prettyPrint(SUBTITLE, "Test SWAP function");
+
   prettyPrint(CODE_INSTRUCTIONS, "ft::map<double,char> foo, bar;");
 
   ft::map<double,char> foo, bar;
