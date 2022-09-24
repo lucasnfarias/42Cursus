@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:39:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 18:25:49 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:33:31 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main()
   tests_constructors_and_operators();
   tests_insert();
   tests_erase();
+  tests_swap();
 
   end = clock();
   elapsed_time = end - start;
