@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 22:14:15 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:52:54 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 // PRINT HELPERS
 
-enum TextType { TITLE = 0, SUBTITLE = 1, CODE_INSTRUCTIONS = 2, RESULT = 3 };
+enum TextType { TITLE = 0, SUBTITLE = 1, CODE_INSTRUCTIONS = 2, RESULT = 3, DESCRIPTION = 4 };
 
 template <typename T>
 void prettyPrint(TextType textType, T value)
@@ -57,6 +57,9 @@ void prettyPrint(TextType textType, T value)
         << value << std::endl
         << "\n#                   #\n" << RESET_COLOR;
       break;
+    case DESCRIPTION:
+      std::cout << YELLOW_COLOR << "\ntest description: " << value << RESET_COLOR << std::endl;
+      break;
     case CODE_INSTRUCTIONS:
       std::cout << CYAN_COLOR << "\ncode instruction: " << value << RESET_COLOR << std::endl;
       break;
@@ -70,9 +73,9 @@ void prettyPrint(TextType textType, T value)
 }
 
 template <typename Key, typename T>
-void printMap(ft::map<Key, T> &myMap, bool printSize = false)
+void printMap(ft::map<Key, T> &myMap, bool printSize = false, std::string mapName = "map")
 {
-  std::cout << "map data: " << (myMap.size() ? "" : "- empty -") << std::endl;
+  std::cout << mapName << " data: " << (myMap.size() ? "" : "- empty -") << std::endl;
 
   if (printSize) {
     std::cout << "- size: " << myMap.size() << std::endl;
@@ -80,7 +83,7 @@ void printMap(ft::map<Key, T> &myMap, bool printSize = false)
   }
 
   for (typename ft::map<Key, T>::iterator it = myMap.begin(); it != myMap.end(); it++)
-    std::cout << "map[" << it->first << "] = " << it->second << std::endl;
+    std::cout << mapName << "[" << it->first << "] = " << it->second << std::endl;
   std::cout << std::endl;
 }
 
@@ -92,5 +95,6 @@ void  tests_size();
 void  tests_max_size();
 void  tests_element_access_operator();
 void  tests_iterators();
+void  tests_constructors();
 
 #endif

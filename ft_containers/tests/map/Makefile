@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2022/09/22 14:21:53 by lniehues         ###   ########.fr        #
+#    Updated: 2022/09/24 13:47:02 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ STD_VERSION := -D STD_VERSION
 RM		:=	rm -rf
 
 SRCS := tests_main.cpp empty.cpp size.cpp max_size.cpp \
-				element_access_operator.cpp iterators.cpp
+				element_access_operator.cpp iterators.cpp constructors.cpp \
 
 STD_OBJ_DIR		:= std_objs
 FT_OBJ_DIR	:= ft_objs

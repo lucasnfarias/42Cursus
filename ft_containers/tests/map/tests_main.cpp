@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:39:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 22:32:45 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:46:51 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ int main()
   start = clock();
 
   prettyPrint(TITLE, "MAP container tests");
+
   tests_empty();
   tests_size();
   tests_max_size();
   tests_element_access_operator();
   tests_iterators();
+  tests_constructors();
 
   end = clock();
   elapsed_time = end - start;
