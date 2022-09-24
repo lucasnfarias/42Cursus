@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 18:45:22 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:05:38 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void  tests_insert();
 void  tests_erase();
 void  tests_swap();
 void  tests_clear();
+void  tests_key_value_compare();
 
 #endif

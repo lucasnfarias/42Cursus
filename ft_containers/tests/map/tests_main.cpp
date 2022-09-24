@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:39:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 18:49:17 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:05:50 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main()
   tests_erase();
   tests_swap();
   tests_clear();
+  tests_key_value_compare();
 
   end = clock();
   elapsed_time = end - start;

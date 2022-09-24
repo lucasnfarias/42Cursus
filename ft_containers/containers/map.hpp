@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/13 16:59:42 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:08:35 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ public:
 
   key_compare key_comp() const { return _tree.key_comp(); }
 
-  value_compare value_comp() const { return value_compare(key_comp); }
+  value_compare value_comp() const { return value_compare(key_comp()); }
 
   // OPERATIONS
 
