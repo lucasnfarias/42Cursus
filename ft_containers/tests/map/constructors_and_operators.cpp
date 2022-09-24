@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constructors.cpp                                   :+:      :+:    :+:   */
+/*   constructors_and_operators.cpp                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 13:41:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 14:12:30 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:25:39 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,15 @@ void  tests_constructors()
 
   delete floatsIteratorsCopyPtr;
 
+  prettyPrint(CODE_INSTRUCTIONS, "map<char, std::string> myMap;");
+  ft::map<char, std::string> myMap;
+
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['w'] = 'Well';");
+  myMap['w'] = "Well";
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['a'] = 'AAAHHHHHH!';");
+  myMap['a'] = "AAAHHHHHH!";
+  prettyPrint(CODE_INSTRUCTIONS, "myMap['c'] = 'Clutchness';");
+  myMap['c'] = "Clutchness";
+
+  printMap(myMap, true, "myMap");
 }
