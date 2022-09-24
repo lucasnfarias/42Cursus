@@ -6,13 +6,13 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 13:41:39 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 14:25:39 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:34:33 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests_main.hpp"
 
-void  tests_constructors()
+void  tests_constructors_and_operators()
 {
   prettyPrint(SUBTITLE, "Test CONSTRUCTORS function");
 
