@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 21:28:47 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:48:48 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void  tests_find();
 void  tests_count();
 void  tests_lower_and_upper_bound();
 void  tests_equal_range();
+void tests_get_allocator();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:39:26 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 21:28:57 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:48:56 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int main()
   tests_count();
   tests_lower_and_upper_bound();
   tests_equal_range();
+  tests_get_allocator();
 
   end = clock();
   elapsed_time = end - start;
