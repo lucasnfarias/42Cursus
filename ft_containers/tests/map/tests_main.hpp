@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:44:51 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 21:48:48 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:06:29 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void prettyPrint(TextType textType, T value)
 }
 
 template <typename Key, typename T>
-void printMap(ft::map<Key, T> &myMap, bool printSize = false, std::string mapName = "map")
+void printMap(ft::map<Key, T> &myMap, bool printSize = false, std::string mapName = "map", bool inlinePrint = false)
 {
-  std::cout << mapName << " data: " << (myMap.size() ? "" : "- empty -") << std::endl;
+  std::cout << mapName << " data:" << (myMap.size() ? "" : " - empty -") << std::endl;
 
   if (printSize) {
     std::cout << "- size: " << myMap.size() << std::endl;
@@ -83,7 +83,12 @@ void printMap(ft::map<Key, T> &myMap, bool printSize = false, std::string mapNam
   }
 
   for (typename ft::map<Key, T>::iterator it = myMap.begin(); it != myMap.end(); it++)
-    std::cout << mapName << "[" << it->first << "] = " << it->second << std::endl;
+  {
+    if (inlinePrint)
+      std::cout << it->first << ", " << it->second << " | ";
+    else
+      std::cout << mapName << "[" << it->first << "] = " << it->second << std::endl;
+  }
   std::cout << std::endl;
 }
 
@@ -106,5 +111,6 @@ void  tests_count();
 void  tests_lower_and_upper_bound();
 void  tests_equal_range();
 void tests_get_allocator();
+void  tests_comparisons();
 
 #endif

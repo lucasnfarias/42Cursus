@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2022/09/24 21:49:37 by lniehues         ###   ########.fr        #
+#    Updated: 2022/09/25 19:39:53 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS := tests_main.cpp empty.cpp size.cpp max_size.cpp \
 				element_access_operator.cpp iterators.cpp constructors_and_operators.cpp \
 				insert.cpp erase.cpp swap.cpp clear.cpp key_value_compare.cpp find.cpp \
 				count.cpp lower_and_upper_bound.cpp equal_range.cpp get_allocator.cpp \
+				comparisons.cpp
 
 STD_OBJ_DIR		:= std_objs
 FT_OBJ_DIR	:= ft_objs

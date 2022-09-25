@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:39:57 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 18:45:04 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:05:01 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void  tests_clear()
 
   for (int i = 0; i < 1000; i++) ints[i] = i * 4;
 
-  printMap(ints);
+  printMap(ints, false, "ints", true);
 
   prettyPrint(CODE_INSTRUCTIONS, "ints.clear();");
   ints.clear();
 
-  printMap(ints);
+  printMap(ints, false, "ints", true);
 
   prettyPrint(CODE_INSTRUCTIONS, "for (int i = 0; i < 200; i++) ints[i] = i * 3;");
   for (int i = 0; i < 200; i++) ints[i] = i * 3;
 
-  printMap(ints);
+  printMap(ints, false, "ints", true);
 }
