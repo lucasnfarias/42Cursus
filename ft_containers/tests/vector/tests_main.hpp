@@ -26,7 +26,7 @@
 
 // PRINT HELPERS
 
-enum TextType { TITLE = 0, SUBTITLE = 1, CODE_INSTRUCTIONS = 2, RESULT = 3 };
+enum TextType { TITLE = 0, SUBTITLE = 1, CODE_INSTRUCTIONS = 2, RESULT = 3, DESCRIPTION = 4 };
 
 template <typename T>
 void prettyPrint(TextType textType, T value)
@@ -46,6 +46,9 @@ void prettyPrint(TextType textType, T value)
         << "\n#                   #\n" << std::endl
         << value << std::endl
         << "\n#                   #\n" << RESET;
+      break;
+    case DESCRIPTION:
+      std::cout << YELLOW << "\ntest description: " << value << RESET << std::endl;
       break;
     case CODE_INSTRUCTIONS:
       std::cout << CYAN << "\ncode instruction: " << value << RESET << std::endl;
@@ -71,8 +74,9 @@ void printVector(ft::vector<T> &vect, bool printInline = false, bool printAttrib
   }
 
   if (printInline) {
+    size_t lastIndex = vect.size() - 1;
     for (size_t i = 0; i < vect.size(); i++) {
-      std::cout << vect[i] << " ";
+      std::cout << vect[i] << (i == lastIndex ? "" : " | ");
     }
   } else {
       for (size_t i = 0; i < vect.size(); i++) {
@@ -90,5 +94,6 @@ void  tests_empty();
 void  tests_erase();
 void  tests_resize();
 void  tests_reserve();
+void  tests_constructors();
 
 #endif

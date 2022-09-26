@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/13 14:20:09 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:02:23 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ class vector
       InputIterator first,
       InputIterator last,
       const allocator_type &alloc = allocator_type(),
-      typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 42
+      typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 42
     )
       : _size(last - first), _capacity(last - first), _alloc(alloc), _data(_alloc.allocate(_capacity))
     {
