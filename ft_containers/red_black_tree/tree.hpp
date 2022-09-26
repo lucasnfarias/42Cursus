@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/24 15:28:19 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:27:00 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ public:
 private:
   typedef typename Alloc::template rebind< Node<value_type> >::other
     node_allocator_type;
-  // VER SE ISSO AQUI DÁ CERTO , qualquer coisa volta pra como é na linha 50
 
   size_type _size;
   allocator_type _alloc;
