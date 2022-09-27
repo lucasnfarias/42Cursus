@@ -95,5 +95,6 @@ void  tests_erase();
 void  tests_resize();
 void  tests_reserve();
 void  tests_constructors();
+void  tests_operators();
 
 #endif

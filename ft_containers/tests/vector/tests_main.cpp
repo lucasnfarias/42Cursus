@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:07:09 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 19:07:05 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:13:43 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int main()
 
   prettyPrint(TITLE, "VECTOR container tests");
 
+  tests_constructors();
+  tests_operators();
   tests_clear();
   tests_empty();
   tests_erase();
   tests_resize();
   tests_reserve();
-  tests_constructors();
 
   end = clock();
 	elapsed_time = end - start;
