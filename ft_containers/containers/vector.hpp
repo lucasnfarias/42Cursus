@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/27 19:26:17 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:47:11 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,14 @@ class vector
       const allocator_type &alloc = allocator_type(),
       typename ft::enable_if<!ft::is_integral<InputIterator>::value, int>::type = 42
     )
-      : _size(last - first), _capacity(last - first), _alloc(alloc), _data(_alloc.allocate(_capacity))
+      : _size(last - first), _capacity(last - first), _alloc(alloc), _data(_alloc.allocate(last - first))
     {
       for (size_type i = 0; i < _size; i++)
         _alloc.construct(_data + i, *(first + i));
     }
 
     vector(const vector &src)
-      : _size(src._size), _capacity(src._capacity), _alloc(Alloc(src._alloc)), _data(_alloc.allocate(_capacity))
+      : _size(src._size), _capacity(src._size), _alloc(Alloc(src._alloc)), _data(_alloc.allocate(_size))
     {
       for (size_type i = 0; i < _size; i++)
         _alloc.construct(_data + i, src._data[i]);
