@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:07:38 by lniehues          #+#    #+#             */
-/*   Updated: 2022/07/11 20:42:47 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:31:50 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,79 @@ class random_access_iterator
     }
 
 };
+
+template<class T>
+bool operator==(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() == rhs.base();
+}
+
+template<class T>
+bool operator!=(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() != rhs.base();
+}
+
+template<class T>
+bool operator<(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() < rhs.base();
+}
+
+template<class T>
+bool operator<=(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() <= rhs.base();
+}
+
+template<class T>
+bool operator>(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() > rhs.base();
+}
+
+template<class T>
+bool operator>=(const ft::random_access_iterator<T>& lhs, const ft::random_access_iterator<T>& rhs)
+{
+  return lhs.base() >= rhs.base();
+}
+
+//able comparison of reverse and const_reverse
+template<class T_L, class T_R>
+bool operator==(const ft::random_access_iterator<T_R>& lhs, const ft::random_access_iterator<T_L>& rhs)
+{
+  return lhs.base() == rhs.base();
+}
+
+template<class T_L, class T_R>
+bool operator!=(const ft::random_access_iterator<T_L>& lhs, const ft::random_access_iterator<T_R>& rhs)
+{
+  return lhs.base() != rhs.base();
+}
+
+template<class T_L, class T_R>
+bool operator<(const ft::random_access_iterator<T_L>& lhs, const ft::random_access_iterator<T_R>& rhs)
+{
+  return lhs.base() < rhs.base();
+}
+
+template<class T_L, class T_R>
+bool operator<=(const ft::random_access_iterator<T_L>& lhs, const ft::random_access_iterator<T_R>& rhs)
+{
+  return lhs.base() <= rhs.base();
+}
+
+template<class T_L, class T_R>
+bool operator>(const ft::random_access_iterator<T_L>& lhs, const ft::random_access_iterator<T_R>& rhs)
+{
+  return lhs.base() > rhs.base();
+}
+
+template<class T_L, class T_R>
+bool operator>=(const ft::random_access_iterator<T_L>& lhs, const ft::random_access_iterator<T_R>& rhs)
+{
+  return lhs.base() >= rhs.base();
+}
 
 }
 

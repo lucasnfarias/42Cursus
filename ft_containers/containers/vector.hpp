@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 19:02:23 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:46:12 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ class vector
     iterator end() { return begin() + size(); }
     const_iterator end() const { return begin() + size(); }
 
-    reverse_iterator rbegin() { return reverse_iterator(--end()); }
-    const_reverse_iterator rbegin() const { return const_reverse_iterator(--end()); }
+    reverse_iterator rbegin() { return reverse_iterator(end()); }
+    const_reverse_iterator rbegin() const { return const_reverse_iterator(end()); }
 
-    reverse_iterator rend() { return reverse_iterator(--begin()); }
-    const_reverse_iterator rend() const { return const_reverse_iterator(--begin()); }
+    reverse_iterator rend() { return reverse_iterator(begin()); }
+    const_reverse_iterator rend() const { return const_reverse_iterator(begin()); }
 
     // Capacity
 

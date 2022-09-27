@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:41:44 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 22:34:41 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:56:46 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,25 +169,25 @@ bool operator!=(const reverse_iterator<IteratorL> &lhs, const reverse_iterator<I
 template<class IteratorL, class IteratorR>
 bool operator<(const reverse_iterator<IteratorL> &lhs, const reverse_iterator<IteratorR> &rhs)
 {
-  return lhs.base() < rhs.base();
+  return lhs.base() > rhs.base();
 }
 
 template<class IteratorL, class IteratorR>
 bool operator<=(const reverse_iterator<IteratorL> &lhs, const reverse_iterator<IteratorR> &rhs)
 {
-  return lhs.base() <= rhs.base();
+  return lhs.base() >= rhs.base();
 }
 
 template<class IteratorL, class IteratorR>
 bool operator>(const reverse_iterator<IteratorL> &lhs, const reverse_iterator<IteratorR> &rhs)
 {
-  return lhs.base() > rhs.base();
+  return lhs.base() < rhs.base();
 }
 
 template<class IteratorL, class IteratorR>
 bool operator>=(const reverse_iterator<IteratorL> &lhs, const reverse_iterator<IteratorR> &rhs)
 {
-  return lhs.base() >= rhs.base();
+  return lhs.base() <= rhs.base();
 }
 
 template <class Iterator>

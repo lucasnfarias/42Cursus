@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:07:09 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 21:13:43 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:35:18 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main()
 
   tests_constructors();
   tests_operators();
+  tests_iterators();
   tests_clear();
   tests_empty();
   tests_erase();

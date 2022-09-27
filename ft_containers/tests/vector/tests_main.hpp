@@ -63,7 +63,7 @@ void prettyPrint(TextType textType, T value)
 }
 
 template <typename T>
-void printVector(ft::vector<T> &vect, bool printInline = false, bool printAttributes = false)
+void printVector(const ft::vector<T> &vect, bool printInline = false, bool printAttributes = false)
 {
   std::cout << "vector data: " << (vect.size() ? "" : "- empty -") << std::endl;
 
@@ -96,5 +96,6 @@ void  tests_resize();
 void  tests_reserve();
 void  tests_constructors();
 void  tests_operators();
+void  tests_iterators();
 
 #endif
