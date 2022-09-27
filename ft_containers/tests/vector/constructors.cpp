@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 19:03:53 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:24:31 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ void  tests_constructors()
   ft::vector<std::string> strings(500, "Don't Panic!");
 
   printVector(strings, true);
+
+  try {
+    prettyPrint(CODE_INSTRUCTIONS, "ft::vector<int> intsOverload(ints.max_size() + 1, 42);");
+    ft::vector<int> ints;
+    ft::vector<int> intsOverload(ints.max_size() + 1, 42);
+    printVector(intsOverload);
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   prettyPrint(DESCRIPTION, "test RANGE constructor");
   prettyPrint(CODE_INSTRUCTIONS, "vector<char> charsCopy(chars.begin() + 2, chars.end() - 1);");

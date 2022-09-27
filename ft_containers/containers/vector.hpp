@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 21:46:12 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:26:17 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <string>
 # include <exception>
+# include <sstream>
 # include "../utils/type_traits.hpp"
 # include "../iterators/random_access_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
@@ -60,7 +61,16 @@ class vector
     void _checkRange(size_type n) const
     {
       if (n >= size())
-        throw std::out_of_range("vector::_M_range_check: n >= _size");
+      {
+        std::stringstream sstm;
+        sstm
+          << "vector::_M_range_check: __n (which is "
+          << n
+          << ") >= this->size() (which is "
+          << size()
+          << ")";
+        throw std::out_of_range(sstm.str());
+      }
     }
 
   public:
@@ -78,7 +88,7 @@ class vector
       : _size(n), _capacity(n), _alloc(alloc)
     {
       if (n > max_size())
-        throw std::length_error("vector(size_type, const value_type&, const allocator_type&)");
+        throw std::length_error("cannot create std::vector larger than max_size()");
 
       _data = _alloc.allocate(_capacity);
 
@@ -182,7 +192,7 @@ class vector
 
     void reserve (size_type n) {
       if (n > max_size())
-        throw std::length_error("ft::vector::reserve(size_type)");
+        throw std::length_error("vector::reserve");
 
       if (n > _capacity)
       {

@@ -97,5 +97,6 @@ void  tests_reserve();
 void  tests_constructors();
 void  tests_operators();
 void  tests_iterators();
+void  tests_at_front_back();
 
 #endif

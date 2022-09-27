@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 20:20:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/08/14 20:22:11 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:25:52 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void  tests_reserve()
 
   try {
     prettyPrint(CODE_INSTRUCTIONS, "ints.reserve(ints.max_size());");
-    ints.reserve(ints.max_size());
+    ints.reserve(ints.max_size() + 1);
     printVector(ints);
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
