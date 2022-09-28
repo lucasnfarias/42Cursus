@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/27 19:47:11 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:16:13 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ class vector
 
       if (newSize > max_size())
         throw std::length_error("ft::vector:assign(InputIterator, InputIterator)");
-      if (newSize > capacity)
+      if (newSize > capacity())
         reserve(newSize);
 
       for (size_type i = 0; i < newSize; i++)
@@ -260,8 +260,8 @@ class vector
     void assign(size_type n, const value_type& val)
     {
       if (n > max_size())
-        throw std::length_error("ft::vector:assign(size_type, const value_type&)");
-      if (n > capacity)
+        throw std::length_error("cannot create std::vector larger than max_size()");
+      if (n > capacity())
         reserve(n);
 
       for (size_type i = 0; i < n; i++)
