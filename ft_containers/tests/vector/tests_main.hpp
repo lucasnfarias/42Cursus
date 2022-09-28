@@ -101,5 +101,6 @@ void  tests_at_front_back();
 void  tests_assign();
 void  tests_push_back();
 void  tests_pop_back();
+void  tests_swap();
 
 #endif
