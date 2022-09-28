@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:07:09 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/27 21:34:04 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:26:10 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main()
   tests_pop_back();
   tests_swap();
   tests_get_allocator();
+  tests_insert();
 
   end = clock();
 	elapsed_time = end - start;

@@ -103,5 +103,6 @@ void  tests_push_back();
 void  tests_pop_back();
 void  tests_swap();
 void  tests_get_allocator();
+void  tests_insert();
 
 #endif

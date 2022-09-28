@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 21:27:34 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/27 20:16:13 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:37:17 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,7 +334,7 @@ class vector
         reserve(n > _size * _growthFactor ? n : _size * _growthFactor);
 
       for (size_type i = _size + n - 1; i > indexInserted; i--)
-        _alloc.construct(&_data[i], _data[i - 1]);
+        _alloc.construct(&_data[i], _data[i - n]);
       for (size_type i = 0; i < n; i++)
         _alloc.construct(&_data[indexInserted + i], *(first + i));
 

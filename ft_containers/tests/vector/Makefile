@@ -6,7 +6,7 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2022/09/27 21:34:23 by lniehues         ###   ########.fr        #
+#    Updated: 2022/09/28 19:26:20 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ RM		:=	rm -rf
 SRCS := tests_main.cpp clear.cpp empty.cpp erase.cpp resize.cpp reserve.cpp \
 				constructors.cpp operators.cpp iterators.cpp at_front_back.cpp \
 				assign.cpp push_back.cpp pop_back.cpp swap.cpp get_allocator.cpp \
+				insert.cpp
 
 STD_OBJ_DIR		:= std_objs
 FT_OBJ_DIR	:= ft_objs
