@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:35:48 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/23 22:16:18 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:12:15 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ public:
   typedef Alloc     allocator_type;
   typedef Color     color_type;
 
-  pointer         content;
-  node_pointer        parent;
-  node_pointer        leftChild;
-  node_pointer        rightChild;
-  color_type      color;
-  allocator_type  alloc;
+  pointer           content;
+  node_pointer      parent;
+  node_pointer      leftChild;
+  node_pointer      rightChild;
+  color_type        color;
+  allocator_type    alloc;
+  bool              unitialized;
 
   explicit Node(
     color_type color = BLACK,
@@ -54,7 +55,8 @@ public:
     leftChild(leftChild),
     rightChild(rightChild),
     color(color),
-    alloc(alloc)
+    alloc(alloc),
+    unitialized(true)
   {}
 
   Node(
@@ -68,7 +70,8 @@ public:
     leftChild(nil),
     rightChild(nil),
     color(color),
-    alloc(alloc)
+    alloc(alloc),
+    unitialized(false)
   {
     content = alloc.allocate(1);
     alloc.construct(content, value);
@@ -80,28 +83,38 @@ public:
     leftChild(other.leftChild),
     rightChild(other.rightChild),
     color(other.color),
-    alloc(other.alloc)
+    alloc(other.alloc),
+    unitialized(true)
   {
     content = alloc.allocate(1);
-    if (other.content != NULL)
+    if (other.content != NULL) {
       alloc.construct(content, *other.content);
+      unitialized = false;
+    }
   }
 
   Node &operator=(const Node &rhs)
   {
     if (this != &rhs)
     {
-      if (content != NULL)
-      {
-        alloc.destroy(content);
-        alloc.deallocate(content, 1);
-        content = NULL;
-      }
-
       if (rhs.content != NULL)
       {
+        if (content != NULL)
+        {
+          alloc.destroy(content);
+          alloc.deallocate(content, 1);
+        }
         content = alloc.allocate(1);
         alloc.construct(content, *rhs.content);
+      }
+      else
+      {
+        if (content != NULL)
+        {
+          alloc.destroy(content);
+          alloc.deallocate(content, 1);
+        }
+        content = NULL;
       }
 
       parent = rhs.parent;
@@ -113,8 +126,9 @@ public:
     return *this;
   }
 
-  virtual ~Node() {
-    if (content != NULL)
+  virtual ~Node()
+  {
+    if (!unitialized)
       alloc.destroy(content);
 
     alloc.deallocate(content, 1);

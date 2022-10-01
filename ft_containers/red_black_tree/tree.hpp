@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/26 18:27:00 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:11:07 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ public:
   typedef ConstTreeIterator<value_type> const_iterator;
   typedef ft::reverse_iterator<iterator> reverse_iterator;
   typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
-  // typedef std::allocator<node_type> node_allocator_type;
 
 private:
   typedef typename Alloc::template rebind< Node<value_type> >::other
