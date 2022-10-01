@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 20:37:06 by lniehues          #+#    #+#             */
-/*   Updated: 2022/09/30 21:11:07 by lniehues         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:41:37 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,8 +327,6 @@ private:
   {
     return upper_bound(value.first)-- == position;
   }
-
-    // CHECK IF DEEP COPY WORKS or look on the internet
 
   node_pointer _copyTree(
     const node_pointer &node,
