@@ -1,0 +1,11 @@
+version: '1'
+
+services:
+  nginx-service:
+    image: my-nginx-image
+    build:
+      - ./requirements/nginx
+    volumes:
+      - ./requirements/nginx/tools:/usr/share/nginx/html
+    ports:
+      - 8080:80
