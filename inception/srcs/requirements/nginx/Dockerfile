@@ -3,31 +3,23 @@ FROM debian:buster
 
 LABEL author="Lucas Farias" user_name="lniehues" email="lniehues@student.42sp.org.br"
 
-# Variables Configuration
-ARG HTTP_DIR=/var/www/html
+# Variables Configuration (those with no values get their values from .env/docker-compose.yml)
+ARG DOMAIN_NAME
+ARG NGINX_ROOT
+ARG CERTS_
+ARG CERT_KEY_
+ARG HTTP_DIR=/var/www/lniehues
 ARG NGINX_DIR=/etc/nginx
-ARG NGINX_SITES_DIR=$NGINX_DIR/sites-enabled
+ARG NGINX_SITES_ENABLED=$NGINX_DIR/sites-enabled
+ARG NGINX_SITES_AVAILABLE=$NGINX_DIR/sites-available
 
+WORKDIR /
 
 # Used to re-synchronize the package index files from their sources.
-RUN apt-get update
-
-# Installing required programs nginx
-RUN apt-get install nginx -y;
-
-# Installing debug tools
-RUN apt-get install curl zsh git vim -y;
-
-# Using web/working directory
-WORKDIR $HTTP_DIR
-
-# Removing trash data
-RUN rm -f $NGINX_DIR/default ; \
-	rm -rf *
+RUN apt-get update && apt-get install -y nginx curl vim openssl;
 
 # Copying NGINX configuration files and preparing for PHP use
-COPY ./conf/nginx_configuration $NGINX_SITES_DIR/default
-RUN sed -i 's/%PHP_FPM%/'$(find /etc/init.d -name "php*" -printf "%f")'/g' $NGINX_SITES_DIR/default
+COPY ./conf/ /srcs/
 
 # SSL Configuration
 
@@ -46,21 +38,24 @@ RUN sed -i 's/%PHP_FPM%/'$(find /etc/init.d -name "php*" -printf "%f")'/g' $NGIN
 #	#-out: This tells OpenSSL where to place the certificate that we are creating.
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-	-keyout /etc/ssl/private/nginx-dev.key \
-	-out /etc/ssl/certs/nginx-dev.crt \
-	-subj "/C=BR/ST=Sao Paulo/L=Sao Paulo/O=42SP/OU=Development/CN=localhost"
+	-out $CERTS_ \
+	-keyout $CERT_KEY_ \
+	-subj "/C=BR/ST=Sao Paulo/L=Sao Paulo/O=42SP/OU=Development/CN=$DOMAIN_NAME"
+
+RUN mkdir -p $HTTP_DIR; mv /srcs/nginx_configuration $NGINX_SITES_AVAILABLE/nginx_configuration; \
+  sed -i "s/DOMAIN_NAME/$DOMAIN_NAME/g" $NGINX_SITES_AVAILABLE/nginx_configuration; \
+  sed -i -r "s#NGINX_ROOT#$NGINX_ROOT#g" $NGINX_SITES_AVAILABLE/nginx_configuration; \
+	sed -i -r "s#CERTS_#$CERTS_#" $NGINX_SITES_AVAILABLE/nginx_configuration; \
+	sed -i -r "s#CERT_KEY_#$CERT_KEY_#" $NGINX_SITES_AVAILABLE/nginx_configuration; \
+	ln -s $NGINX_SITES_AVAILABLE/nginx_configuration etc/nginx/sites-enabled/;
+	# mv /srcs/ssl-params.conf /etc/nginx/snippets/
 
 #Checking and testing NGINX configuration
-RUN cat $NGINX_SITES_DIR/default; \
+RUN cat $NGINX_SITES_AVAILABLE/nginx_configuration; \
 	nginx -t
-
-# Informing Docker the specified network ports to listen during a runtime by the container (HTTP /80 e SSL /443).
-EXPOSE 80/tcp
-EXPOSE 80/udp
 
 EXPOSE 443/tcp
 EXPOSE 443/udp
 
-# When starting container, starting mysql, php proxy and nginx
-CMD service nginx start; \
-	sleep infinity
+# starting nginx
+CMD ["nginx", "-g", "daemon off;"]

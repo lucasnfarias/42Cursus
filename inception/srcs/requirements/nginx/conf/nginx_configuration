@@ -1,49 +1,28 @@
 server {
-		#default_server: this virtual host will answer requests on port 80 that don’t specifically match another virtual host’s listen statement.
-        listen 80 default_server;
-        #This second statement listens over IPv6 and behaves similarly.
-        listen [::]:80 default_server;
+  listen 443 ssl;
+  listen [::]:443 ssl;
 
-        root /var/www/html;
-        index index.php index.html index.htm index.nginx-debian.html
+  #SSL certificate and key for access
+  ssl on;
+  ssl_certificate CERTS_;
+  ssl_certificate_key CERT_KEY_;
+  ssl_protocols TLSv1.2 TLSv1.3;
 
-        server_name ft_server;
+  root NGINX_ROOT;
+  index index.php index.html index.htm;
 
-        location / {
-                try_files $uri $uri/ =404;
-                autoindex on;
-        }
-        location ~ \.php$ {
-                include snippets/fastcgi-php.conf;
-                fastcgi_pass unix:/run/php/%PHP_FPM%.sock;
-        }
-}
+  #The server_name directive allows multiple domains to be served from a single IP address.
+  server_name DOMAIN_NAME www.DOMAIN_NAME ;
 
-server {
-		#Same of the above, but for ssl protocols
-		listen 443;
-		listen [::]:443;
+  #location directives cover requests for specific files and folders, such as http://example.com/blog/
+  location / {
+      root NGINX_ROOT;
+      try_files $uri $uri/ =404;
+  }
 
-		#SSL certificate and key for access
-		ssl on;
-		ssl_certificate /etc/ssl/certs/nginx-dev.crt;
-		ssl_certificate_key /etc/ssl/private/nginx-dev.key;
-
-		#
-		root /var/www/html;
-		index index.php index.html index.htm index.nginx-debian.html
-
-		#The server_name directive allows multiple domains to be served from a single IP address.
-		server_name ft_server;
-
-		#location directives cover requests for specific files and folders, such as http://example.com/blog/
-		location / {
-				try_files $uri $uri/ =404;
-				autoindex on;
-		}
-		#starting with a tilde (~), NGINX performs a REGEX match. These matches are always case-sensitive, except (~*)
-		location ~ \.php$ {
-				include snippets/fastcgi-php.conf;
-				fastcgi_pass unix:/run/php/%PHP_FPM%.sock;
-		}
+  #starting with a tilde (~), NGINX performs a REGEX match. These matches are always case-sensitive, except (~*)
+  #location ~ \.php$ {
+  #    include snippets/fastcgi-php.conf;
+  #    fastcgi_pass wordpress:9000;
+  #}
 }

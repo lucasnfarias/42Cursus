@@ -1,11 +1,55 @@
-version: '1'
+version: '3'
 
 services:
-  nginx-service:
-    image: my-nginx-image
+  nginx:
+    image: nginx
     build:
-      - ./requirements/nginx
-    volumes:
-      - ./requirements/nginx/tools:/usr/share/nginx/html
+      context: ./requirements/nginx
+      args:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - NGINX_ROOT=${NGINX_ROOT}
+      - CERTS_=${CERTS_}
+      - CERT_KEY_=${CERT_KEY_}
+    container_name: nginx
+    env_file:
+      - .env
     ports:
-      - 8080:80
+      - "443:443"
+    volumes:
+      - ./requirements/nginx/tools:/var/www/html
+    restart: unless-stopped
+    networks:
+      - 42-inception-network
+    # depends_on:
+    #   - wordpress-php
+  # wordpress-php:
+  #   image: my-wordpress-image
+  #   build: ./requirements/wordpress
+  #   container_name: 42-wordpress-service
+  #   volumes:
+  #     - ./requirements/wordpress/conf:/ # checar onde colocar os arquivos A second volume that contains your WordPress website files.
+  #   ports:
+  #     - 9001:9001
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - mariadb
+  # mariadb:
+  #   image: my-mariadb-image
+  #   build: ./requirements/mariadb
+  #   container_name: 42-mariadb-service
+  #   ports:
+  #     - 3000:3000 # checar qual melhor porta
+  #   volumes:
+  #     - ./requirements/mariadb/tools:/ # checar qual a pasta com o db A volume that contains your WordPress database
+  #   restart: unless-stopped
+
+# volumes:
+#     wordpress:
+#         # using external volume created in custom directory
+#         external: true
+#     dbdata:
+#         external: true
+
+networks:
+    42-inception-network:
+        driver: bridge
