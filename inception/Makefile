@@ -23,11 +23,11 @@ volumes: | $(MARIADB_VOLUME_DIR) $(WORDPRESS_VOLUME_DIR)
 
 $(MARIADB_VOLUME_DIR):
 	sudo mkdir -p $(MARIADB_VOLUME_DIR)
-	docker volume create --name dbdata --opt type=none --opt device=$(MARIADB_VOLUME_DIR) --opt o=bind
+	docker volume create --name dbdata -o type=none -o device=$(MARIADB_VOLUME_DIR) -o o=bind
 
 $(WORDPRESS_VOLUME_DIR):
 	sudo mkdir -p $(WORDPRESS_VOLUME_DIR)
-	docker volume create --name wordpress --opt type=none --opt device=$(WORDPRESS_VOLUME_DIR) --opt o=bind
+	docker volume create --name wordpress -o type=none -o device=$(WORDPRESS_VOLUME_DIR) -o o=bind
 
 hosts:
 ifneq (${DOMAIN},lniehues.42.fr)
@@ -42,15 +42,15 @@ up:
 down:
 	cd srcs/ && docker-compose -f docker-compose.yml down
 
-# clean:
-# ifneq ($(VOLUMES),)
-# 	docker volume rm $(VOLUMES)
-# endif
+clean:
+ifneq ($(VOLUMES),)
+	docker volume rm $(VOLUMES)
+endif
 
-# fclean: clean
-# 	sudo rm -rf /home/lniehues/data
-# 	sudo rm /etc/hosts
-# 	sudo mv ./hosts_backup /etc/hosts
-# 	docker system prune -a --volumes
+fclean: clean
+	sudo rm -rf /home/lniehues/data
+	sudo rm /etc/hosts
+	sudo mv ./hosts_backup /etc/hosts
+	docker system prune -a --volumes
 
 PHONY: all volumes clean fclean up down hosts
