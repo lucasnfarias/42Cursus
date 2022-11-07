@@ -16,39 +16,54 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./requirements/nginx/tools:/var/www/html
+      - wordpress:/var/www/lniehues/wordpress
     restart: unless-stopped
     networks:
       - 42-inception-network
-    # depends_on:
-    #   - wordpress-php
-  # wordpress-php:
-  #   image: my-wordpress-image
-  #   build: ./requirements/wordpress
-  #   container_name: 42-wordpress-service
-  #   volumes:
-  #     - ./requirements/wordpress/conf:/ # checar onde colocar os arquivos A second volume that contains your WordPress website files.
-  #   ports:
-  #     - 9001:9001
-  #   restart: unless-stopped
+    depends_on:
+      - wordpress
+
+  wordpress:
+    image: wordpress
+    build: ./requirements/wordpress
+    container_name: wordpress
+    restart: unless-stopped
+    env_file:
+        - .env
+    environment:
+        - MYSQL_HOST=${MYSQL_HOST}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+        - wordpress:/var/www/lniehues/wordpress
+    networks:
+        - 42-inception-network
   #   depends_on:
   #     - mariadb
-  # mariadb:
-  #   image: my-mariadb-image
-  #   build: ./requirements/mariadb
-  #   container_name: 42-mariadb-service
-  #   ports:
-  #     - 3000:3000 # checar qual melhor porta
-  #   volumes:
-  #     - ./requirements/mariadb/tools:/ # checar qual a pasta com o db A volume that contains your WordPress database
-  #   restart: unless-stopped
 
-# volumes:
-#     wordpress:
-#         # using external volume created in custom directory
-#         external: true
-#     dbdata:
-#         external: true
+  # mariadb:
+  #   image: mariadb
+  #   build: ./requirements/mariadb
+  #   container_name: mariadb
+  #   restart: unless-stopped
+  #   env_file:
+  #       - .env
+  #   environment:
+  #       - MYSQL_DATABASE=${MYSQL_DATABASE}
+  #       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #       - MYSQL_USER=${MYSQL_USER}
+  #       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  #   volumes:
+  #       - dbdata:/var/lib/mysql
+  #   networks:
+  #         - 42-inception-network
+
+volumes:
+    wordpress:
+        external: true
+    # dbdata:
+    #     external: true
 
 networks:
     42-inception-network:

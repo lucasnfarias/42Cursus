@@ -37,22 +37,17 @@ COPY ./conf/ /srcs/
 #	#-keyout: This line tells OpenSSL where to place the generated private key file that we are creating.
 #	#-out: This tells OpenSSL where to place the certificate that we are creating.
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:4096  \
 	-out $CERTS_ \
 	-keyout $CERT_KEY_ \
 	-subj "/C=BR/ST=Sao Paulo/L=Sao Paulo/O=42SP/OU=Development/CN=$DOMAIN_NAME"
 
-RUN mkdir -p $HTTP_DIR; mv /srcs/nginx_configuration $NGINX_SITES_AVAILABLE/nginx_configuration; \
-  sed -i "s/DOMAIN_NAME/$DOMAIN_NAME/g" $NGINX_SITES_AVAILABLE/nginx_configuration; \
-  sed -i -r "s#NGINX_ROOT#$NGINX_ROOT#g" $NGINX_SITES_AVAILABLE/nginx_configuration; \
-	sed -i -r "s#CERTS_#$CERTS_#" $NGINX_SITES_AVAILABLE/nginx_configuration; \
-	sed -i -r "s#CERT_KEY_#$CERT_KEY_#" $NGINX_SITES_AVAILABLE/nginx_configuration; \
-	ln -s $NGINX_SITES_AVAILABLE/nginx_configuration etc/nginx/sites-enabled/;
-	# mv /srcs/ssl-params.conf /etc/nginx/snippets/
-
-#Checking and testing NGINX configuration
-RUN cat $NGINX_SITES_AVAILABLE/nginx_configuration; \
-	nginx -t
+RUN mkdir -p $HTTP_DIR; mv /srcs/nginx_config $NGINX_SITES_AVAILABLE/nginx_config; \
+  sed -i "s/DOMAIN_NAME/$DOMAIN_NAME/g" $NGINX_SITES_AVAILABLE/nginx_config; \
+  sed -i -r "s#NGINX_ROOT#$NGINX_ROOT#g" $NGINX_SITES_AVAILABLE/nginx_config; \
+	sed -i -r "s#CERTS_#$CERTS_#" $NGINX_SITES_AVAILABLE/nginx_config; \
+	sed -i -r "s#CERT_KEY_#$CERT_KEY_#" $NGINX_SITES_AVAILABLE/nginx_config; \
+	ln -s $NGINX_SITES_AVAILABLE/nginx_config etc/nginx/sites-enabled/;
 
 EXPOSE 443/tcp
 EXPOSE 443/udp

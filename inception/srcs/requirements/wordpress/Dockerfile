@@ -1,41 +1,37 @@
 FROM debian:buster
 
-LABEL author="Lucas Farias" user_name="lniehues" email="lniehues@student.42sp.org.br"
+ARG HTTP_DIR=/var/www/lniehues
+ARG WP_TAR_URL=https://wordpress.org/latest.tar.gz
+ARG WP_TAR=wordpress-latest.tar.gz
+ARG WP_CONFIG=wp-config.php
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_HOST
+ARG MYSQL_DATABASE
 
-ARG HTTP_DIR=/var/www/html
+RUN apt-get update && apt-get install \
+	wget php7.3 php7.3-fpm php7.3-opcache php7.3-cli \
+	php7.3-gd php7.3-curl php7.3-mysql php7.3-mbstring -y;
 
-ARG MYSQL_PASSWORD="marvin42"
+RUN mkdir /run/php && \
+	mkdir -p $HTTP_DIR && \
+	wget $WP_TAR_URL -O $WP_TAR && \
+	tar -xzvf $WP_TAR && \
+	rm $WP_TAR && \
+	mv wordpress $HTTP_DIR/wordpress
 
-ARG WP_DB_NAME=42_docker_wp
-ARG WP_TAR=wordpress.tar.gz
-ARG WP_TAR_URL=https://br.wordpress.org/latest-pt_BR.tar.gz
+COPY conf/ /srcs/
 
-ARG PHPMYADMIN=phpmyadmin
-ARG PHPMYADMIN_TAR=phpmyadmin.tar.gz
-ARG PHPMYADMIN_TAR_URL=https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+RUN cp /srcs/www.conf /etc/php/7.3/fpm/pool.d/
 
-RUN apt-update && apt-get install php-gd php7.3 php7.3-fpm php7.3-mysql php-common php7.3-cli \
-  php7.3-common php7.3-json php7.3-opcache php7.3-readline php-json php-mbstring php7.3-mbstring \
-  php-curl php-gd php-intl php-soap php-xml php-xmlrpc php-zip -y ; \
-  apt-get install wget -y ;
+WORKDIR $HTTP_DIR/wordpress
 
-# Using web/working directory
-WORKDIR $HTTP_DIR
+RUN mv wp-config-sample.php $WP_CONFIG; \
+	sed -i "s/username_here/$MYSQL_USER/g" $WP_CONFIG; \
+	sed -i "s/password_here/$MYSQL_PASSWORD/g" $WP_CONFIG; \
+	sed -i "s/localhost/$MYSQL_HOST/g" $WP_CONFIG; \
+	sed -i "s/database_name_here/$MYSQL_DATABASE/g" $WP_CONFIG;
 
-# Installing Wordpress
-RUN wget -P $HTTP_DIR -O $WP_TAR $WP_TAR_URL ; \
-	tar xvf $WP_TAR ; \
-	rm -rf $WP_TAR
-COPY ./conf/wp-config.php wordpress/wp-config.php
-RUN sed -i 's/%MYSQL_PASSWORD%/'$MYSQL_PASSWORD'/g' wordpress/wp-config.php ; \
-	sed -i 's/%MYSQL_DB%/'$WP_DB_NAME'/g' wordpress/wp-config.php
+EXPOSE 9000
 
-# Installing PhpMyAdmin
-RUN mkdir $HTTP_DIR/$PHPMYADMIN ; \
-	wget -P $HTTP_DIR -O $PHPMYADMIN_TAR $PHPMYADMIN_TAR_URL ; \
-	tar xvf $PHPMYADMIN_TAR ; \
-	mv phpMyAdmin*/* phpmyadmin ; \
-	rm -rf phpMyAdmin* $PHPMYADMIN_TAR
-COPY ./conf/config.inc.php phpmyadmin
-
-CMD service $(find /etc/init.d -name "php*" -printf "%f") start ;
+ENTRYPOINT ["/usr/sbin/php-fpm7.3", "--nodaemonize"]
