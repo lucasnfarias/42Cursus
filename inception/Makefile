@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-VOLUME_DIR = /home/lniehues/data/
-WORDPRESS_VOLUME_DIR = $(VOLUME_DIR)wordpress
-MARIADB_VOLUME_DIR = $(VOLUME_DIR)mysql
+VOLUME_DIR = /home/lniehues/data
+WORDPRESS_VOLUME_DIR = $(VOLUME_DIR)/wordpress
+MARIADB_VOLUME_DIR = $(VOLUME_DIR)/mysql
 DOMAIN	=	$(shell awk '/lniehues.42.fr/{print $$2}' /etc/hosts)
 VOLUMES = $(shell docker volume ls -q)
 

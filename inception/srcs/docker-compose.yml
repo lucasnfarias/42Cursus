@@ -25,16 +25,17 @@ services:
 
   wordpress:
     image: wordpress
-    build: ./requirements/wordpress
-    container_name: wordpress
-    restart: unless-stopped
-    env_file:
-        - .env
-    environment:
+    build:
+      context: ./requirements/wordpress
+      args:
         - MYSQL_HOST=${MYSQL_HOST}
         - MYSQL_DATABASE=${MYSQL_DATABASE}
         - MYSQL_USER=${MYSQL_USER}
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    container_name: wordpress
+    restart: unless-stopped
+    env_file:
+        - .env
     volumes:
         - wordpress:/var/www/lniehues/wordpress
     networks:
