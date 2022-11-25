@@ -16,7 +16,7 @@ ARG NGINX_SITES_AVAILABLE=$NGINX_DIR/sites-available
 WORKDIR /
 
 # Used to re-synchronize the package index files from their sources.
-RUN apt-get update && apt-get install -y nginx curl vim openssl;
+RUN apt-get update && apt-get install -y nginx curl vim openssl procps;
 
 # Copying NGINX configuration files and preparing for PHP use
 COPY ./conf/ /srcs/

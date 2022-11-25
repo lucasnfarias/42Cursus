@@ -36,35 +36,46 @@ services:
     restart: unless-stopped
     env_file:
         - .env
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
         - wordpress:/var/www/lniehues/wordpress
     networks:
         - 42-inception-network
-  #   depends_on:
-  #     - mariadb
+    depends_on:
+      - mariadb
 
-  # mariadb:
-  #   image: mariadb
-  #   build: ./requirements/mariadb
-  #   container_name: mariadb
-  #   restart: unless-stopped
-  #   env_file:
-  #       - .env
-  #   environment:
-  #       - MYSQL_DATABASE=${MYSQL_DATABASE}
-  #       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-  #       - MYSQL_USER=${MYSQL_USER}
-  #       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-  #   volumes:
-  #       - dbdata:/var/lib/mysql
-  #   networks:
-  #         - 42-inception-network
+  mariadb:
+    image: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    container_name: mariadb
+    restart: unless-stopped
+    env_file:
+        - .env
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+        - mariadb:/var/lib/mysql
+    networks:
+          - 42-inception-network
 
 volumes:
     wordpress:
         external: true
-    # dbdata:
-    #     external: true
+    mariadb:
+        external: true
 
 networks:
     42-inception-network:
