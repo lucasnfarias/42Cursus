@@ -1,0 +1,82 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    build:
+      context: ./requirements/nginx
+      args:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - NGINX_ROOT=${NGINX_ROOT}
+      - CERTS_=${CERTS_}
+      - CERT_KEY_=${CERT_KEY_}
+    container_name: nginx
+    env_file:
+      - .env
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress:/var/www/lniehues/wordpress
+    restart: unless-stopped
+    networks:
+      - 42-inception-network
+    depends_on:
+      - wordpress
+
+  wordpress:
+    image: wordpress
+    build:
+      context: ./requirements/wordpress
+      args:
+        - MYSQL_HOST=${MYSQL_HOST}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    container_name: wordpress
+    restart: unless-stopped
+    env_file:
+        - .env
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+        - wordpress:/var/www/lniehues/wordpress
+    networks:
+        - 42-inception-network
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    container_name: mariadb
+    restart: unless-stopped
+    env_file:
+        - .env
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+        - mariadb:/var/lib/mysql
+    networks:
+          - 42-inception-network
+
+volumes:
+    wordpress:
+        external: true
+    mariadb:
+        external: true
+
+networks:
+    42-inception-network:
+        driver: bridge
