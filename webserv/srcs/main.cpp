@@ -6,7 +6,7 @@
 /*   By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 19:45:05 by lniehues          #+#    #+#             */
-/*   Updated: 2023/01/20 21:07:20 by lniehues         ###   ########.fr       */
+/*   Updated: 2023/01/22 17:08:58 by lniehues         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ int main(int argc, char **argv) {
 
     if (valread == 0) printf("No bytes are there to read");
     else if (valread == -1) strerror(errno);
-
-    printf("%s\n", buffer);
+    else printf("%s\n", buffer);
 
     std::string response = "HTTP/1.1 200 OK\nContent-Type: text/html\n";
-    std::ifstream myfile ("./srcs/index.html");
+    std::ifstream myfile ("./www/index.html");
     std::string file_content;
     std::string tmp;
     std::stringstream content_length;

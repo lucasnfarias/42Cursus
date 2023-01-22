@@ -6,13 +6,12 @@
 #    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2022/12/22 13:50:42 by lniehues         ###   ########.fr        #
+#    Updated: 2023/01/22 16:23:15 by lniehues         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= webserv
 
-INCLUDES	:= $(addprefix -I, $(SRCS_DIR))
 
 HEADERS	=	main.hpp
 
@@ -22,18 +21,22 @@ CFLAGS	+= -g
 CFLAGS	+= -std=c++98
 
 SRCS_DIR	:=	srcs
+INCL_DIR := includes
+OBJ_DIR		:= objs
+
 SRCS := main.cpp
 
-OBJ_DIR		:= objs
+# INCLUDES := $(INCL_DIR)/WebServer.hpp
+
 OBJS		:= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(INCLUDES)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(OBJ_DIR)/%.o:	$(SRCS_DIR)/%.cpp # this might need to check headers too
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJ_DIR)/%.o:	$(SRCS_DIR)/%.cpp $(INCLUDES)# this might need to check headers too
+	$(CC) $(CFLAGS) -I ./$(INCL_DIR) -c $< -o $@
 
 $(OBJS): | $(OBJ_DIR)
 
