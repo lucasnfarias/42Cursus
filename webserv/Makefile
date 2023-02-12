@@ -1,54 +1,43 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lniehues <lniehues@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/08 19:16:47 by lniehues          #+#    #+#              #
-#    Updated: 2023/01/22 16:23:15 by lniehues         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = webserv
 
-NAME	:= webserv
+CXX      = c++
+CXXFLAGS =
+CPPFLAGS =
+LDFLAGS  =
+
+override CXXFLAGS += -Wall -Wextra -Werror -std=c++98
+override CPPFLAGS += -Iinclude
+override LDFLAGS	+=
 
 
-HEADERS	=	main.hpp
+OBJ_DIR = ./build
+SRC_DIR = ./src
 
-CC		:= c++
-CFLAGS	:= -Wall -Wextra -Werror
-CFLAGS	+= -g
-CFLAGS	+= -std=c++98
+SRC_FILES   = $(wildcard $(SRC_DIR)/*.cpp)
+INCLUDE_FILES = $(wildcard include/*.hpp)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-SRCS_DIR	:=	srcs
-INCL_DIR := includes
-OBJ_DIR		:= objs
+.PHONY: intra run
 
-SRCS := main.cpp
+all: $(NAME)
 
-# INCLUDES := $(INCL_DIR)/WebServer.hpp
+$(NAME): $(OBJ_FILES)
+	$(CXX) $(LDFLAGS) $^ -o $@
 
-OBJS		:= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.cpp=.o)))
-
-all:		$(NAME)
-
-$(NAME):	$(OBJS) $(INCLUDES)
-	$(CC) $(CFLAGS) $^ -o $@
-
-$(OBJ_DIR)/%.o:	$(SRCS_DIR)/%.cpp $(INCLUDES)# this might need to check headers too
-	$(CC) $(CFLAGS) -I ./$(INCL_DIR) -c $< -o $@
-
-$(OBJS): | $(OBJ_DIR)
-
-$(OBJ_DIR):
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.cpp $(INCLUDE_FILES)
 	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+intra: $(NAME)
+	./$< ./www/conf/conf_tester
+
+run: $(NAME)
+	./$< ./www/conf/conf
 
 clean:
-	rm -rf $(OBJ_DIR)
+	$(RM) -r $(OBJ_DIR)
 
-fclean:		clean
-	rm -rf $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
-re:			fclean all
-
-PHONY:		all clean fclean re
+re: fclean all

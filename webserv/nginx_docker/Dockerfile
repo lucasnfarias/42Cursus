@@ -8,7 +8,7 @@ RUN apt update; \
 	procps \
 	vim
 
-COPY ./example_conf /srcs/
+COPY ./conf/example_conf /srcs/
 
 RUN mkdir -p /var/www/example; \
   unlink /etc/nginx/sites-enabled/default; \
