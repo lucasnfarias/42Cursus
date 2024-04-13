@@ -1,0 +1,9 @@
+.container {
+  border: 1px solid #434343;
+  border-radius: 10px;
+  min-width: 70%;
+  height: 70vh;
+  display: flex;
+  padding: 0;
+  margin: 32px auto;
+}
